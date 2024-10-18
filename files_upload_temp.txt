@@ -420,14 +420,14 @@
         
         </div>
 
-        <div id="content-div">
+        <div id="content-div"  style="margin-top: -4%; margin-left: 1.85%; width: 96%; height: 100vh;">
 
-            <object id="html-content" data="" type="text/html" style="width: 80%; height: fit-content;"></object>
+            <object id="html-content" data="" type="text/html" style="width: 100%; height: 90%;"></object>
 
         </div>
 
         <!-- Save and Continue Button -->
-        <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -2.9%;  width: fit-content; margin-left: 86.2%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500;">Save and Continue</button>
+        <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -2.9%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
 
     </div>
     
@@ -539,6 +539,9 @@
 
                         // Dynamically load the HTML content into the div 
                         document.getElementById('html-content').data = result.file_path;
+
+                        // make the save and continue button visible
+                        document.getElementById('save-continue').style.display = 'block'
 
                     } else {
                         const errorResponse = await response.json();
