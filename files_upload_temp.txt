@@ -1,63 +1,34 @@
-from flask import Flask, request, jsonify, render_template_string, send_from_directory
-import os
-from werkzeug.utils import secure_filename
+// Function to handle both files after they are selected or dropped
+async function handleFiles() {
+    if (files_1 && files_2) {  // Ensures both files are available
+        const file_1 = files_1[0];
+        const file_2 = files_2[0];
 
-app = Flask(__name__)
+        const formData = new FormData();
+        formData.append('file_1', file_1);  // Append the first file to the form data
+        formData.append('file_2', file_2);  // Append the second file to the form data
 
-# Define upload folder and allowed extensions
-UPLOAD_FOLDER = 'uploads/'
-GENERATED_HTML_FOLDER = 'generated_html/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['GENERATED_HTML_FOLDER'] = GENERATED_HTML_FOLDER
+        // Fetch API to send the files to the server for processing
+        try {
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            });
 
-# Ensure the folders exist
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs(GENERATED_HTML_FOLDER, exist_ok=True)
-
-# Route to upload files
-@app.route('/upload', methods=['POST'])
-def upload_files():
-    # Check if the request contains both files
-    if 'file_1' not in request.files or 'file_2' not in request.files:
-        return jsonify({"error": "Both files are required"}), 400
-
-    # Save the first file
-    file_1 = request.files['file_1']
-    file_1_name = secure_filename(file_1.filename)
-    file_1_path = os.path.join(app.config['UPLOAD_FOLDER'], file_1_name)
-    file_1.save(file_1_path)
-
-    # Save the second file
-    file_2 = request.files['file_2']
-    file_2_name = secure_filename(file_2.filename)
-    file_2_path = os.path.join(app.config['UPLOAD_FOLDER'], file_2_name)
-    file_2.save(file_2_path)
-
-    # Create an HTML file that will be shown in the iframe
-    html_content = f"""
-    <html>
-    <head><title>File Upload Results</title></head>
-    <body>
-        <h1>Uploaded Files</h1>
-        <p>File 1: {file_1_name}</p>
-        <p>File 2: {file_2_name}</p>
-    </body>
-    </html>
-    """
-    html_file_name = "file_display.html"
-    html_file_path = os.path.join(app.config['GENERATED_HTML_FOLDER'], html_file_name)
-
-    # Save the HTML content to the file
-    with open(html_file_path, 'w') as html_file:
-        html_file.write(html_content)
-
-    # Return the file path to be used in the iframe
-    return jsonify({"file_path": f"/get_html/{html_file_name}"}), 200
-
-# Route to serve the generated HTML file
-@app.route('/get_html/<filename>')
-def get_html(filename):
-    return send_from_directory(app.config['GENERATED_HTML_FOLDER'], filename)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+            if (response.ok) {
+                const result = await response.json();
+                const iframe = document.createElement('iframe');
+                iframe.src = result.file_path;  // Display the generated HTML in the iframe
+                iframe.style.width = '100%';
+                iframe.style.height = '500px';
+                document.getElementById('iframe-container').innerHTML = '';  // Clear previous iframe
+                document.getElementById('iframe-container').appendChild(iframe);
+            } else {
+                const errorResponse = await response.json();
+                alert(`Error uploading file: ${errorResponse.error}`);
+            }
+        } catch (error) {
+            alert(`Error uploading file: ${error.message}`);
+        }
+    }
+}
