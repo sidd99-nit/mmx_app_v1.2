@@ -278,109 +278,6 @@
         }
     </style>
 
-    <!-- for uploading files sales and media -->
-    <style>
-
-        /* General Aesthetic Font */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
-
-        /* Styling for the file upload container */
-        .upload-container {
-        padding: 20px;
-        margin-top: -1.6%;
-        }
-
-        .custom-card {
-        background-color: #1F2937; /* Off-white background for the cards */
-        border-bottom: 0.01px solid #475363; /* Soft bottom border */
-        border-top: 0.01px solid #475363;
-        border-left: 0.01px solid #475363;
-        border-right: 0.01px solid #475363;
-        border-radius: 1vh; /* Rounded corners */
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2); /* Softer shadow for more subtle depth */
-        transition: box-shadow 0.3s ease, transform 0.3s ease;
-        height: fit-content;
-        }
-
-        .custom-card:hover {
-        box-shadow: 0 10px 45px rgba(0, 0, 0, 0.15); /* Stronger shadow for a dynamic hover effect */
-        transform: translateY(-5px); /* Lift effect on hover */
-        }
-
-        .custom-card-header {
-        background-color: #1F2937; /* Light off-white for the card header */
-        border-bottom: 0.01px solid #475363; /* Soft bottom border */
-        border-top: 0.01px solid #475363;
-        border-left: 0.01px solid #475363;
-        border-right: 0.01px solid #475363;
-        /* background: linear-gradient(135deg, #d0dbff , #ebddff , #ffdfff);  */
-        /*override with gradient background */
-        /* background: linear-gradient(135deg, #faffea , #efe1ff , #e0e8ff);  */
-
-        color: #353535; /* Darker grey text for contrast */
-        font-weight: 500;
-        border-top-left-radius: 1vh;
-        border-top-right-radius: 1vh;
-        height: 8vh;
-        padding: 1.4%;
-        text-align: center;
-        letter-spacing: 0.1vh; /* Modern letter-spacing */
-        }
-
-        /* Upload area with off-white tones, dashed lines */
-        .upload-area {
-        background: #374151; /* Slightly off-white background for a clean look */
-        border: 0.25vh dashed #818181; /* Subtle light grey dashed border */
-        border-radius: 2vh; /* Slightly rounded corners */
-        padding: 3vh;
-        text-align: center;
-        transition: background 0.4s ease, transform 0.3s ease;
-        color: #444; /* Dark grey for base text */
-        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.03), -3px -3px 10px rgba(255, 255, 255, 0.01); /* Soft, subtle shadows for depth */
-        position: relative;
-        }
-
-        .upload-area:hover {
-        background: #4b5666; /* Slightly darker off-white background on hover */
-        transform: translateY(-3px); /* Light hover effect */
-        }
-
-        .upload-area p {
-        margin: 0;
-        font-weight: 400;
-        color: #666; /* Mid-grey for text */
-        letter-spacing: 0.5px; /* Add some modern spacing to text */
-        }
-
-        /* Button styles */
-        .btn-danger {
-        background-color: #ff4b4b; /* Soft red for the remove button */
-        border: none;
-        border-radius: 0.5vh; /* Slightly rounded corners for buttons */
-        transition: background-color 0.3s ease;
-        height: 4vh;
-        width: 9vh;
-        font-size: xx-small;
-        padding-top: -1%;
-        }
-
-        .btn-danger:hover {
-        background-color: #ff0000; /* Slightly darker red on hover */
-        }
-
-        /* File info styling */
-        .file-info {
-        font-size: 15px;
-        color: #CED0D4; /* Darker grey for file info */
-        }
-
-        .filename {
-        font-weight: 600;
-        margin-left: 36vh;
-        }
-
-    </style>
-
     <!-- for below drag and drop features -->
     <style>
             /* General Aesthetic Font */
@@ -579,64 +476,18 @@
     <!-- Breadcrumb Style Tabs Navbar -->
     <div id="breadcrumb-navbar-container">
         <nav class="breadcrumb">
-            <a href="/main" class="active">Data Input and Exploration</a>
+            <a href="/main">Data Input and Exploration</a>
             <span class="separator">&gt;</span>
-            <a href="/main">Model Data Preparation</a>
+            <a href="/select_features" class="active">Model Data Preparation</a>
             <span class="separator">&gt;</span>
-            <a href="/main">Model Execution</a>
+            <a href="/select_features">Model Execution</a>
             <span class="separator">&gt;</span>
-            <a href="/main">Model Results</a>
+            <a href="/select_features">Model Results</a>
         </nav>
     </div>
 
     
-    <div class="container-fluid" style="margin-top: -2.8%;">
-        <div class="upload-container">
-            <!-- File Upload Section -->
-            <div class="row mb-3">
-                <div class="col-12" style="display: flex; justify-content: space-between;">
-
-                    <div class="custom-card" style="width: 49%; margin-right: 3%; margin-left: -1.6%;">
-                        <div class="custom-card-header">
-                            <span style="font-size: 3vh; color: #CED0D4;">Sales File</span>
-                        </div>
-                        <div class="card-body" style="display: flex; justify-content: space-between;">
-                            <!-- First Upload Section -->
-                            <div style="width: 100%;">
-                                <div id="upload-area-1" class="upload-area">
-                                    <p style="font-size: 2.5vh;  color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
-                                </div>
-                                <input type="file" id="file-input-1" style="display: none;">
-                                <div id="file-info-1" class="file-info" style="display: none;">
-                                    <span id="filename-1" class="filename"></span>
-                                    <button id="remove-file-1" class="btn btn-danger btn-sm ml-2">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="custom-card" style="width: 50%; margin-right: -1.6%;">
-                        <div class="custom-card-header">
-                            <span style="font-size: 3vh; color: #CED0D4;">Media File</span>
-                        </div>
-                        <div class="card-body" style="display: flex; justify-content: space-between;">
-                            <!-- Second Upload Section -->
-                            <div style="width: 100%;">
-                                <div id="upload-area-2" class="upload-area">
-                                    <p style="font-size: 2.5vh;  color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
-                                </div>
-                                <input type="file" id="file-input-2" style="display: none;">
-                                <div id="file-info-2" class="file-info" style="display: none;">
-                                    <span id="filename-2" class="filename"></span>
-                                    <button id="remove-file-2" class="btn btn-danger btn-sm ml-2">Remove</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+    <div class="container-fluid" style="margin-top: -1%;">       
         <div class="row row-full-height" style="margin-top: -1.6vh;">
             <!-- Left Column for All Variables -->
             <div class="col-12 col-md-4 col-lg-4 col-xl-4 col-full-height" style="height: 74vh;">
@@ -734,146 +585,27 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    <!-- handling files -->
+    <!-- handling populating the column names -->
     <script>
-        let files_1 = null;
-        let files_2 = null;
+        // Function to populate all the columns
 
-        // File upload functionality for the first file
-        $('#upload-area-1').on('click', function() {
-            $('#file-input-1').click();
+        const columns = {{ all_columns|tojson }};
+        
+        columns.forEach(function(column, index) {
+            $('#variable-list').append(`
+                <li class="list-group-item draggable" draggable="true" style="width:70vh">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input variable-checkbox" id="var${index}" value="${column}">
+                        <label class="custom-control-label" for="var${index}">${column}</label>
+                    </div>
+                </li>
+            `);
         });
-
-        $('#upload-area-1').on('dragover', function(e) {
-            e.preventDefault();
-            $(this).addClass('hover');
+        // Make the newly added list items draggable
+        $('.draggable').each(function() {
+            makeDraggable($(this));
         });
-
-        $('#upload-area-1').on('dragleave', function() {
-            $(this).removeClass('hover');
-        });
-
-        $('#upload-area-1').on('drop', function(e) {
-            e.preventDefault();
-            $(this).removeClass('hover');
-            files_1 = e.originalEvent.dataTransfer.files;
-            const file_1 = files_1[0];
-            $('#filename-1').text(file_1.name);
-            $('#upload-area-1').hide();
-            $('#file-info-1').show();
-            handleFiles();  // Calls the function to handle both files when uploaded
-        });
-
-        $('#file-input-1').on('change', function(e) {
-            files_1 = e.target.files;
-            const file_1 = files_1[0];
-            $('#filename-1').text(file_1.name);
-            $('#upload-area-1').hide();
-            $('#file-info-1').show();
-            handleFiles();  // Calls the function to handle both files when uploaded
-        });
-
-        $('#remove-file-1').on('click', function() {
-            resetFileInput(1);  // Resets the file input for file 1
-        });
-
-        // File upload functionality for the second file
-        $('#upload-area-2').on('click', function() {
-            $('#file-input-2').click();
-        });
-
-        $('#upload-area-2').on('dragover', function(e) {
-            e.preventDefault();
-            $(this).addClass('hover');
-        });
-
-        $('#upload-area-2').on('dragleave', function() {
-            $(this).removeClass('hover');
-        });
-
-        $('#upload-area-2').on('drop', function(e) {
-            e.preventDefault();
-            $(this).removeClass('hover');
-            files_2 = e.originalEvent.dataTransfer.files;
-            const file_2 = files_2[0];
-            $('#filename-2').text(file_2.name);
-            $('#upload-area-2').hide();
-            $('#file-info-2').show();
-            handleFiles();  // Calls the function to handle both files when uploaded
-        });
-
-        $('#file-input-2').on('change', function(e) {
-            files_2 = e.target.files;
-            const file_2 = files_2[0];
-            $('#filename-2').text(file_2.name);
-            $('#upload-area-2').hide();
-            $('#file-info-2').show();
-            handleFiles();  // Calls the function to handle both files when uploaded
-        });
-
-        $('#remove-file-2').on('click', function() {
-            resetFileInput(2);  // Resets the file input for file 2
-        });
-
-        // Function to handle both files after they are selected or dropped
-        function handleFiles() {
-            if (files_1 && files_2) {  // Ensures both files are available
-                const file_1 = files_1[0];
-                const file_2 = files_2[0];
-
-                const formData = new FormData();
-                formData.append('file_1', file_1);  // Append the first file to the form data
-                formData.append('file_2', file_2);  // Append the second file to the form data
-
-                // AJAX request to send the files to the server for processing
-                $.ajax({
-                    url: '/upload',  // API endpoint
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {  // Handles the successful response from the server
-                        $('#variable-list').empty();  // Clear the variable list
-                        // Loop through the columns from the API response and add them to the list
-                        response.columns.forEach(function(column, index) {
-                            $('#variable-list').append(`
-                                <li class="list-group-item draggable" draggable="true" style="width:70vh">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input variable-checkbox" id="var${index}" value="${column}">
-                                        <label class="custom-control-label" for="var${index}">${column}</label>
-                                    </div>
-                                </li>
-                            `);
-                        });
-                        // Make the newly added list items draggable
-                        $('.draggable').each(function() {
-                            makeDraggable($(this));
-                        });
-                    },
-                    error: function(xhr) {  // Handles errors during the file upload process
-                        const errorResponse = JSON.parse(xhr.responseText);
-                        alert(`Error uploading file: ${errorResponse.error}`);
-                    }
-                });
-            }
-        }
-
-        // Function to reset file input areas (for both files)
-        function resetFileInput(fileNumber) {
-            if (fileNumber === 1) {
-                files_1 = null;
-                $('#filename-1').text('');
-                $('#file-info-1').hide();
-                $('#upload-area-1').show();
-                $('#file-input-1').val(null);  // Clear the input field
-            } else if (fileNumber === 2) {
-                files_2 = null;
-                $('#filename-2').text('');
-                $('#file-info-2').hide();
-                $('#upload-area-2').show();
-                $('#file-input-2').val(null);  // Clear the input field
-            }
-        }
+        
     </script>
 
     <!-- handling drag and drop -->
