@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Marketing Mix Platform</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #1e3a8a, #5b21b6, #831843);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 4rem;
+            color: white;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .content {
+            text-align: center;
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .description {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background-color: white;
+            color: #1e3a8a;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .chevron-right {
+            margin-left: 0.5rem;
+            display: inline-block;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-top: 2px solid currentColor;
+            border-right: 2px solid currentColor;
+            transform: rotate(45deg);
+        }
+
+        /* Custom animations for machine learning aesthetics */
+        .chart-animation {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+
+        .chart-bar {
+            position: absolute;
+            width: 10px;
+            background-color: #60a5fa;
+            bottom: 0;
+            animation: bar-rise 4s infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        .chart-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #f472b6;
+            top: 50%;
+            animation: line-float 6s infinite alternate;
+        }
+
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #60a5fa;
+            animation: dot-move 10s infinite;
+        }
+
+        @keyframes bar-rise {
+            0% { height: 30%; }
+            50% { height: 90%; }
+            100% { height: 30%; }
+        }
+
+        @keyframes line-float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(30px); }
+        }
+
+        @keyframes dot-move {
+            0% { left: 10%; top: 40%; }
+            25% { left: 30%; top: 20%; }
+            50% { left: 60%; top: 50%; }
+            75% { left: 80%; top: 30%; }
+            100% { left: 10%; top: 40%; }
+        }
+
+        .powered-by {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 0.9rem;
+            opacity: 1;
+        }
+
+        .logo {
+            height: 5.5vh; /* Adjust the size as needed */
+            margin-left: 0.4rem; /* Add some spacing between text and logo */
+            vertical-align: middle; /* Align the logo with the text */
+            margin-bottom: 0.3rem;
+            margin-right: 0.4rem;
+        }
+
+
+        @media (max-width: 640px) {
+            .title {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .description {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1 class="title">
+                Welcome to
+                <br>
+                <span class="gradient-text">Marketing Mix Platform</span>
+            </h1>
+            <p class="subtitle">
+                Revolutionize your marketing strategy with ML-powered insights and real-time optimization.
+            </p>
+            <p class="description">
+                Marketing Mix Platform by Genpact leverages cutting-edge Bayesian Based Machine Learning algorithms to analyze your marketing data, 
+                providing actionable insights and optimizing your marketing mix in real-time. Stay ahead of the curve and 
+                maximize your ROI with our state-of-the-art solution.
+            </p>
+            <button class="cta-button" id="get-started-btn">
+                Get Started
+                <span class="chevron-right"></span>
+            </button>
+        </div>
+        <div class="chart-animation">
+            <!-- Sample bar charts for background animation -->
+            <div class="chart-bar" style="left: 10%; height: 40%;"></div>
+            <div class="chart-bar" style="left: 30%; height: 70%; animation-delay: 1s;"></div>
+            <div class="chart-bar" style="left: 50%; height: 50%; animation-delay: 2s;"></div>
+            <div class="chart-bar" style="left: 70%; height: 80%; animation-delay: 3s;"></div>
+            <div class="chart-bar" style="left: 90%; height: 60%; animation-delay: 4s;"></div>
+
+            <!-- Sample line chart for background animation -->
+            <div class="chart-line"></div>
+
+            <!-- Moving dots to simulate data points -->
+            <div class="dot" style="left: 10%; top: 40%;"></div>
+            <div class="dot" style="left: 50%; top: 60%;"></div>
+            <div class="dot" style="left: 70%; top: 30%;"></div>
+        </div>
+        <div class="powered-by">
+            Powered by 
+            <img src="/static/images/G.png" alt="Genpact Logo" class="logo">
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const content = document.querySelector('.content');
+            content.style.opacity = '0';
+            content.style.transform = 'translateY(-20px)';
+
+            setTimeout(() => {
+                content.style.transition = 'opacity 0.8s, transform 0.8s';
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }, 100);
+
+            const button = document.querySelector('.cta-button');
+            button.addEventListener('mouseover', () => {
+                button.style.transform = 'scale(1.05)';
+            });
+            button.addEventListener('mouseout', () => {
+                button.style.transform = 'scale(1)';
+            });
+
+            // Add redirect functionality to Get Started button
+            const getStartedBtn = document.getElementById('get-started-btn');
+            getStartedBtn.addEventListener('click', () => {
+                window.location.href = "/files_upload";
+            });
+        });
+    </script>
+</body>
+</html>
