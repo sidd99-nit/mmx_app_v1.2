@@ -84,14 +84,20 @@ def upload_file():
     elif file_2.filename.endswith('.csv'):
         df_media = pd.read_csv(file_2)
 
-    # Generate profiling report
-    # profile = ProfileReport(df_media, title="Profiling Report", explorative=False , dark_mode=True)
+    # Generate profiling report for sales
+    profile_sales = ProfileReport(df_sales, title="Profiling Report", explorative=False , dark_mode=True)
     sales_report_file = 'sales_report.html'
-    profile_path = os.path.join('static','reports', sales_report_file)
-    # profile.to_file(profile_path)
+    profile_path_sales = os.path.join('static','reports', sales_report_file)
+    profile_sales.to_file(profile_path_sales)
+
+    # Generate profiling report for media
+    profile_media = ProfileReport(df_media, title="Profiling Report", explorative=False , dark_mode=True)
+    media_report_file = 'media_report.html'
+    profile_path_media = os.path.join('static','reports', media_report_file)
+    profile_media.to_file(profile_path_media)
 
     # Return the file path to be used in the iframe
-    return jsonify({"file_path": f"/get_html/{sales_report_file}"}), 200
+    return jsonify({"file_path_sales": f"/get_html/{sales_report_file}" , "file_path_media": f"/get_html/{media_report_file}" }), 200
 
 # route to serve the generated report HTML file
 @app.route('/get_html/<filename>', methods=['GET','POST'])
