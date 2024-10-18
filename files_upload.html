@@ -18,7 +18,7 @@
 
     <style>
         body{
-            background-color: #111827;
+            background-color: #050914;
         }
     </style>
 
@@ -116,81 +116,6 @@
         }
       </style>
   
-    <!-- for drag and dropped item controlling their sizes and styling -->
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-        .row-full-height {
-            height: 100%;
-        }
-        .col-full-height {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-full-height {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-body {
-            flex: 1;
-            overflow-y: auto;
-        }
-        .drop-zone-container {
-            margin-bottom: 1.5%;
-        }
-        .drop-zone {
-            min-height: 5%;
-            border: 2px dashed #ccc;
-            padding: 12%;
-            margin-top: 1%;
-            position: relative;
-            background-color: #f8f9fa;
-            overflow-y: auto;
-        }
-        .drop-zone.small {
-            height: 70px;
-            padding: 3%;
-            margin-top: 0.5%;
-        }
-        .drop-zone.hover {
-            background-color: #e9ecef;
-        }
-        .drop-zone-container p {
-            margin: 0;
-        }
-        .list-group-item {
-            cursor: pointer;
-            font-size: 2.4vh;
-        }
-        .custom-control-label::before {
-            left: -1.5rem;
-        }
-        .custom-control-label::after {
-            left: -1.5rem;
-        }
-        .custom-checkbox .custom-control-label::before {
-            border-radius: 0.25rem;
-        }
-        .custom-control {
-            display: flex;
-            align-items: center;
-        }
-        .draggable {
-            cursor: move;
-        }
-        .dropped-item {
-            margin: 0.5% 0;
-            cursor: move;
-            width: 70vh;
-            font-size: small;
-        }
-
-    </style>
-
     <!-- for second navbar -->
     <style>
         #breadcrumb-navbar-container {
@@ -210,7 +135,7 @@
             border-radius: 2vh; /* Rounded corners */
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.01); /* Subtle shadow */
             transition: box-shadow 0.3s; /* Shadow transition */
-            margin-top: -0.5%;
+            margin-top: 1.8%;
         }
 
         .breadcrumb:hover {
@@ -381,151 +306,6 @@
 
     </style>
 
-    <!-- for below drag and drop features -->
-    <style>
-            /* General Aesthetic Font */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
-
-        /* Font-family and subtle modern look */
-        .row-full-height, .col-full-height, .card-full-height {
-            color: #1F2937; /* Dark grey for text */
-        }
-
-        /* Card Styling */
-        .card-full-height {
-            background-color: #f5f5f5; /* Light grey for card background */
-            color: #1F2937;
-            border-radius: 8px;
-             /* Soft shadow */
-            border-bottom: 0.01px solid #475363; /* Soft bottom border */
-            border-top: 0.01px solid #475363;
-            border-left: 0.01px solid #475363;
-            border-right: 0.01px solid #475363;
-        }
-
-        .card-full-height:hover {
-            /* Subtle shadow on hover */
-            border: none;
-            /* transform: translateY(-3px);  */
-            /* Slight lift on hover */
-        }
-
-        /* Header Styling */
-        .card-header {
-            color: #313131;
-            /* background: linear-gradient(135deg, #d0dbff , #ebddff , #ffdfff);  */
-            /*override with gradient background */
-
-            /* background: linear-gradient(135deg, #ffdff2 , #efe1ff , #e0e8ff); */ 
-            background-color: #1F2937;
-            border-top: none;
-            padding: 1.5vh 1.5vh;
-            border-radius: 6px 6px 0 0;
-            border-bottom: 0.01px solid #475363; /* Soft bottom border */
-        }
-
-        .card-header span {
-            letter-spacing: 0.1vh; /* Light letter spacing */
-            font-weight: 600;
-            color: #CED0D4;
-        }
-
-        /* Checkbox Styling */
-        .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-            background-color: #007bff; /* Subtle blue color for checkbox */
-        }
-
-        /* Search Input */
-        #search {
-            background-color: #374151; /* White input background */
-            border: 1px solid #475363; /* Soft border */
-            color: #CED0D4; /*for search inside written text */
-            border-radius: 6px;
-            padding: 8px;
-            box-shadow: none;
-            transition: border 0.3s ease;
-        }
-
-        #search:focus {
-            outline: none;
-            border-color: #007bff; /* Blue border on focus */
-        }
-
-        /* Scrollable List */
-        #scrollable-list-container {
-            border-radius: 6px;
-            background-color: #374151; /* Very light grey background */
-            padding: 10px;
-            color: #333333;
-        }
-
-        /* List Group Styling */
-        .list-group-item {
-            background-color: transparent;
-            color: #CED0D4; /* Dark grey for list items */
-            border: none;
-            padding: 10px;
-            transition: background-color 0.2s ease;
-        }
-
-        .list-group-item:hover {
-            background-color: #f0f0f0; /* Light hover effect */
-            color: #000000;
-        }
-
-        /* Drop Zone Styling */
-        .drop-zone {
-            border: 0.23vh dashed #818181; /* Light grey dashed border */
-            border-radius: 6px;
-            background-color: #374151; /* Very light grey background */
-            padding: 3.5vh;
-            text-align: center;
-            color: #666666; /* Medium grey for text */
-            transition: border-color 0.3s ease, background-color 0.3s ease;
-        }
-
-        .drop-zone:hover {
-            border-color: #818181; /* Subtle blue border on hover */
-            background-color: #475365;
-        }
-
-        .drop-zone.small {
-            padding: 10px;
-        }
-
-        .placeholder-text {
-            color: #666; /* Soft grey for placeholder text */
-            font-style: italic;
-            font-weight: 400;
-            letter-spacing: 0.5px; /* Add some modern spacing to text */
-            margin: 0;
-        }
-
-        /* Reset Links */
-        .reset-link {
-            color: #666666; /* Medium grey for reset links */
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 2.2vh;
-        }
-
-        .reset-link:hover {
-            color: #007bff; /* Subtle blue on hover */
-            text-decoration: underline;
-        }
-
-        /* Drop Zone Container */
-        .drop-zone-container p {
-            margin-bottom: 1vh;
-            color: #333333;
-        }
-
-        /* Targeting specific class names to avoid affecting other elements */
-        .row-full-height {
-            margin-bottom: 20px;
-        }
-    </style>
-
     <!-- for below first nav -->
     <style>
 
@@ -637,90 +417,6 @@
             </div>
         </div>
         
-        <div class="row row-full-height" style="margin-top: -1.6vh;">
-            <!-- Left Column for All Variables -->
-            <div class="col-12 col-md-4 col-lg-4 col-xl-4 col-full-height" style="height: 74vh;">
-                <div class="card card-full-height">
-                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #1F2937; border-top-right-radius: 1.2vh; border-top-left-radius: 1.2vh;">
-                        <span>All Variables</span>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="select-all">
-                            <label class="custom-control-label" for="select-all" style="font-size: 2vh; color: #CED0D4;">Select All</label>
-                        </div>
-                    </div>
-                    <div class="card-body" style="background-color: #1F2937; border-bottom-left-radius: 1.2vh; border-bottom-right-radius: 1.2vh;">
-                        <div style="padding: 1vh 0.2vh 1vh 0.2vh">
-                            <input type="text" class="form-control mb-3" id="search"  placeholder="Search...">
-                            <div id="scrollable-list-container" style=" max-height: 60vh; overflow-y: auto;">
-                                <ul class="list-group" id="variable-list">
-                        
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Middle Column for Marketing Variables and Base Variables -->
-            <div class="col-12 col-md-4 col-lg-4 col-xl-4 " style="overflow-y: auto; max-height: 85vh;">
-                <div class="card card-full-height mb-3" style="overflow-y: auto; max-height: 50vh;">
-                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #1F2937;">
-                        <span>Marketing Variables</span>
-                        <a href="#" class="reset-link" data-target="#marketing-zone" style="text-decoration: underline; color: #CED0D4;">Reset</a>
-                    </div> 
-                    <div style="padding: 1.5vh 1.5vh 2vh 1.5vh; background-color: #1F2937;">
-                        <div class="card-body drop-zone" id="marketing-zone" style="overflow-x: hidden;">
-                            <p class="placeholder-text" style="font-size: 2.5vh;  color: #CED0D4; font-style: italic;">Drag and drop the variables</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-full-height mb-3" style="overflow-y: auto; max-height: 50vh;">
-                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #1F2937;">
-                        <span>Organic Variables</span>
-                        <a href="#" class="reset-link" data-target="#organic-zone" style="text-decoration: underline; color: #CED0D4;">Reset</a>
-                    </div>
-                    <div style="padding: 1.5vh 1.5vh 2vh 1.5vh; background-color: #1F2937;">
-                        <div class="card-body drop-zone" id="organic-zone" style="overflow-x: hidden;">
-                            <p class="placeholder-text" style="font-size: 2.5vh;  color: #CED0D4; font-style: italic;">Drag and drop the variables</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-full-height mb-3" style="overflow-y: auto; max-height: 50vh;">
-                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #1F2937;">
-                        <span>Controls Variables</span>
-                        <a href="#" class="reset-link" data-target="#mandatory-base-zone" style="text-decoration: underline; color: #CED0D4;">Reset</a>
-                    </div>
-                    <div style="padding: 1.5vh 1.5vh 2vh 1.5vh; background-color: #1F2937;">
-                        <div class="card-body drop-zone" id="mandatory-base-zone" style="overflow-x: hidden;">
-                            <p class="placeholder-text" style="font-size: 2.5vh; color: #CED0D4; font-style: italic;">Drag and drop the variables</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column for Target Variable, Period, Subject, and Class -->
-            <div class="col-12 col-md-4 col-lg-4 col-xl-4 col-full-height" style="overflow-y: auto; height: 74vh;">
-                <div class="card card-full-height" style="background-color: #1F2937;">
-                    <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #1F2937; border-top-right-radius: 1.2vh; border-top-left-radius: 1.2vh;">
-                        <span>Model Specification</span>
-                        <a href="#" class="reset-link" data-target="#target-variable, #period, #subject, #class" style="text-decoration: underline; color: #CED0D4;">Reset</a>
-                    </div>
-                    <div class="card-body" style="margin-top: 11%;">
-                        <div class="drop-zone-container">
-                            <p style="font-weight: 500; color: #CED0D4;">Target Variable</p>
-                            <div class="drop-zone small" id="target-variable" style="overflow-x: hidden; overflow-y: hidden;"></div>
-                        </div>
-                    </div>
-                    <div class="card-body" style="margin-top: -20%;">
-                        <div class="drop-zone-container">
-                            <p style="font-weight: 500; color: #CED0D4;">Period</p>
-                            <div class="drop-zone small" id="period-variable" style="overflow-x: hidden; overflow-y: hidden;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     
     </div>
 
@@ -876,166 +572,6 @@
         }
     </script>
 
-    <!-- handling drag and drop -->
-    <script>
-        $(document).ready(function() {
-        // Handle "Select All" checkbox functionality
-        $('#select-all').change(function() {
-            const isChecked = $(this).is(':checked');
-            
-            // Target only checkboxes in visible list items
-            $('#variable-list li:visible .variable-checkbox').each(function() {
-                $(this).prop('checked', isChecked);
-            });
-
-            if (isChecked) {
-                $(this).next('label').text('Select All');
-            } else {
-                $(this).next('label').text('Select All');
-            }
-        });
-
-        // Search functionality to filter list items based on user input
-        $('#search').on('keyup', function() {
-            const searchText = $(this).val().toLowerCase();
-            $('#variable-list li').each(function() {
-                const itemText = $(this).text().toLowerCase();
-                if (itemText.includes(searchText)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        });
-
-        // Clicking on list group item toggles checkbox selection
-        $('.list-group-item').on('click', function(e) {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
-                const checkbox = $(this).find('input[type="checkbox"]');
-                checkbox.prop('checked', !checkbox.is(':checked'));
-            }
-        });
-
-        // Make elements draggable
-        function makeDraggable(draggableElement) {
-            draggableElement.on('dragstart', function(e) {
-                const checkedItems = $('.list-group-item input[type="checkbox"]:checked').closest('.list-group-item');
-                if (checkedItems.length) {
-                    const draggedData = [];
-                    checkedItems.each(function() {
-                        draggedData.push($(this).prop('outerHTML'));
-                    });
-                    e.originalEvent.dataTransfer.setData('text/plain', draggedData.join(''));
-                    checkedItems.addClass('dragged-item');
-                } else {
-                    e.preventDefault(); // Prevent dragging if no items are checked
-                }
-            });
-        }
-
-        // Function to update placeholders in drop zones
-        function updatePlaceholder(zone) {
-            if (!zone.find('.dropped-item').length) {
-                zone.find('p').show();
-            } else {
-                zone.find('p').hide();
-            }
-        }
-
-        // Initialize draggable items
-        $('.draggable').each(function() {
-            makeDraggable($(this));
-        });
-
-        // Drag over functionality for drop zones
-        $('.drop-zone').on('dragover', function(e) {
-            e.preventDefault();
-            $(this).addClass('hover');
-        });
-
-        $('.drop-zone').on('dragleave', function() {
-            $(this).removeClass('hover');
-        });
-
-        // Drop functionality for drop zones
-        $('.drop-zone').on('drop', function(e) {
-            e.preventDefault();
-            $(this).removeClass('hover');
-            const data = e.originalEvent.dataTransfer.getData('text/plain');
-            const $newItems = $(data).removeClass('dragged-item').addClass('dropped-item draggable').attr('draggable', 'true');
-
-            // Ensure only one item is dropped in specific zones
-            if ($(this).is('#target-variable, #period, #subject, #class')) {
-                if ($(this).find('.dropped-item').length) {
-                    const removedItem = $(this).find('.dropped-item').remove();
-                    $('#variable-list').append(removedItem);
-                    makeDraggable($('#variable-list').find('.list-group-item:last-child'));
-                }
-            }
-
-            $(this).append($newItems);
-            $newItems.each(function() {
-                makeDraggable($(this));
-            });
-            $('.dragged-item').remove();
-            updatePlaceholder($('#variable-list'));
-            updatePlaceholder($('#marketing-zone'));
-            updatePlaceholder($('#organic-zone'));
-            updatePlaceholder($('#mandatory-base-zone'));
-            updatePlaceholder($('#target-variable'));
-        });
-
-        // Drop zone functionality for returning items to the variable list
-        $('#variable-list').on('dragover', function(e) {
-            e.preventDefault();
-            $(this).addClass('hover');
-        });
-
-        $('#variable-list').on('dragleave', function() {
-            $(this).removeClass('hover');
-        });
-
-        $('#variable-list').on('drop', function(e) {
-            e.preventDefault();
-            $(this).removeClass('hover');
-            const data = e.originalEvent.dataTransfer.getData('text/plain');
-            const $newItems = $(data).removeClass('dragged-item dropped-item').addClass('list-group-item draggable').attr('draggable', 'true');
-            $(this).append($newItems);
-            $newItems.each(function() {
-                makeDraggable($(this));
-            });
-            $('.dragged-item').remove();
-            updatePlaceholder($(this));
-        });
-
-        // Remove item from drop zone and return it to variable list when clicked
-        $(document).on('click', '.dropped-item', function() {
-            const parentZone = $(this).closest('.drop-zone');
-            $('#variable-list').append(`<li class="list-group-item draggable" draggable="true">${$(this).html()}</li>`);
-            makeDraggable($('#variable-list').find('.list-group-item:last-child'));
-            $(this).remove();
-            updatePlaceholder(parentZone);
-            updatePlaceholder($('#variable-list'));
-        });
-
-        // Reset link functionality to clear specific drop zones
-        $('.reset-link').on('click', function(e) {
-            e.preventDefault();
-            const targets = $(this).data('target').split(', ');
-            targets.forEach(function(target) {
-                const targetZone = $(target);
-                targetZone.find('.dropped-item').each(function() {
-                    $('#variable-list').append(`<li class="list-group-item draggable" draggable="true">${$(this).html()}</li>`);
-                    makeDraggable($('#variable-list').find('.list-group-item:last-child'));
-                    $(this).remove();
-                });
-                updatePlaceholder(targetZone);
-            });
-            updatePlaceholder($('#variable-list'));
-        });
-    });
-    </script>
-
     <script>
         document.addEventListener("DOMContentLoaded",function(){
             const currentDate = new Date();
@@ -1046,30 +582,6 @@
 
     <script>
         document.getElementById('save-continue').addEventListener('click', function() {
-            // Function to collect variables from a drop zone
-            function collectVariablesFromZone(zoneId) {
-                const zone = document.getElementById(zoneId);
-                const variables = [];
-                zone.querySelectorAll('.dropped-item').forEach(item => {
-                    const variable = item.querySelector('.custom-control-label').textContent.trim();
-                    variables.push(variable);
-                });
-                return variables;
-            }
-
-            // Collect variables from all drop zones
-            const marketingVariables = collectVariablesFromZone('marketing-zone');
-            const organicVariables = collectVariablesFromZone('organic-zone');
-            const mandatoryBaseVariables = collectVariablesFromZone('mandatory-base-zone');
-            const targetVariable = collectVariablesFromZone('target-variable');
-
-            // Prepare data to be sent to Flask
-            const data = {
-                marketingVariables: marketingVariables,
-                organicVariables: organicVariables,
-                mandatoryBaseVariables: mandatoryBaseVariables,
-                targetVariable: targetVariable
-            };
 
             // Get the uploaded files
             const formData = new FormData();
@@ -1080,9 +592,6 @@
             if (files_2 && files_2[0]) {
                 formData.append('file_2', files_2[0]);
             }
-            
-            // Append the collected data
-            formData.append('data', JSON.stringify(data));
 
             // Send data and files to Flask server
             $.ajax({
