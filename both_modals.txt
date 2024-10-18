@@ -20,8 +20,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- First Custom Button -->
-                    <div class="custom-button" id="openModal1">More Info</div>
                 </div>
 
                 <!-- Second Card: Media File -->
@@ -41,13 +39,22 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Second Custom Button -->
-                    <div class="custom-button" id="openModal2">More Info</div>
                 </div>
+            </div>
+
+            <!-- Custom Buttons Below the Cards -->
+            <div class="col-12" style="display: flex; justify-content: space-between; margin-top: 10px;">
+                <!-- First Custom Button -->
+                <div class="custom-button" id="openModal1" style="width: 49%;">More Info</div>
+                <!-- Second Custom Button -->
+                <div class="custom-button" id="openModal2" style="width: 50%;">More Info</div>
             </div>
         </div>
     </div>
 </div>
+
+
+&&&&&&&&&&&&&&
 
 <!-- Modal for Sales File -->
 <div id="myModal1" class="modal">
