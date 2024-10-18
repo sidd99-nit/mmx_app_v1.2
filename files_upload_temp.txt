@@ -1,34 +1,76 @@
-// Function to handle both files after they are selected or dropped
-async function handleFiles() {
-    if (files_1 && files_2) {  // Ensures both files are available
-        const file_1 = files_1[0];
-        const file_2 = files_2[0];
+import os
+from flask import Flask, request, jsonify, Response
 
-        const formData = new FormData();
-        formData.append('file_1', file_1);  // Append the first file to the form data
-        formData.append('file_2', file_2);  // Append the second file to the form data
+app = Flask(__name__)
 
-        // Fetch API to send the files to the server for processing
-        try {
-            const response = await fetch('/upload', {
-                method: 'POST',
-                body: formData,
-            });
+UPLOAD_FOLDER = 'uploads/'
+GENERATED_HTML_FOLDER = 'generated_html/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['GENERATED_HTML_FOLDER'] = GENERATED_HTML_FOLDER
 
-            if (response.ok) {
-                const result = await response.json();
-                const iframe = document.createElement('iframe');
-                iframe.src = result.file_path;  // Display the generated HTML in the iframe
-                iframe.style.width = '100%';
-                iframe.style.height = '500px';
-                document.getElementById('iframe-container').innerHTML = '';  // Clear previous iframe
-                document.getElementById('iframe-container').appendChild(iframe);
-            } else {
-                const errorResponse = await response.json();
-                alert(`Error uploading file: ${errorResponse.error}`);
-            }
-        } catch (error) {
-            alert(`Error uploading file: ${error.message}`);
-        }
-    }
-}
+# Ensure the upload and generated HTML folders exist
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+os.makedirs(app.config['GENERATED_HTML_FOLDER'], exist_ok=True)
+
+@app.route('/upload', methods=['POST'])
+def upload_files():
+    if 'file_1' not in request.files or 'file_2' not in request.files:
+        return jsonify({"error": "Both files are required"}), 400
+
+    # Save file 1
+    file_1 = request.files['file_1']
+    file_1_name = secure_filename(file_1.filename)
+    file_1_path = os.path.join(app.config['UPLOAD_FOLDER'], file_1_name)
+    file_1.save(file_1_path)
+
+    # Save file 2
+    file_2 = request.files['file_2']
+    file_2_name = secure_filename(file_2.filename)
+    file_2_path = os.path.join(app.config['UPLOAD_FOLDER'], file_2_name)
+    file_2.save(file_2_path)
+
+    # Generate an HTML file
+    html_content = f"""
+    <html>
+    <head><title>Uploaded Files</title></head>
+    <body>
+        <h1>Uploaded Files:</h1>
+        <p>File 1: {file_1_name}</p>
+        <p>File 2: {file_2_name}</p>
+    </body>
+    </html>
+    """
+    html_file_name = "file_display.html"
+    html_file_path = os.path.join(app.config['GENERATED_HTML_FOLDER'], html_file_name)
+
+    # Save the HTML file
+    with open(html_file_path, 'w') as html_file:
+        html_file.write(html_content)
+
+    # Return the path to the generated HTML file
+    return jsonify({"file_path": f"/get_html/{html_file_name}"}), 200
+
+# Route to serve the HTML file
+@app.route('/get_html/<filename>')
+def get_html(filename):
+    try:
+        # Construct the full file path
+        file_path = os.path.join(app.config['GENERATED_HTML_FOLDER'], filename)
+
+        # Check if file exists
+        if os.path.exists(file_path):
+            # Read the HTML file
+            with open(file_path, 'r') as file:
+                html_content = file.read()
+            
+            # Return the content with the appropriate content type
+            return Response(html_content, mimetype='text/html')
+        else:
+            return jsonify({"error": "File not found"}), 404
+
+    except Exception as e:
+        print(f"Error serving file: {e}")
+        return jsonify({"error": "An error occurred while serving the file."}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
