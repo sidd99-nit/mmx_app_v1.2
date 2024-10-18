@@ -85,10 +85,10 @@ def upload_file():
         df_media = pd.read_csv(file_2)
 
     # Generate profiling report
-    profile = ProfileReport(df_media, title="Profiling Report", explorative=False , dark_mode=True)
+    # profile = ProfileReport(df_media, title="Profiling Report", explorative=False , dark_mode=True)
     sales_report_file = 'sales_report.html'
     profile_path = os.path.join('static','reports', sales_report_file)
-    profile.to_file(profile_path)
+    # profile.to_file(profile_path)
 
     # Return the file path to be used in the iframe
     return jsonify({"file_path": f"/get_html/{sales_report_file}"}), 200
