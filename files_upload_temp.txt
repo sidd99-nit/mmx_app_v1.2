@@ -343,43 +343,89 @@
             width: fit-content;
         }
 
-        /* Modal styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
-            width: 96%; 
-            height: 75.8%;
-            margin-left: 5vh;
-            margin-top: 12vh;
+        /* Modal Background */
+        .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.5); /* Slightly dark background */
         }
 
-        /* Modal content box */
+        /* Modal Content */
         .modal-content {
-            background-color: #fff;
-            height: 100%;
-            /* margin: 15% auto; */
-            /* padding: 20px; */
-            /* border: 1px solid #888; */
-            /* width: 60%;  */
-            /* Can adjust width */
+        border-radius: 12px;  /* Smooth rounded corners */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
+        border: none; /* Remove default borders */
+        background-color: #fefefe; /* Light background */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+        height: 76%;
+        margin-top: 12vh;
         }
 
-        /* Close button (X) */
+        /* Modal Header */
+        .modal-header {
+        border-bottom: 1px solid #ddd;  /* Soft border for separation */
+        padding: 16px;
+        background-color: #004085; /* Professional blue background */
+        color: white;  /* White text for contrast */
+        border-top-left-radius: 12px;  /* Smooth header corners */
+        border-top-right-radius: 12px;
+        }
+
+        /* Modal Title */
+        .modal-title {
+        font-size: 1.5rem;  /* Slightly larger title */
+        font-weight: 500;  /* Medium weight for professional feel */
+        }
+
+        /* Modal Body */
+        .modal-body {
+        padding: 20px; /* Increased padding for better spacing */
+        color: #333; /* Darker text for better readability */
+        line-height: 1.6; /* Line height for better readability */
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+        border-top: 1px solid #ddd;  /* Soft border for separation */
+        padding: 16px;
+        background-color: #f8f9fa;  /* Light gray background */
+        border-bottom-left-radius: 12px; /* Smooth footer corners */
+        border-bottom-right-radius: 12px;
+        }
+
+        /* Close Button */
         .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        color: #fff; /* White close button in header */
+        opacity: 1;
+        text-shadow: none; /* Remove default text shadow */
         }
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            cursor: pointer;
+        .close:hover {
+        color: #ddd; /* Lighten close button on hover */
+        cursor: pointer;
+        }
+
+        /* Modal Buttons */
+        .modal-footer .btn {
+        border-radius: 6px;  /* Soft rounded buttons */
+        padding: 8px 16px;  /* Slightly larger buttons */
+        font-size: 1rem;  /* Increase button text size */
+        }
+
+        .modal-footer .btn-primary {
+        background-color: #007bff;  /* Professional blue button */
+        border-color: #007bff;
+        }
+
+        .modal-footer .btn-primary:hover {
+        background-color: #0056b3;  /* Darker blue on hover */
+        }
+
+        .modal-footer .btn-secondary {
+        background-color: #6c757d;  /* Neutral gray button */
+        border-color: #6c757d;
+        }
+
+        .modal-footer .btn-secondary:hover {
+        background-color: #5a6268;  /* Darker gray on hover */
         }
     </style>
 
