@@ -86,7 +86,7 @@ def upload_file():
         df_media = pd.read_csv(file_2)
 
     # Generate profiling report for sales
-    profile_sales = ProfileReport(df_sales.sample(frac=0.05), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True)
+    profile_sales = ProfileReport(df_sales.sample(frac=0.60), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True , correlations=None)
     sales_report_file = 'sales_report.html'
     profile_path_sales = os.path.join('static','reports', sales_report_file)
     profile_sales.to_file(profile_path_sales)
@@ -107,7 +107,7 @@ def upload_file():
     #     file.write(str(soup))
 
     # Generate profiling report for media
-    profile_media = ProfileReport(df_media, title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None)
+    profile_media = ProfileReport(df_media.sample(frac=0.50), title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None )
     media_report_file = 'media_report.html'
     profile_path_media = os.path.join('static','reports', media_report_file)
     profile_media.to_file(profile_path_media)
