@@ -1,0 +1,140 @@
+<script>
+        let files_1 = null;
+        let files_2 = null;
+
+        // File upload functionality for the first file
+        $('#upload-area-1').on('click', function() {
+            $('#file-input-1').click();
+        });
+
+        $('#upload-area-1').on('dragover', function(e) {
+            e.preventDefault();
+            $(this).addClass('hover');
+        });
+
+        $('#upload-area-1').on('dragleave', function() {
+            $(this).removeClass('hover');
+        });
+
+        $('#upload-area-1').on('drop', function(e) {
+            e.preventDefault();
+            $(this).removeClass('hover');
+            files_1 = e.originalEvent.dataTransfer.files;
+            const file_1 = files_1[0];
+            $('#filename-1').text(file_1.name);
+            $('#upload-area-1').hide();
+            $('#file-info-1').show();
+            handleFiles();  // Calls the function to handle both files when uploaded
+        });
+
+        $('#file-input-1').on('change', function(e) {
+            files_1 = e.target.files;
+            const file_1 = files_1[0];
+            $('#filename-1').text(file_1.name);
+            $('#upload-area-1').hide();
+            $('#file-info-1').show();
+            handleFiles();  // Calls the function to handle both files when uploaded
+        });
+
+        $('#remove-file-1').on('click', function() {
+            resetFileInput(1);  // Resets the file input for file 1
+        });
+
+        // File upload functionality for the second file
+        $('#upload-area-2').on('click', function() {
+            $('#file-input-2').click();
+        });
+
+        $('#upload-area-2').on('dragover', function(e) {
+            e.preventDefault();
+            $(this).addClass('hover');
+        });
+
+        $('#upload-area-2').on('dragleave', function() {
+            $(this).removeClass('hover');
+        });
+
+        $('#upload-area-2').on('drop', function(e) {
+            e.preventDefault();
+            $(this).removeClass('hover');
+            files_2 = e.originalEvent.dataTransfer.files;
+            const file_2 = files_2[0];
+            $('#filename-2').text(file_2.name);
+            $('#upload-area-2').hide();
+            $('#file-info-2').show();
+            handleFiles();  // Calls the function to handle both files when uploaded
+        });
+
+        $('#file-input-2').on('change', function(e) {
+            files_2 = e.target.files;
+            const file_2 = files_2[0];
+            $('#filename-2').text(file_2.name);
+            $('#upload-area-2').hide();
+            $('#file-info-2').show();
+            handleFiles();  // Calls the function to handle both files when uploaded
+        });
+
+        $('#remove-file-2').on('click', function() {
+            resetFileInput(2);  // Resets the file input for file 2
+        });
+
+        // Function to handle both files after they are selected or dropped
+        function handleFiles() {
+            if (files_1 && files_2) {  // Ensures both files are available
+                const file_1 = files_1[0];
+                const file_2 = files_2[0];
+
+                const formData = new FormData();
+                formData.append('file_1', file_1);  // Append the first file to the form data
+                formData.append('file_2', file_2);  // Append the second file to the form data
+
+                // AJAX request to send the files to the server for processing
+                $.ajax({
+                    url: '/upload',  // API endpoint
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {  // Handles the successful response from the server
+                        $('#variable-list').empty();  // Clear the variable list
+                        // Loop through the columns from the API response and add them to the list
+                        response.columns.forEach(function(column, index) {
+                            $('#variable-list').append(`
+                                <li class="list-group-item draggable" draggable="true" style="width:70vh">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input variable-checkbox" id="var${index}" value="${column}">
+                                        <label class="custom-control-label" for="var${index}">${column}</label>
+                                    </div>
+                                </li>
+                            `);
+                        });
+                        // Make the newly added list items draggable
+                        $('.draggable').each(function() {
+                            makeDraggable($(this));
+                        });
+                    },
+                    error: function(xhr) {  // Handles errors during the file upload process
+                        const errorResponse = JSON.parse(xhr.responseText);
+                        alert(`Error uploading file: ${errorResponse.error}`);
+                    }
+                });
+            }
+        }
+
+        // Function to reset file input areas (for both files)
+        function resetFileInput(fileNumber) {
+            if (fileNumber === 1) {
+                files_1 = null;
+                $('#filename-1').text('');
+                $('#file-info-1').hide();
+                $('#upload-area-1').show();
+                $('#file-input-1').val(null);  // Clear the input field
+            } else if (fileNumber === 2) {
+                files_2 = null;
+                $('#filename-2').text('');
+                $('#file-info-2').hide();
+                $('#upload-area-2').show();
+                $('#file-input-2').val(null);  // Clear the input field
+            }
+        }
+    </script>
