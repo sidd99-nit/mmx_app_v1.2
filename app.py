@@ -93,6 +93,7 @@ def upload_file():
     return jsonify({"file_path": f"/get_html/{html_file_name}"}), 200
 
 # route to serve the generated report HTML file
+@app.route('/get_html/<filename>', methods=['GET','POST'])
 def get_html(filename):
     try:
         return send_from_directory(os.path.join('static','reports'),filename)    
