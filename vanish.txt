@@ -1,71 +1,21 @@
-// When the user clicks the first button, open the first modal
-btn1.onclick = function() {
-    modal1.style.display = "block";
+from bs4 import BeautifulSoup
 
-    // to vanish the blue colored objects
-    var navbarBrand = document.getElementsByClassName("navbar-brand");
-    for (var i = 0; i < navbarBrand.length; i++) {
-        navbarBrand[i].style.display = 'none';
-    }
+# Load the HTML file
+with open('example.html', 'r', encoding='utf-8') as file:
+    soup = BeautifulSoup(file, 'html.parser')
 
-    var userInitials = document.getElementsByClassName("user-initials ml-3");
-    for (var i = 0; i < userInitials.length; i++) {
-        userInitials[i].style.display = 'none';
-    }
+# Find the elements with a specific class name
+class_name = 'navbar-brand'
 
-    document.getElementById("save-continue").style.display = 'none';
-}
+# Modify the style for all elements with the given class name
+for element in soup.find_all(class_=class_name):
+    # Add or modify the style
+    element['style'] = 'display: none; color: red;'  # Update styles as needed
+    # Optionally, you can also modify the content
+    element.string = "New Navbar Brand Text"  # Update the text content
 
-// When the user clicks the second button, open the second modal
-btn2.onclick = function() {
-    modal2.style.display = "block";
+# Save the modified HTML back to a file
+with open('modified_example.html', 'w', encoding='utf-8') as file:
+    file.write(str(soup))
 
-    // to vanish the blue colored objects
-    var navbarBrand = document.getElementsByClassName("navbar-brand");
-    for (var i = 0; i < navbarBrand.length; i++) {
-        navbarBrand[i].style.display = 'none';
-    }
-
-    var userInitials = document.getElementsByClassName("user-initials ml-3");
-    for (var i = 0; i < userInitials.length; i++) {
-        userInitials[i].style.display = 'none';
-    }
-
-    document.getElementById("save-continue").style.display = 'none';
-}
-
-// When the user clicks on <span> (x), close the first modal
-span1.onclick = function() {
-    modal1.style.display = "none";
-
-    // to reappear the blue colored objects
-    var navbarBrand = document.getElementsByClassName("navbar-brand");
-    for (var i = 0; i < navbarBrand.length; i++) {
-        navbarBrand[i].style.display = 'block';
-    }
-
-    var userInitials = document.getElementsByClassName("user-initials ml-3");
-    for (var i = 0; i < userInitials.length; i++) {
-        userInitials[i].style.display = 'block';
-    }
-
-    document.getElementById("save-continue").style.display = 'block';
-}
-
-// When the user clicks on <span> (x), close the second modal
-span2.onclick = function() {
-    modal2.style.display = "none";
-
-    // to reappear the blue colored objects
-    var navbarBrand = document.getElementsByClassName("navbar-brand");
-    for (var i = 0; i < navbarBrand.length; i++) {
-        navbarBrand[i].style.display = 'block';
-    }
-
-    var userInitials = document.getElementsByClassName("user-initials ml-3");
-    for (var i = 0; i < userInitials.length; i++) {
-        userInitials[i].style.display = 'block';
-    }
-
-    document.getElementById("save-continue").style.display = 'block';
-}
+print("HTML file updated successfully.")
