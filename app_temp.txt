@@ -51,10 +51,6 @@ def files_upload():
 
     return render_template('files_upload.html')
 
-@app.route('/select_features')
-def select_features():
-    return render_template('select_features.html')
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     # Check if the request contains both files
@@ -65,6 +61,7 @@ def upload_file():
     file_1 = request.files['file_1']
     file_1_name = secure_filename(file_1.filename)
     file_1_path = os.path.join('static','uploads', file_1_name)
+    session['sales_file_name'] = file_1_name
     file_1.save(file_1_path)
 
     # read file sales
@@ -77,6 +74,7 @@ def upload_file():
     file_2 = request.files['file_2']
     file_2_name = secure_filename(file_2.filename)
     file_2_path = os.path.join('static','uploads', file_2_name)
+    session['media_file_name'] = file_2_name
     file_2.save(file_2_path)
 
     # read file media
@@ -91,41 +89,11 @@ def upload_file():
     profile_path_sales = os.path.join('static','reports', sales_report_file)
     profile_sales.to_file(profile_path_sales)
 
-    # # Changing the Title for reports using beautiful soup
-    # # Load the HTML file
-    # with open(os.path.join('static','reports', sales_report_file), 'r', encoding='utf-8') as file:
-    #     soup = BeautifulSoup(file, 'html.parser')
-    # # Find the elements with a specific class name
-    # class_name = 'navbar-brand anchor'
-    # # Modify the style for all elements with the given class name
-    # for element in soup.find_all(class_=class_name):
-    #     # Add or modify the style
-    #     # Optionally, you can also modify the content
-    #     element.string = "Sales Profiling Report"  # Update the text content
-    # # Save the modified HTML back to a file
-    # with open(os.path.join('static','reports', sales_report_file), 'w', encoding='utf-8') as file:
-    #     file.write(str(soup))
-
     # Generate profiling report for media
     profile_media = ProfileReport(df_media.sample(frac=0.60), title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None  , minimal=True)
     media_report_file = 'media_report.html'
     profile_path_media = os.path.join('static','reports', media_report_file)
     profile_media.to_file(profile_path_media)
-
-    # Changing the Title for reports using beautiful soup
-    # Load the HTML file
-    # with open(os.path.join('static','reports', media_report_file), 'r', encoding='utf-8') as file:
-    #     soup = BeautifulSoup(file, 'html.parser')
-    # # Find the elements with a specific class name
-    # class_name = 'navbar-brand anchor'
-    # # Modify the style for all elements with the given class name
-    # for element in soup.find_all(class_=class_name):
-    #     # Add or modify the style
-    #     # Optionally, you can also modify the content
-    #     element.string = "Media Profiling Report"  # Update the text content
-    # # Save the modified HTML back to a file
-    # with open(os.path.join('static','reports', media_report_file), 'w', encoding='utf-8') as file:
-    #     file.write(str(soup))
 
     # Return the file path to be used in the iframe
     return jsonify({"file_path_sales": f"/get_html/{sales_report_file}" , "file_path_media": f"/get_html/{media_report_file}" }), 200
@@ -137,6 +105,41 @@ def get_html(filename):
         return send_from_directory(os.path.join('static','reports'),filename)    
     except FileNotFoundError:
         return jsonify({"error":"File not found"}), 404
+
+#dummy route to redirect
+@app.route('/select_features_redirect', methods=['GET','POST'])
+def select_features_redirect():
+
+    # go to the next page (select feature)
+    redirect_url = url_for('select_features')
+
+    # Return JSON with a message and a URL
+    return jsonify({"message": "Data saved successfully!", "redirect_url": redirect_url}), 200
+    
+
+# route for selecting features
+@app.route('/select_features')
+def select_features():
+
+    # retrieving sales and media files name
+    media_file_name = session['media_file_name'] 
+    sales_file_name = session['sales_file_name'] 
+
+    # reading them using pandas
+    if media_file_name.endswith('.xlsx'):
+        media_df = pd.read_excel(os.path.join('static','uploads',media_file_name))
+    elif media_file_name.endswith('.csv'):
+        media_df = pd.read_csv(os.path.join('static','uploads',media_file_name))
+
+    if sales_file_name.endswith('.xlsx'):
+        sales_df = pd.read_excel(os.path.join('static','uploads',sales_file_name))
+    elif sales_file_name.endswith('.csv'):
+        sales_df = pd.read_csv(os.path.join('static','uploads',sales_file_name))
+
+    # retrieving column names to populate the list and give user for selection
+    all_columns = list(set(list(sales_df.columns) + list(media_df.columns)))
+
+    return render_template('select_features.html' , all_columns = all_columns)
 
 @app.route('/pre-qc', methods=['POST'])
 def save_data():
