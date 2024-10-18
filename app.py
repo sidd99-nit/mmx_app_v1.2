@@ -8,6 +8,7 @@ from datetime import timedelta
 import plotly.graph_objects as go
 import mpld3
 import time
+from ydata_profiling import ProfileReport
 
 
 from routes.preqc.modal2 import create_plot
@@ -65,32 +66,32 @@ def upload_file():
     file_1_path = os.path.join('static','uploads', file_1_name)
     file_1.save(file_1_path)
 
+    # read file sales
+    if file_1.filename.endswith('.xlsx'):
+        df_sales = pd.read_excel(file_1)
+    elif file_1.filename.endswith('.csv'):
+        df_sales = pd.read_csv(file_1)
+
     # Save the second file
     file_2 = request.files['file_2']
     file_2_name = secure_filename(file_2.filename)
     file_2_path = os.path.join('static','uploads', file_2_name)
     file_2.save(file_2_path)
 
-    # Create an HTML file that will be shown in the iframe
-    html_content = f"""
-    <html>
-    <head><title>File Upload Results</title></head>
-    <body>
-        <h1 style="colour:white">Uploaded Files</h1>
-        <p style="colour:white">File 1: {file_1_name}</p>
-        <p style="colour:white">File 2: {file_2_name}</p>
-    </body>
-    </html>
-    """
-    html_file_name = "file_display.html"
-    html_file_path = os.path.join('static','reports', html_file_name)
+    # read file media
+    if file_2.filename.endswith('.xlsx'):
+        df_media = pd.read_excel(file_2)
+    elif file_2.filename.endswith('.csv'):
+        df_media = pd.read_csv(file_2)
 
-    # Save the HTML content to the file
-    with open(html_file_path, 'w') as html_file:
-        html_file.write(html_content)
+    # Generate profiling report
+    profile = ProfileReport(df_media, title="Profiling Report", explorative=False , dark_mode=True)
+    sales_report_file = 'sales_report.html'
+    profile_path = os.path.join('static','reports', sales_report_file)
+    profile.to_file(profile_path)
 
     # Return the file path to be used in the iframe
-    return jsonify({"file_path": f"/get_html/{html_file_name}"}), 200
+    return jsonify({"file_path": f"/get_html/{sales_report_file}"}), 200
 
 # route to serve the generated report HTML file
 @app.route('/get_html/<filename>', methods=['GET','POST'])
@@ -98,7 +99,6 @@ def get_html(filename):
     try:
         return send_from_directory(os.path.join('static','reports'),filename)    
     except FileNotFoundError:
-        print("html prop")
         return jsonify({"error":"File not found"}), 404
 
 @app.route('/pre-qc', methods=['POST'])
