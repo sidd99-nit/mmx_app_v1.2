@@ -810,16 +810,9 @@
             // Get the uploaded files
             const formData = new FormData();
             
-            if (files_1 && files_1[0]) {
-                formData.append('file_1', files_1[0]);
-            }
-            if (files_2 && files_2[0]) {
-                formData.append('file_2', files_2[0]);
-            }
-
             // Send data and files to Flask server
             $.ajax({
-                url: '/pre-qc',
+                url: '/select_features_redirect',
                 type: 'POST',
                 data: formData,
                 processData: false,
