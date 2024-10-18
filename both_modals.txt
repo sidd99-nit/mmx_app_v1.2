@@ -93,4 +93,70 @@
 </div>
 
 
+&&&&&&&&&&&&&
+
+
+<script>
+    // Trigger Sales File modal
+    document.getElementById('openModal1').addEventListener('click', function() {
+        $('#myModal1').modal('show'); // Use Bootstrap's modal method to open the modal
+    });
+
+    // Trigger Media File modal
+    document.getElementById('openModal2').addEventListener('click', function() {
+        $('#myModal2').modal('show'); // Use Bootstrap's modal method to open the modal
+    });
+</script>
+
+&&&&&&&&&&&&&&&
+
+
+<style>
+    /* Customize modal background */
+    .modal {
+        background-color: rgba(0, 0, 0, 0.5); /* Slightly darker background */
+    }
+
+    /* Modal content box with some padding and shadow for a sleek look */
+    .modal-content {
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    }
+
+    /* Custom header with sleek font and border */
+    .modal-header {
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 10px;
+    }
+
+    /* Style for close button (X) */
+    .modal-header .close {
+        font-size: 1.5rem;
+        color: #999;
+        opacity: 0.8;
+    }
+
+    /* Hover effect for close button */
+    .modal-header .close:hover {
+        color: #333;
+        opacity: 1;
+    }
+
+    /* Smooth transition effect when modal opens */
+    .modal.fade .modal-dialog {
+        transition: transform 0.3s ease-out;
+        transform: translate(0, -50px);
+    }
+
+    /* Adjusting size and responsiveness */
+    .modal-lg {
+        max-width: 80%; /* Makes the modal a bit wider */
+    }
+
+    /* Adding subtle hover effect to modal content */
+    .modal-content:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+</style>
 
