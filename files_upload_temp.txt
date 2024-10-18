@@ -765,29 +765,57 @@
         // When the user clicks the first button, open the first modal
         btn1.onclick = function() {
             modal1.style.display = "block";
+
+            // to vansh the blue coloured objects
+            document.getElementsByClassName("navbar-brand").style.display = 'none'
+            document.getElementsByClassName("user-initials ml-3").style.display = 'none'
+            document.getElementById("save-continue").style.display = 'none'
         }
 
         // When the user clicks the second button, open the second modal
         btn2.onclick = function() {
             modal2.style.display = "block";
+
+            // to vansh the blue coloured objects
+            document.getElementsByClassName("navbar-brand").style.display = 'none'
+            document.getElementsByClassName("user-initials ml-3").style.display = 'none'
+            document.getElementById("save-continue").style.display = 'none'
         }
 
         // When the user clicks on <span> (x), close the first modal
         span1.onclick = function() {
             modal1.style.display = "none";
+
+            // to appear the blue coloured objects
+            document.getElementsByClassName("navbar-brand").style.display = 'block'
+            document.getElementsByClassName("user-initials ml-3").style.display = 'block'
+            document.getElementById("save-continue").style.display = 'block'
         }
 
         // When the user clicks on <span> (x), close the second modal
         span2.onclick = function() {
             modal2.style.display = "none";
+
+            // to appear the blue coloured objects
+            document.getElementsByClassName("navbar-brand").style.display = 'block'
+            document.getElementsByClassName("user-initials ml-3").style.display = 'block'
+            document.getElementById("save-continue").style.display = 'block'
         }
 
         // When the user clicks anywhere outside the modal, close the modal
         window.onclick = function(event) {
             if (event.target == modal1) {
                 modal1.style.display = "none";
+                // to appear the blue coloured objects
+                document.getElementsByClassName("navbar-brand").style.display = 'block'
+                document.getElementsByClassName("user-initials ml-3").style.display = 'block'
+                document.getElementById("save-continue").style.display = 'block'
             } else if (event.target == modal2) {
                 modal2.style.display = "none";
+                // to appear the blue coloured objects
+                document.getElementsByClassName("navbar-brand").style.display = 'block'
+                document.getElementsByClassName("user-initials ml-3").style.display = 'block'
+                document.getElementById("save-continue").style.display = 'block'
             }
         }
     </script>
