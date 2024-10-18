@@ -486,7 +486,7 @@
         </div>
 
     
-        <div class="container-fluid" style="margin-top: -2.8%;">
+        <div class="container-fluid" style="margin-top: 2.8%;">
             <div class="upload-container">
                 <!-- File Upload Section -->
                 <div class="row mb-3">
@@ -546,7 +546,7 @@
         <div id="myModal1" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeModal1">&times;</span>
-                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95% ; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;"></object>
+                <object id="html-content-sales" data="" type="text/html" style="width: 100%; height: 95% ; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;"></object>
             </div>
         </div> 
 
@@ -554,7 +554,7 @@
         <div id="myModal2" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeModal2">&times;</span>
-                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95%; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;"></object>
+                <object id="html-content-media" data="" type="text/html" style="width: 100%; height: 95%; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;"></object>
             </div>
         </div>
 
@@ -566,7 +566,7 @@
         </div> -->
 
         <!-- Save and Continue Button -->
-        <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -2.9%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
+        <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -5.5%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
 
     </div>
     
@@ -676,8 +676,9 @@
                     if (response.ok) {
                         const result = await response.json();
 
-                        // Dynamically load the HTML content into the div 
-                        document.getElementById('html-content').data = result.file_path;
+                        // Dynamically load the HTML content into the div for sales and media
+                        document.getElementById('html-content-sales').data = result.file_path_sales;
+                        document.getElementById('html-content-media').data = result.file_path_media;
 
                         // make the save and continue button visible
                         document.getElementById('save-continue').style.display = 'block'
