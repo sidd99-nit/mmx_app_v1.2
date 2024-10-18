@@ -355,8 +355,10 @@
         border: none; /* Remove default borders */
         background-color: #fefefe; /* Light background */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-        height: 76%;
-        margin-top: 12vh;
+        height: 90%;
+        margin-top: 4.8vh;
+        width: 90%;
+        margin-left: 12vh;
         }
 
         /* Modal Header */
@@ -393,13 +395,13 @@
 
         /* Close Button */
         .close {
-        color: #fff; /* White close button in header */
+        color: #757575; /* White close button in header */
         opacity: 1;
         text-shadow: none; /* Remove default text shadow */
         }
 
         .close:hover {
-        color: #ddd; /* Lighten close button on hover */
+        color: #000000; /* Lighten close button on hover */
         cursor: pointer;
         }
 
