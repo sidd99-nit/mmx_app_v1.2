@@ -321,6 +321,66 @@
 
     </style>
 
+    <!-- styling for modal and it's trigger buttons -->
+    <style>
+        /* Style for the custom button */
+        .custom-button {
+            background: #374151; /* Slightly off-white background for a clean look */
+            border: 0.25vh dashed #818181; /* Subtle light grey dashed border */
+            border-radius: 2vh; /* Slightly rounded corners */
+            background-color: transparent;
+            font-size: 2.5vh; 
+            color: #CED0D4;
+            font-style: italic;
+            padding: 10px 20px;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 2.3vh;
+            text-align: center;
+            margin-left: 36vh;
+            margin-top: -30vh;
+            height: fit-content;
+            width: fit-content;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+            width: 96%; 
+            height: 80%;
+            margin-left: 5vh;
+            margin-top: 12vh;
+        }
+
+        /* Modal content box */
+        .modal-content {
+            background-color: #fff;
+            /* margin: 15% auto; */
+            /* padding: 20px; */
+            /* border: 1px solid #888; */
+            /* width: 60%;  */
+            /* Can adjust width */
+        }
+
+        /* Close button (X) */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 <body>
@@ -375,16 +435,15 @@
                 <!-- File Upload Section -->
                 <div class="row mb-3">
                     <div class="col-12" style="display: flex; justify-content: space-between;">
-
+                        <!-- First Card: Sales File -->
                         <div class="custom-card" style="width: 49%; margin-right: 3%; margin-left: -1.6%;">
                             <div class="custom-card-header">
                                 <span style="font-size: 3vh; color: #CED0D4;">Sales File</span>
                             </div>
                             <div class="card-body" style="display: flex; justify-content: space-between;">
-                                <!-- First Upload Section -->
                                 <div style="width: 100%;">
                                     <div id="upload-area-1" class="upload-area">
-                                        <p style="font-size: 2.5vh;  color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
+                                        <p style="font-size: 2.5vh; color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
                                     </div>
                                     <input type="file" id="file-input-1" style="display: none;">
                                     <div id="file-info-1" class="file-info" style="display: none;">
@@ -394,16 +453,16 @@
                                 </div>
                             </div>
                         </div>
-                        
+        
+                        <!-- Second Card: Media File -->
                         <div class="custom-card" style="width: 50%; margin-right: -1.6%;">
                             <div class="custom-card-header">
                                 <span style="font-size: 3vh; color: #CED0D4;">Media File</span>
                             </div>
                             <div class="card-body" style="display: flex; justify-content: space-between;">
-                                <!-- Second Upload Section -->
                                 <div style="width: 100%;">
                                     <div id="upload-area-2" class="upload-area">
-                                        <p style="font-size: 2.5vh;  color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
+                                        <p style="font-size: 2.5vh; color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
                                     </div>
                                     <input type="file" id="file-input-2" style="display: none;">
                                     <div id="file-info-2" class="file-info" style="display: none;">
@@ -414,17 +473,42 @@
                             </div>
                         </div>
                     </div>
+        
+                    <!-- Custom Buttons Below the Cards -->
+                    <div class="col-12" id="triggerModal" style="display: none; justify-content: space-between; margin-top: 35vh; margin-left: -20vh;">
+                        <!-- First Custom Button -->
+                        <div class="custom-button" id="openModal1" style="width: 49%;">Open Sales File Report</div> 
+                
+                        <!-- Second Custom Button -->
+                        <div class="custom-button" id="openModal2" style="width: 50%;">Open Media File Report</div>
+                    </div>
                 </div>
             </div>
-            
-        
         </div>
 
-        <div id="content-div"  style="margin-top: -4%; margin-left: 1.85%; width: 96%; height: 100vh;">
+        <!-- Modal for Sales File -->
+        <div id="myModal1" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal1">&times;</span>
+                <p>This is a paragraph inside the Sales File modal.</p>
+                <object id="html-content" data="" type="text/html" style="width: 100%; height: max-content"></object>
+            </div>
+        </div>
+
+        <!-- Modal for Media File -->
+        <div id="myModal2" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal2">&times;</span>
+                <p>This is a paragraph inside the Media File modal.</p>
+                <object id="html-content" data="" type="text/html" style="width: 100%; height: 90%;"></object>
+            </div>
+        </div>
+
+        <!-- <div id="content-div"  style="margin-top: -4%; margin-left: 1.85%; width: 96%; height: 100vh;">
 
             <object id="html-content" data="" type="text/html" style="width: 100%; height: 90%;"></object>
 
-        </div>
+        </div> -->
 
         <!-- Save and Continue Button -->
         <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -2.9%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
@@ -543,6 +627,9 @@
                         // make the save and continue button visible
                         document.getElementById('save-continue').style.display = 'block'
 
+                        // make the modal trigger buttons visible
+                        document.getElementById('triggerModal').style.display = 'flex'
+
                     } else {
                         const errorResponse = await response.json();
                         alert(`Error uploading file: ${errorResponse.error}`);
@@ -611,6 +698,50 @@
                 }
             });
         });
+    </script>
+
+    <!-- for opening sales modal -->
+    <script>
+        // Get modal elements
+        var modal1 = document.getElementById("myModal1");
+        var modal2 = document.getElementById("myModal2");
+
+        // Get the buttons that open the modals
+        var btn1 = document.getElementById("openModal1");
+        var btn2 = document.getElementById("openModal2");
+
+        // Get the <span> elements that close the modals
+        var span1 = document.getElementById("closeModal1");
+        var span2 = document.getElementById("closeModal2");
+
+        // When the user clicks the first button, open the first modal
+        btn1.onclick = function() {
+            modal1.style.display = "block";
+        }
+
+        // When the user clicks the second button, open the second modal
+        btn2.onclick = function() {
+            modal2.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the first modal
+        span1.onclick = function() {
+            modal1.style.display = "none";
+        }
+
+        // When the user clicks on <span> (x), close the second modal
+        span2.onclick = function() {
+            modal2.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside the modal, close the modal
+        window.onclick = function(event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            } else if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
     </script>
 
 </body>
