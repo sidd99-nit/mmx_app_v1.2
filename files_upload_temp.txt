@@ -438,6 +438,71 @@
         }
     </style>
 
+    <!-- for loading bar -->
+    <style>
+        .container-load {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-left: 68vh;
+            margin-top: 6vh;
+            display: none;
+        }
+    
+        h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+    
+        .status-text {
+            color: #22d3ee;
+            font-size: 0.875rem;
+            animation: pulse 2s infinite;
+        }
+    
+        .progress-container {
+            position: relative;
+            height: 12px;
+            background-color: #2d3748;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+    
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #14b8a6, #22d3ee, #3b82f6);
+            transition: width 0.5s ease-out;
+        }
+    
+        .blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, #36ffe8, #4be7ff, #5f9cff);
+            opacity: 0.5;
+            filter: blur(10px);
+        }
+    
+        .time-remaining {
+            font-size: 0.875rem;
+            color: #a0aec0;
+        }
+    
+        @keyframes pulse {
+            0%, 100% {
+            opacity: 0.5;
+            }
+            50% {
+            opacity: 0.1;
+            }
+        }
+    </style>
+
 </head>
 <body>
    
@@ -529,6 +594,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Loading Bar Container -->
+                    <div class="container-load" id="loadingContainer">
+                        <!-- <h2>Data Profiling</h2> -->
+                        <p class="status-text">Anyalyzing your data...</p>
+                        <div class="progress-container">
+                          <div class="progress-bar" id="progress-bar"></div>
+                          <div class="blur-layer" id="blur-layer"></div>
+                        </div>
+                        <p class="time-remaining">Estimated time: 2 minutes</p>
+                      </div>
         
                     <!-- Custom Buttons Below the Cards -->
                     <div class="col-12" id="triggerModal" style="display: none; justify-content: space-between; margin-top: 35vh; margin-left: -20vh;">
@@ -662,6 +738,9 @@
                 const file_1 = files_1[0];
                 const file_2 = files_2[0];
 
+                // make the loading bar visible
+                document.getElementById('loadingContainer').style.display = 'block'
+
                 const formData = new FormData();
                 formData.append('file_1', file_1);  // Append the first file to the form data
                 formData.append('file_2', file_2);  // Append the second file to the form data
@@ -679,6 +758,9 @@
                         // Dynamically load the HTML content into the div for sales and media
                         document.getElementById('html-content-sales').data = result.file_path_sales;
                         document.getElementById('html-content-media').data = result.file_path_media;
+
+                        // make the loading bar disappear
+                        document.getElementById('loadingContainer').style.display = 'none'
 
                         // make the save and continue button visible
                         document.getElementById('save-continue').style.display = 'block'
@@ -883,6 +965,31 @@
         }
     </script>
 
+    <!-- for moving the loading bar -->
+    <script>
+        let progress = 0;
+    
+        function updateProgressBar() {
+          const progressBar = document.getElementById('progress-bar');
+          const blurLayer = document.getElementById('blur-layer');
+          
+          // Update progress
+          const diff = Math.random() * 10;
+          progress = Math.min(progress + diff, 100);
+          
+          // Set progress width
+          progressBar.style.width = progress + '%';
+          blurLayer.style.width = progress + '%';
+          
+          // Reset progress after reaching 100%
+          if (progress >= 100) {
+            progress = 0;
+          }
+        }
+    
+        // Update the progress bar every 200ms
+        setInterval(updateProgressBar, 200);
+      </script>
     
 
 </body>
