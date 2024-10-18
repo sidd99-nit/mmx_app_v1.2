@@ -1,0 +1,66 @@
+<div class="container-fluid" style="margin-top: -2.8%;">
+    <div class="upload-container">
+        <!-- File Upload Section -->
+        <div class="row mb-3">
+            <div class="col-12" style="display: flex; justify-content: space-between;">
+                <!-- First Card: Sales File -->
+                <div class="custom-card" style="width: 49%; margin-right: 3%; margin-left: -1.6%;">
+                    <div class="custom-card-header">
+                        <span style="font-size: 3vh; color: #CED0D4;">Sales File</span>
+                    </div>
+                    <div class="card-body" style="display: flex; justify-content: space-between;">
+                        <div style="width: 100%;">
+                            <div id="upload-area-1" class="upload-area">
+                                <p style="font-size: 2.5vh; color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
+                            </div>
+                            <input type="file" id="file-input-1" style="display: none;">
+                            <div id="file-info-1" class="file-info" style="display: none;">
+                                <span id="filename-1" class="filename"></span>
+                                <button id="remove-file-1" class="btn btn-danger btn-sm ml-2">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- First Custom Button -->
+                    <div class="custom-button" id="openModal1">More Info</div>
+                </div>
+
+                <!-- Second Card: Media File -->
+                <div class="custom-card" style="width: 50%; margin-right: -1.6%;">
+                    <div class="custom-card-header">
+                        <span style="font-size: 3vh; color: #CED0D4;">Media File</span>
+                    </div>
+                    <div class="card-body" style="display: flex; justify-content: space-between;">
+                        <div style="width: 100%;">
+                            <div id="upload-area-2" class="upload-area">
+                                <p style="font-size: 2.5vh; color: #CED0D4; font-style: italic;">Click or Drag and Drop a CSV file here to upload</p>
+                            </div>
+                            <input type="file" id="file-input-2" style="display: none;">
+                            <div id="file-info-2" class="file-info" style="display: none;">
+                                <span id="filename-2" class="filename"></span>
+                                <button id="remove-file-2" class="btn btn-danger btn-sm ml-2">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Second Custom Button -->
+                    <div class="custom-button" id="openModal2">More Info</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Sales File -->
+<div id="myModal1" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal1">&times;</span>
+        <p>This is a paragraph inside the Sales File modal.</p>
+    </div>
+</div>
+
+<!-- Modal for Media File -->
+<div id="myModal2" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal2">&times;</span>
+        <p>This is a paragraph inside the Media File modal.</p>
+    </div>
+</div>
