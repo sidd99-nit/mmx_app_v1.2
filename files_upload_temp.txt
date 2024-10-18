@@ -603,7 +603,7 @@
                           <div class="progress-bar" id="progress-bar"></div>
                           <div class="blur-layer" id="blur-layer"></div>
                         </div>
-                        <p class="time-remaining">Estimated time: 2 minutes</p>
+                        <p class="time-remaining">Estimated time: 4 minutes</p>
                       </div>
         
                     <!-- Custom Buttons Below the Cards -->
