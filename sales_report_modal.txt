@@ -1,146 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal with Dotted Outline Button</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Trigger Button -->
-    <div class="custom-button" id="openModal">Click here to open modal</div>
+<style>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>This is a paragraph inside the modal.</p>
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+            width: 96%; 
+            height: 75.8%;
+            margin-left: 5vh;
+            margin-top: 12vh;
+        }
+
+        /* Modal content box */
+        .modal-content {
+            background-color: #fff;
+            height: 100%;
+        }
+
+        /* Close button (X) */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            cursor: pointer;
+        }
+    </style>
+
+
+<!-- Modal for Sales File -->
+        <div id="myModal1" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal1">&times;</span>
+                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95%"></object>
+            </div>
+        </div> 
+
+        <!-- Modal for Media File -->
+        <div id="myModal2" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal2">&times;</span>
+                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95%;"></object>
+            </div>
         </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
-&&&&&&&&&
-
-/* Style for the custom button */
-.custom-button {
-    border: 2px dotted #000;
-    padding: 10px 20px;
-    display: inline-block;
-    cursor: pointer;
-    background-color: transparent;
-    font-size: 16px;
-    text-align: center;
-}
-
-/* Modal styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
-}
-
-/* Modal content box */
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 60%; /* Can adjust width */
-}
-
-/* Close button (X) */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    cursor: pointer;
-}
-
-
-&&&&&&&&&&&
-
-
-// Get modal element
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("openModal");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-
-&&&&&&&&&&&&&
-
-// Get modal elements
-var modal1 = document.getElementById("myModal1");
-var modal2 = document.getElementById("myModal2");
-
-// Get the buttons that open the modals
-var btn1 = document.getElementById("openModal1");
-var btn2 = document.getElementById("openModal2");
-
-// Get the <span> elements that close the modals
-var span1 = document.getElementById("closeModal1");
-var span2 = document.getElementById("closeModal2");
-
-// When the user clicks the first button, open the first modal
-btn1.onclick = function() {
-    modal1.style.display = "block";
-}
-
-// When the user clicks the second button, open the second modal
-btn2.onclick = function() {
-    modal2.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the first modal
-span1.onclick = function() {
-    modal1.style.display = "none";
-}
-
-// When the user clicks on <span> (x), close the second modal
-span2.onclick = function() {
-    modal2.style.display = "none";
-}
-
-// When the user clicks anywhere outside the modal, close the modal
-window.onclick = function(event) {
-    if (event.target == modal1) {
-        modal1.style.display = "none";
-    } else if (event.target == modal2) {
-        modal2.style.display = "none";
-    }
-}
-
