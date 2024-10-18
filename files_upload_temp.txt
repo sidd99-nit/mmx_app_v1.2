@@ -268,6 +268,7 @@
         .upload-area:hover {
         background: #4b5666; /* Slightly darker off-white background on hover */
         transform: translateY(-3px); /* Light hover effect */
+        cursor: pointer;
         }
 
         .upload-area p {
@@ -346,6 +347,8 @@
         /* Modal Background */
         .modal-backdrop {
         background-color: rgba(0, 0, 0, 0.5); /* Slightly dark background */
+        border-bottom-left-radius: 12px; /* Smooth footer corners */
+        border-bottom-right-radius: 12px;
         }
 
         /* Modal Content */
@@ -359,6 +362,8 @@
         margin-top: 4.8vh;
         width: 90%;
         margin-left: 12vh;
+        border-bottom-left-radius: 12px; /* Smooth footer corners */
+        border-bottom-right-radius: 12px;
         }
 
         /* Modal Header */
@@ -382,6 +387,8 @@
         padding: 20px; /* Increased padding for better spacing */
         color: #333; /* Darker text for better readability */
         line-height: 1.6; /* Line height for better readability */
+        border-bottom-left-radius: 12px; /* Smooth footer corners */
+        border-bottom-right-radius: 12px;
         }
 
         /* Modal Footer */
@@ -407,9 +414,9 @@
 
         /* Modal Buttons */
         .modal-footer .btn {
-        border-radius: 6px;  /* Soft rounded buttons */
         padding: 8px 16px;  /* Slightly larger buttons */
         font-size: 1rem;  /* Increase button text size */
+
         }
 
         .modal-footer .btn-primary {
@@ -539,7 +546,7 @@
         <div id="myModal1" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeModal1">&times;</span>
-                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95%"></object>
+                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95% ; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;"></object>
             </div>
         </div> 
 
@@ -547,7 +554,7 @@
         <div id="myModal2" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeModal2">&times;</span>
-                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95%;"></object>
+                <object id="html-content" data="" type="text/html" style="width: 100%; height: 95%; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;"></object>
             </div>
         </div>
 
@@ -812,10 +819,10 @@
 
             var userInitials = document.getElementsByClassName("user-initials ml-3");
             for (var i = 0; i < userInitials.length; i++) {
-                userInitials[i].style.display = 'block';
+                userInitials[i].style.display = 'flex';
             }
 
-            document.getElementById("save-continue").style.display = 'flex';
+            document.getElementById("save-continue").style.display = 'block';
             
         }
 
@@ -831,10 +838,10 @@
 
             var userInitials = document.getElementsByClassName("user-initials ml-3");
             for (var i = 0; i < userInitials.length; i++) {
-                userInitials[i].style.display = 'block';
+                userInitials[i].style.display = 'flex';
             }
 
-            document.getElementById("save-continue").style.display = 'flex';
+            document.getElementById("save-continue").style.display = 'block';
         }
 
         // When the user clicks anywhere outside the modal, close the modal
@@ -850,10 +857,10 @@
 
             var userInitials = document.getElementsByClassName("user-initials ml-3");
             for (var i = 0; i < userInitials.length; i++) {
-                userInitials[i].style.display = 'block';
+                userInitials[i].style.display = 'flex';
             }
 
-            document.getElementById("save-continue").style.display = 'flex';
+            document.getElementById("save-continue").style.display = 'block';
             } 
             
             else if (event.target == modal2) {
@@ -867,10 +874,10 @@
 
             var userInitials = document.getElementsByClassName("user-initials ml-3");
             for (var i = 0; i < userInitials.length; i++) {
-                userInitials[i].style.display = 'block';
+                userInitials[i].style.display = 'flex';
             }
 
-            document.getElementById("save-continue").style.display = 'flex';
+            document.getElementById("save-continue").style.display = 'block';
             }
         }
     </script>
