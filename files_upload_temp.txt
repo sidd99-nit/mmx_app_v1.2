@@ -344,6 +344,12 @@
             width: fit-content;
         }
 
+        /* hover effect */
+        .custom-button:hover{
+        background: #374151; /* Slightly darker off-white background on hover */
+        transform: translateY(-3px); /* Light hover effect */
+        }
+
         /* Modal Background */
         .modal-backdrop {
         background-color: rgba(0, 0, 0, 0.5); /* Slightly dark background */
@@ -500,6 +506,14 @@
             50% {
             opacity: 0.1;
             }
+        }
+    </style>
+
+    <!-- for save and continue button -->
+    <style>
+        #save-continue:hover{
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #0066ff , #006184,#005c56);
         }
     </style>
 
