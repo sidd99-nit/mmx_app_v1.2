@@ -484,7 +484,7 @@
     <!-- Breadcrumb Style Tabs Navbar -->
     <div id="breadcrumb-navbar-container">
         <nav class="breadcrumb">
-            <a href="/main">Data Input and Exploration</a>
+            <a href="/files_upload">Data Input and Exploration</a>
             <span class="separator">&gt;</span>
             <a href="/select_features" class="active">Model Data Preparation</a>
             <span class="separator">&gt;</span>
