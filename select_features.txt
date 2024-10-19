@@ -438,6 +438,14 @@
 
     </style>
 
+    <!-- for save and continue button -->
+    <style>
+        #save-continue:hover{
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #0066ff , #006184,#005c56);
+        }
+    </style>
+
 
 </head>
 <body>
@@ -476,7 +484,7 @@
     <!-- Breadcrumb Style Tabs Navbar -->
     <div id="breadcrumb-navbar-container">
         <nav class="breadcrumb">
-            <a href="/main">Data Input and Exploration</a>
+            <a href="/files_upload">Data Input and Exploration</a>
             <span class="separator">&gt;</span>
             <a href="/select_features" class="active">Model Data Preparation</a>
             <span class="separator">&gt;</span>
