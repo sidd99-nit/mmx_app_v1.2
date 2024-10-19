@@ -45,7 +45,7 @@ def welcome():
 def files_upload():
 
     # having loading effect
-    # time.sleep(1.8)
+    time.sleep(1.5)
     # Clear all session variables
     session.clear()
 
@@ -84,13 +84,13 @@ def upload_file():
         df_media = pd.read_csv(file_2)
 
     # Generate profiling report for sales
-    profile_sales = ProfileReport(df_sales.sample(frac=0.50), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True , correlations=None)
+    profile_sales = ProfileReport(df_sales.sample(frac=0.30), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True , correlations=None)
     sales_report_file = 'sales_report.html'
     profile_path_sales = os.path.join('static','reports', sales_report_file)
     profile_sales.to_file(profile_path_sales)
 
     # Generate profiling report for media
-    profile_media = ProfileReport(df_media.sample(frac=0.60), title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None  , minimal=True)
+    profile_media = ProfileReport(df_media.sample(frac=0.30), title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None  , minimal=True)
     media_report_file = 'media_report.html'
     profile_path_media = os.path.join('static','reports', media_report_file)
     profile_media.to_file(profile_path_media)
