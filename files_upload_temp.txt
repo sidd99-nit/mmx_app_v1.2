@@ -447,11 +447,8 @@
     <!-- for loading bar -->
     <style>
         .container-load {
-            width: 100%;
             max-width: 400px;
             text-align: center;
-            margin-left: 68vh;
-            margin-top: 11vh;
             display: none;
         }
     
@@ -590,7 +587,11 @@
 
     <!-- for toggle button -->
     <style>
-
+        .myToggle {
+            display: flex;
+            align-items: center; /* Vertically align items */
+        }
+    
         .toggle-container {
             display: inline-block;
             position: relative;
@@ -599,7 +600,7 @@
             vertical-align: middle;
             margin-left: 8vh;
         }
-
+    
         .toggle-button {
             position: absolute;
             top: 0;
@@ -611,7 +612,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+    
         .toggle-button::before {
             content: '';
             position: absolute;
@@ -623,31 +624,20 @@
             background-color: white;
             transition: all 0.3s ease;
         }
-
+    
         .toggle-container.active .toggle-button {
             background: linear-gradient(135deg, #2ecc71, #27ae60);
         }
-
+    
         .toggle-container.active .toggle-button::before {
             transform: translateX(24px);
         }
-
+    
         .toggle-label {
             margin-left: 10px;
             font-size: 14px;
-            vertical-align: middle;
             color: #b7b9bc;
-            margin-top: -1.6%;
         }
-    </style>
-
-    <!-- for end buttons toggle and save and continue button -->
-    <style >
-
-        .endButtons{
-            margin-top: 28vh;
-        }
-
     </style>
 
 </head>
@@ -780,26 +770,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Loading Bar Container -->
-                    <div class="container-load" id="loadingContainer">
-                        <!-- <h2>Data Profiling</h2> -->
-                        <p class="status-text">Anyalyzing your data...</p>
-                        <div class="progress-container">
-                          <div class="progress-bar" id="progress-bar"></div>
-                          <div class="blur-layer" id="blur-layer"></div>
-                        </div>
-                        <p class="time-remaining">Estimated time: 4 minutes</p>
-                      </div>
         
-                    <!-- Custom Buttons Below the Cards -->
-                    <div class="col-12" id="triggerModal" style="display: none; justify-content: space-between; margin-top: 35vh; margin-left: -20vh;">
-                        <!-- First Custom Button -->
-                        <div class="custom-button" id="openModal1" style="width: 15%; margin-left: 27.5%;">Open Sales File Report</div> 
-                
-                        <!-- Second Custom Button -->
-                        <div class="custom-button" id="openModal2" style="width: 15%; margin-right: 6%;">Open Media File Report</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -820,7 +791,6 @@
             </div>
         </div>
 
-
         <!-- <div id="content-div"  style="margin-top: -4%; margin-left: 1.85%; width: 96%; height: 100vh;">
 
             <object id="html-content" data="" type="text/html" style="width: 100%; height: 90%;"></object>
@@ -828,22 +798,42 @@
         </div> -->
 
 
-        <!-- toggle button for y data profiling -->
+        <!-- Custom Buttons Below the Cards for opening the sales and media file report -->
+        <div class="col-12" id="triggerModal" style="visibility: hidden; justify-content: space-between; margin-top: -9vh; margin-left: -20vh;">
+            <!-- First Custom Button -->
+            <div class="custom-button" id="openModal1" style="width: 15%; margin-left: 27.5%;">Open Sales File Report</div> 
+    
+            <!-- Second Custom Button -->
+            <div class="custom-button" id="openModal2" style="width: 15%; margin-left: 36%;">Open Media File Report</div>
+        </div>
 
-        <div class="endButtons" style="display: flex;"> 
 
-            <div class="myToggle" style="display:flex;">
+        <!-- toggle button for y data profiling and save and continue and loading bar-->
+        <div id="ending" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10vh;">
+
+            <!-- toggle button for analysis -->
+            <div class="myToggle" style="width: 15%;">
                 <div class="toggle-container" id="toggleContainer">
                     <div class="toggle-button"></div>
                 </div>
-                <span class="toggle-label" id="toggleLabel"> Analysis Off</span>
+                <span class="toggle-label" id="toggleLabel">Analysis Off</span>
+            </div> 
+
+
+            <!-- Loading Bar Container -->
+            <div class="container-load" id="loadingContainer" style="display: block;visibility: hidden; width: 50%;">
+                <!-- <h2>Data Profiling</h2> -->
+                <p class="status-text">Anyalyzing your data...</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <div class="blur-layer" id="blur-layer"></div>
+                </div>
+                <p class="time-remaining">Estimated time: 4 minutes</p>
             </div>
 
             <!-- Save and Continue Button -->
-            <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -5.5%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
-
+            <button id="save-continue" class="btn btn-primary btn-block" style="margin-bottom: 0.1%; margin-right: 7.5vh;height: fit-content ;width: 15% ; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; visibility: hidden" >Save and Continue</button>
         </div>
-
     </div>
     
     <!-- div that has the entire body -->
@@ -855,21 +845,24 @@
     <script>
         let files_1 = null;
         let files_2 = null;
-
+    
+        // Add toggle functionality reference
+        // const get_toggleContainer = document.getElementById('toggleContainer');
+    
         // File upload functionality for the first file
         $('#upload-area-1').on('click', function() {
             $('#file-input-1').click();
         });
-
+    
         $('#upload-area-1').on('dragover', function(e) {
             e.preventDefault();
             $(this).addClass('hover');
         });
-
+    
         $('#upload-area-1').on('dragleave', function() {
             $(this).removeClass('hover');
         });
-
+    
         $('#upload-area-1').on('drop', function(e) {
             e.preventDefault();
             $(this).removeClass('hover');
@@ -880,7 +873,7 @@
             $('#file-info-1').show();
             handleFiles();  // Calls the function to handle both files when uploaded
         });
-
+    
         $('#file-input-1').on('change', function(e) {
             files_1 = e.target.files;
             const file_1 = files_1[0];
@@ -889,25 +882,25 @@
             $('#file-info-1').show();
             handleFiles();  // Calls the function to handle both files when uploaded
         });
-
+    
         $('#remove-file-1').on('click', function() {
             resetFileInput(1);  // Resets the file input for file 1
         });
-
+    
         // File upload functionality for the second file
         $('#upload-area-2').on('click', function() {
             $('#file-input-2').click();
         });
-
+    
         $('#upload-area-2').on('dragover', function(e) {
             e.preventDefault();
             $(this).addClass('hover');
         });
-
+    
         $('#upload-area-2').on('dragleave', function() {
             $(this).removeClass('hover');
         });
-
+    
         $('#upload-area-2').on('drop', function(e) {
             e.preventDefault();
             $(this).removeClass('hover');
@@ -918,7 +911,7 @@
             $('#file-info-2').show();
             handleFiles();  // Calls the function to handle both files when uploaded
         });
-
+    
         $('#file-input-2').on('change', function(e) {
             files_2 = e.target.files;
             const file_2 = files_2[0];
@@ -927,47 +920,64 @@
             $('#file-info-2').show();
             handleFiles();  // Calls the function to handle both files when uploaded
         });
-
+    
         $('#remove-file-2').on('click', function() {
             resetFileInput(2);  // Resets the file input for file 2
         });
-
+    
         // Function to handle both files after they are selected or dropped
         async function handleFiles() {
             if (files_1 && files_2) {  // Ensures both files are available
                 const file_1 = files_1[0];
                 const file_2 = files_2[0];
-
+    
                 // make the loading bar visible
-                document.getElementById('loadingContainer').style.display = 'block'
-
+                document.getElementById('loadingContainer').style.visibility = 'visible';
+    
                 const formData = new FormData();
                 formData.append('file_1', file_1);  // Append the first file to the form data
                 formData.append('file_2', file_2);  // Append the second file to the form data
-
-                // Fetch API to send the files to the server for processing
+    
+                // Add the toggle state to the form data
+                // const isAnalysisOn = get_toggleContainer.classList.contains('active');
+                // formData.append('analysisOn', isAnalysisOn);  
+                // Append toggle state
+                formData.append('analysisStatus',analysisStatus);
+    
+                // Fetch API to send the files and toggle status to the server for processing
                 try {
                     const response = await fetch('/upload', {
                         method: 'POST',
                         body: formData,
                     });
-
+    
                     if (response.ok) {
                         const result = await response.json();
+                        
+                        // check if analysis is on or off
+                        if (analysisStatus === 'on'){
+                            // Dynamically load the HTML content into the div for sales and media
+                            document.getElementById('html-content-sales').data = result.file_path_sales;
+                            document.getElementById('html-content-media').data = result.file_path_media;
 
-                        // Dynamically load the HTML content into the div for sales and media
-                        document.getElementById('html-content-sales').data = result.file_path_sales;
-                        document.getElementById('html-content-media').data = result.file_path_media;
+                            // make the loading bar disappear
+                            document.getElementById('loadingContainer').style.visibility = 'hidden';
+            
+                            // make the save and continue button visible
+                            document.getElementById('save-continue').style.visibility = 'visible';
 
-                        // make the loading bar disappear
-                        document.getElementById('loadingContainer').style.display = 'none'
+                            // make the modal trigger buttons visible
+                            document.getElementById('triggerModal').style.visibility = 'visible';
+                        } else{
+                            // document.getElementById('noAnalysisMessage').innerText = result.message;
 
-                        // make the save and continue button visible
-                        document.getElementById('save-continue').style.display = 'block'
+                            // make the loading bar disappear
+                            document.getElementById('loadingContainer').style.visibility = 'hidden';
 
-                        // make the modal trigger buttons visible
-                        document.getElementById('triggerModal').style.display = 'flex'
-
+                            // make the save and continue button visible
+                            document.getElementById('save-continue').style.visibility = 'visible';
+                        }
+    
                     } else {
                         const errorResponse = await response.json();
                         alert(`Error uploading file: ${errorResponse.error}`);
@@ -977,7 +987,7 @@
                 }
             }
         }
-
+    
         // Function to reset file input areas (for both files)
         function resetFileInput(fileNumber) {
             if (fileNumber === 1) {
@@ -1221,10 +1231,12 @@
     <script>
         const toggleContainer = document.getElementById('toggleContainer');
         const toggleLabel = document.getElementById('toggleLabel');
+        let analysisStatus = 'off'
         
         toggleContainer.addEventListener('click', () => {
             toggleContainer.classList.toggle('active');
-            toggleLabel.textContent = toggleContainer.classList.contains('active') ? 'Analysis On' : 'Analysis Off';
+            analysisStatus = toggleContainer.classList.contains('active') ? 'on':'off';
+            toggleLabel.textContent = analysisStatus ==='on' ? 'Analysis On' : 'Analysis Off';
         });
     </script>
 
