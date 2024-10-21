@@ -638,7 +638,6 @@
             font-size: 14px;
             vertical-align: middle;
             color: #b7b9bc;
-            margin-top: 44.5vh;
         }
     </style>
 
@@ -826,16 +825,15 @@
 
 
         <!-- toggle button for y data profiling -->
-
-            <div class="myToggle" style="display:flex;">
-                <div class="toggle-container" id="toggleContainer">
-                    <div class="toggle-button"></div>
-                </div>
-                <span class="toggle-label" id="toggleLabel"> Analysis Off</span>
+        <div style="height: fit-content;">
+            <div class="toggle-container" id="toggleContainer">
+                <div class="toggle-button"></div>
             </div>
+            <span class="toggle-label" id="toggleLabel"> Analysis Off</span>
+        </div>           
 
             <!-- Save and Continue Button -->
-            <button id="save-continue" class="btn btn-primary btn-block" style="margin-bottom: 10% ;height: fit-content ; width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: block;" >Save and Continue</button>
+            <button id="save-continue" class="btn btn-primary btn-block" style="margin-bottom: 20vh; height: fit-content ; width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: block;" >Save and Continue</button>
 
     </div>
     
