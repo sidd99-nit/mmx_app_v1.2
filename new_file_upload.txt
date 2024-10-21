@@ -221,7 +221,7 @@
         border-top: 0.01px solid #475363;
         border-left: 0.01px solid #475363;
         border-right: 0.01px solid #475363;
-        border-radius: 1vh; /* Rounded corners */
+        border-radius: 1.5vh; /* Rounded corners */
         box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2); /* Softer shadow for more subtle depth */
         transition: box-shadow 0.3s ease, transform 0.3s ease;
         height: fit-content;
@@ -244,8 +244,8 @@
 
         color: #353535; /* Darker grey text for contrast */
         font-weight: 500;
-        border-top-left-radius: 1vh;
-        border-top-right-radius: 1vh;
+        border-top-left-radius: 1.5vh;
+        border-top-right-radius: 1.5vh;
         height: 8vh;
         padding: 1.4%;
         text-align: center;
@@ -302,7 +302,7 @@
 
         .filename {
         font-weight: 600;
-        margin-left: 36vh;
+        margin-left: 23vh;
         }
 
     </style>
@@ -333,15 +333,15 @@
             font-size: 2.5vh; 
             color: #CED0D4;
             font-style: italic;
-            padding: 10px 20px;
+            padding: 10px 15px;
             display: inline-block;
             cursor: pointer;
             font-size: 2.3vh;
             text-align: center;
-            margin-left: 36vh;
+            margin-left: 45vh;
             margin-top: -30vh;
             height: fit-content;
-            width: fit-content;
+            width: 2vh;
         }
 
         /* hover effect */
@@ -517,6 +517,7 @@
         }
     </style>
 
+    <!-- for the side navbar -->
     <style>
             .menu-button {
             color: #b7b9bc;
@@ -587,6 +588,68 @@
         }
     </style>
 
+    <!-- for toggle button -->
+    <style>
+
+        .toggle-container {
+            display: inline-block;
+            position: relative;
+            width: 6.8vh;
+            height: 2.7vh;
+            vertical-align: middle;
+            margin-left: 8vh;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-button::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 2vh;
+            height: 2vh;
+            border-radius: 11px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-container.active .toggle-button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .toggle-container.active .toggle-button::before {
+            transform: translateX(24px);
+        }
+
+        .toggle-label {
+            margin-left: 10px;
+            font-size: 14px;
+            vertical-align: middle;
+            color: #b7b9bc;
+            margin-top: -1.6%;
+        }
+    </style>
+
+    <!-- for end buttons toggle and save and continue button -->
+    <style >
+
+        .endButtons{
+            margin-top: 28vh;
+        }
+
+    </style>
+
 </head>
 <body>
    
@@ -599,7 +662,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/main" style="margin-left: 92vh; font-size: small; letter-spacing: 0.06vh; color: #b7b9bc;">New Project</a>
+                        <a class="nav-link" href="/main" style="margin-left: 86vh; font-size: small; letter-spacing: 0.06vh; color: #b7b9bc;">New Project</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/main" style="margin-left:4vh; font-size: small;  letter-spacing: 0.06vh; color: #b7b9bc;">Open Project</a>
@@ -617,7 +680,7 @@
             </div>
         </nav>
 
-        
+    <!-- for the side navbar         -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Close navigation menu" style="background-color: transparent;">&times;</a>
         <a href="#">
@@ -674,13 +737,13 @@
         </div>
 
     
-        <div class="container-fluid" style="margin-top: 2.8%;">
+        <div class="container-fluid" style="margin-top: 1.2%;">
             <div class="upload-container">
                 <!-- File Upload Section -->
                 <div class="row mb-3">
                     <div class="col-12" style="display: flex; justify-content: space-between;">
                         <!-- First Card: Sales File -->
-                        <div class="custom-card" style="width: 49%; margin-right: 3%; margin-left: -1.6%;">
+                        <div class="custom-card" style="width: 39%; margin-right: 2%; margin-left: 6%;">
                             <div class="custom-card-header">
                                 <span style="font-size: 3vh; color: #CED0D4;">Sales File</span>
                             </div>
@@ -699,7 +762,7 @@
                         </div>
         
                         <!-- Second Card: Media File -->
-                        <div class="custom-card" style="width: 50%; margin-right: -1.6%;">
+                        <div class="custom-card" style="width: 39%; margin-right: 4%;">
                             <div class="custom-card-header">
                                 <span style="font-size: 3vh; color: #CED0D4;">Media File</span>
                             </div>
@@ -732,10 +795,10 @@
                     <!-- Custom Buttons Below the Cards -->
                     <div class="col-12" id="triggerModal" style="display: none; justify-content: space-between; margin-top: 35vh; margin-left: -20vh;">
                         <!-- First Custom Button -->
-                        <div class="custom-button" id="openModal1" style="width: 49%;">Open Sales File Report</div> 
+                        <div class="custom-button" id="openModal1" style="width: 15%; margin-left: 27.5%;">Open Sales File Report</div> 
                 
                         <!-- Second Custom Button -->
-                        <div class="custom-button" id="openModal2" style="width: 50%;">Open Media File Report</div>
+                        <div class="custom-button" id="openModal2" style="width: 15%; margin-right: 6%;">Open Media File Report</div>
                     </div>
                 </div>
             </div>
@@ -764,8 +827,22 @@
 
         </div> -->
 
-        <!-- Save and Continue Button -->
-        <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -5.5%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
+
+        <!-- toggle button for y data profiling -->
+
+        <div class="endButtons" style="display: flex;"> 
+
+            <div class="myToggle" style="display:flex;">
+                <div class="toggle-container" id="toggleContainer">
+                    <div class="toggle-button"></div>
+                </div>
+                <span class="toggle-label" id="toggleLabel"> Analysis Off</span>
+            </div>
+
+            <!-- Save and Continue Button -->
+            <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -5.5%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
+
+        </div>
 
     </div>
     
@@ -1107,6 +1184,7 @@
         setInterval(updateProgressBar, 200);
       </script>
     
+    <!-- for the side navbar -->
     <script>
         const sidenav = document.getElementById("mySidenav");
         const overlay = document.getElementById("overlay");
@@ -1135,6 +1213,18 @@
             if (event.key === "Escape") {
                 closeNav();
             }
+        });
+    </script>
+
+    <!-- for toggle button -->
+
+    <script>
+        const toggleContainer = document.getElementById('toggleContainer');
+        const toggleLabel = document.getElementById('toggleLabel');
+        
+        toggleContainer.addEventListener('click', () => {
+            toggleContainer.classList.toggle('active');
+            toggleLabel.textContent = toggleContainer.classList.contains('active') ? 'Analysis On' : 'Analysis Off';
         });
     </script>
 
