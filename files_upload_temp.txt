@@ -588,6 +588,63 @@
         }
     </style>
 
+    <!-- for toggle button -->
+    <style>
+
+        .myToggle{
+            margin-top: 35vh;
+            margin-left: 10vh;
+        }
+
+        .toggle-container {
+            display: inline-block;
+            position: relative;
+            width: 5.8vh;
+            height: 2.5vh;
+            vertical-align: middle;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-button::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 2vh;
+            height: 2vh;
+            border-radius: 11px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-container.active .toggle-button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .toggle-container.active .toggle-button::before {
+            transform: translateX(24px);
+        }
+
+        .toggle-label {
+            margin-left: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            vertical-align: middle;
+            color: #b7b9bc;
+        }
+    </style>
+
 </head>
 <body>
    
@@ -764,6 +821,16 @@
             <object id="html-content" data="" type="text/html" style="width: 100%; height: 90%;"></object>
 
         </div> -->
+
+
+        <!-- toggle button for y data profiling -->
+
+        <div class="myToggle" style="display:flex;">
+            <div class="toggle-container" id="toggleContainer">
+                <div class="toggle-button"></div>
+            </div>
+            <span class="toggle-label" id="toggleLabel"> Analysis Off</span>
+        </div>
 
         <!-- Save and Continue Button -->
         <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -5.5%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
@@ -1137,6 +1204,18 @@
             if (event.key === "Escape") {
                 closeNav();
             }
+        });
+    </script>
+
+    <!-- for toggle button -->
+
+    <script>
+        const toggleContainer = document.getElementById('toggleContainer');
+        const toggleLabel = document.getElementById('toggleLabel');
+        
+        toggleContainer.addEventListener('click', () => {
+            toggleContainer.classList.toggle('active');
+            toggleLabel.textContent = toggleContainer.classList.contains('active') ? 'Analysis On' : 'Analysis Off';
         });
     </script>
 
