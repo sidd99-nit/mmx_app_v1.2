@@ -45,7 +45,7 @@ def welcome():
 def files_upload():
 
     # having loading effect
-    time.sleep(1.5)
+    # time.sleep(1.5)
     # Clear all session variables
     session.clear()
 
@@ -53,6 +53,10 @@ def files_upload():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+
+    # retrieve the analysis status
+    analysis_status = request.form.get('analysisStatus')
+
     # Check if the request contains both files
     if 'file_1' not in request.files or 'file_2' not in request.files:
         return jsonify({"error": "Both files are required"}), 400
@@ -82,6 +86,10 @@ def upload_file():
         df_media = pd.read_excel(file_2)
     elif file_2.filename.endswith('.csv'):
         df_media = pd.read_csv(file_2)
+
+    # do not run y-data if run analysis is off
+    if analysis_status == 'off':
+        return jsonify({"message":"Click on save and continue button to proceed"})
 
     # Generate profiling report for sales
     profile_sales = ProfileReport(df_sales.sample(frac=0.30), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True , correlations=None)
