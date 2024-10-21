@@ -591,17 +591,13 @@
     <!-- for toggle button -->
     <style>
 
-        .myToggle{
-            margin-top: 35vh;
-            margin-left: 10vh;
-        }
-
         .toggle-container {
             display: inline-block;
             position: relative;
-            width: 5.8vh;
-            height: 2.5vh;
+            width: 6.8vh;
+            height: 2.7vh;
             vertical-align: middle;
+            margin-left: 8vh;
         }
 
         .toggle-button {
@@ -638,11 +634,20 @@
 
         .toggle-label {
             margin-left: 10px;
-            font-family: Arial, sans-serif;
             font-size: 14px;
             vertical-align: middle;
             color: #b7b9bc;
+            margin-top: -1.6%;
         }
+    </style>
+
+    <!-- for end buttons toggle and save and continue button -->
+    <style >
+
+        .endButtons{
+            margin-top: 28vh;
+        }
+
     </style>
 
 </head>
@@ -825,15 +830,19 @@
 
         <!-- toggle button for y data profiling -->
 
-        <div class="myToggle" style="display:flex;">
-            <div class="toggle-container" id="toggleContainer">
-                <div class="toggle-button"></div>
-            </div>
-            <span class="toggle-label" id="toggleLabel"> Analysis Off</span>
-        </div>
+        <div class="endButtons" style="display: flex;"> 
 
-        <!-- Save and Continue Button -->
-        <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -5.5%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
+            <div class="myToggle" style="display:flex;">
+                <div class="toggle-container" id="toggleContainer">
+                    <div class="toggle-button"></div>
+                </div>
+                <span class="toggle-label" id="toggleLabel"> Analysis Off</span>
+            </div>
+
+            <!-- Save and Continue Button -->
+            <button id="save-continue" class="btn btn-primary btn-block" style="margin-top: -5.5%;  width: fit-content; margin-left: 85.5%; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); color: #131314; border: #0e3046; font-weight: 500; display: none;" >Save and Continue</button>
+
+        </div>
 
     </div>
     
