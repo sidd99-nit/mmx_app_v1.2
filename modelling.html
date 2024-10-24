@@ -5,97 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketing Analytics Platform</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
     
-    <!-- for the first navbar -->
-  <style>
-    /* Import the Poppins font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-.navbar-custom {
-    background-color: #0a2a3e; /* Deeper, futuristic background color */
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
-    margin-bottom: 0.5%;
-}
-
-.navbar-brand, .navbar-nav .nav-link {
-    color: white;
-    font-weight: 400;
-    letter-spacing: 1px; /* Slightly wider letter spacing for a sleek look */
-    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-}
-
-.navbar-brand:hover, .navbar-nav .nav-link:hover {
-    color: #00d1ff; /* Neon blue hover effect */
-    transform: scale(1.05); /* Slight scale on hover */
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    color: white;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    font-size: small;
-}
-
-.user-info span {
-    margin-left: 10px;
-}
-
-.user-initials {
-    width: 5vh; /* Slightly larger for modern aesthetics */
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1c8ef9, #17a2b8); /* Gradient background */
-    color: white;
-    font-weight: 200;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0, 221, 255, 0.6); /* Glow effect */
-    transition: box-shadow 0.3s ease;
-    font-family: 'Poppins', sans-serif; /* Aesthetic font */
-}
-
-.user-initials:hover {
-    box-shadow: 0 2px 20px rgba(23, 162, 184, 1); /* Intense glow on hover */
-}
-
-.nav-tabs-custom {
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent tabs background */
-    backdrop-filter: blur(10px); /* Blur effect for a futuristic feel */
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Depth shadow */
-    font-family: 'Poppins', sans-serif; /* Aesthetic font */
-}
-
-.nav-tabs-custom .nav-link.active {
-    background-color: #1c8ef9; /* Bright active tab color */
-    color: white;
-    border-radius: 5px;
-    box-shadow: 0 3px 10px rgba(0, 209, 255, 0.5); /* Neon shadow on active tab */
-}
-
-.nav-tabs-custom .nav-link {
-    color: #00d1ff; /* Cool neon blue for unselected tabs */
-    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
-}
-
-.nav-tabs-custom .nav-link:hover {
-    background-color: rgba(0, 209, 255, 0.1); /* Soft hover effect */
-    color: white;
-}
-
-.container-fluid {
-    height: 16.5%;
-    margin-bottom: 3.5%;
-}
+<!-- for font all  -->
+<style>
+    * {
+        font-size: 'Arial' , sans-serif !important;
+    }
 </style>
+
+<style>
+    body{
+        background-color: #111827;
+    }
+</style>
+
+
+    <!-- for the first navbar -->
+<style>
+        /* Import the Poppins and Montserrat fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+        
+        /* Navbar styles */
+        .navbar-custom {
+          background-color: #111827; /* Deep futuristic background */
+          color: rgb(255, 255, 255);
+          padding: 2vh;
+          border-bottom: 0.01px solid #475363; /* Soft border */
+          border-top: 0.01px solid #475363; /* Soft border */
+          border-left: 0.01px solid #475363; /* Soft border */
+          border-right: 0.01px solid #475363; /* Soft border */
+
+          margin-bottom: 0.5%;
+          margin-right: -0.02%;
+          margin-left: -0.01%;
+          margin-top: 0.15%;
+        }
+    
+        .navbar-brand, .navbar-nav .nav-link {
+          color: white;
+          font-weight: 600;
+          letter-spacing: 0.05vh; /* Sleek spacing */
+          transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+        }
+    
+        .navbar-brand:hover, .navbar-nav .nav-link:hover {
+          color: #00d1ff; /* Neon blue hover effect */
+          transform: scale(1.05); /* Slight scaling on hover */
+          background-color: #374151;
+          border-radius: 1vh;
+        }
+    
+        /* Gradient text for navbar brand */
+        .navbar-brand {
+          font-family:  Geneva, Tahoma, sans-serif;
+          font-size: larger;
+          background: linear-gradient(45deg, #106af3 , #0193c7,#019a90);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-decoration: none;
+        }
+    
+        /* Navigation links */
+        .nav-link {
+          font-size: small;
+          letter-spacing: 0.06vh;
+          color: rgb(236, 236, 236);
+        }
+    
+        /* User info section */
+        .user-info {
+          display: flex;
+          align-items: center;
+          color: white;
+          font-weight: 500;
+          letter-spacing: 0.07vh;
+          font-size: small;
+        }
+    
+        .user-info span {
+          margin-left: 10px;
+          font-weight: 500;
+        }
+    
+        /* User initials */
+        .user-initials {
+          width: 5vh;
+          height: 5vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(18deg, #106af3 , #0193c7,#019a90);
+          color: white;
+          font-weight: 200;
+          border-radius: 50%;
+          box-shadow: 0 2px 10px rgba(114, 114, 114, 0.6); /* Glow effect */
+          transition: box-shadow 0.3s ease;
+          font-family: 'Poppins', sans-serif; /* Aesthetic font */
+        }
+    
+        .user-initials:hover {
+          box-shadow: 0 2px 15px rgba(23, 162, 184, 1); /* Intense glow on hover */
+        }
+    
+        .container-fluid {
+          height: 16.5%;
+          margin-bottom: 3.5%;
+        }
+</style>
+
 
 <!-- for second navbar -->
 <style>
@@ -105,43 +126,47 @@
         align-items: center; /* Center vertically */
         width: 100%; /* Full width */
         padding: 20px 0; /* Spacing above and below */
-        margin-top: -1.5%;
-        margin-bottom: -5%;
+        margin-top: 1%;
     }
 
     .breadcrumb {
         display: flex;
         align-items: center;
-        background-color: rgba(255, 255, 255, 0.9); /* Light background for navbar */
+        background-color: transparent;
         padding: 10px 20px; /* Adjust padding for content fitting */
-        border-radius: 20px; /* Rounded corners */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        border-radius: 2vh; /* Rounded corners */
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.01); /* Subtle shadow */
         transition: box-shadow 0.3s; /* Shadow transition */
+        margin-top: -0.5%;
     }
 
     .breadcrumb:hover {
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Slightly darker shadow on hover */
+        box-shadow: 0 8px 30px rgba(255, 255, 255, 0.05); /* Slightly darker shadow on hover */
     }
 
     .breadcrumb a {
         text-decoration: none;
-        color: #4a4a4a; /* Dark gray for links */
-        padding: 10px 15px; /* Adjusted for better fit */
+        background-color: #1F2937;
+        color: #CED0D4; /* Dark gray for links */
+        padding: 1.1vh 1.3vh; /* Adjusted for better fit */
         transition: color 0.3s, transform 0.3s; /* Smooth transitions */
-        border-radius: 10px; /* Rounded corners for links */
+        border-radius: 2vh; /* Rounded corners for links */
         position: relative; /* Position for pseudo-element */
+        padding: 1.5vh;
     }
 
     .breadcrumb a:hover {
-        color: #ffffff; /* White text on hover */
-        background-color: #a3d0ff; /* Soft blue background on hover */
+        color: #ededed; /* White text on hover */
+        background-color: #39485e; /* Soft blue background on hover */
         transform: scale(1.05); /* Slightly enlarge link on hover */
     }
 
     /* Active link styling */
     .breadcrumb a.active {
-        color: #ffffff; /* White text for active link */
+        color: #131314; /* White text for active link */
+        font-weight: 600;
         background-color: #155fae; /* Soft blue background for active link */
+        background: linear-gradient(45deg, #106af3 , #0193c7,#019a90);
         transform: scale(1.05); /* Slightly enlarge active link */
     }
 
@@ -150,7 +175,7 @@
         position: absolute;
         width: 100%;
         height: 2px;
-        background: #a3d0ff; /* Soft blue underline */
+        background: #39485e; /* Soft blue underline */
         bottom: -5px; /* Position below the link */
         left: 0;
         transform: scaleX(0);
@@ -163,7 +188,7 @@
 
     .breadcrumb .separator {
         margin: 0 10px;
-        color: #aaa; /* Light gray color for separator */
+        color: #6d6d6d; /* Light gray color for separator */
         font-weight: bold; /* Bold separator */
     }
 
@@ -176,7 +201,6 @@
         }
     }
 </style>
-
 
 <style>
     .container {
@@ -249,12 +273,6 @@
 
 <!-- for custom prior slider in LightWeight -->
 <style>
-    /* General Styles for Labels and Spacing */
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #F9FAFB; /* Light background for enterprise feel */
-        margin: 20px;
-    }
 
     .slider-container {
         margin-top: 30px;
@@ -351,23 +369,113 @@
 </style>
 <!-- for custom prior slider in LightWeight -->
 
+
+<!-- for the side navbar -->
+<style>
+    .menu-button {
+    color: #b7b9bc;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: -250px;
+    background-color: #172554;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #e0f2fe;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+.sidenav a:hover {
+    background-color: #1e3a8a;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.sidenav svg {
+    margin-right: 10px;
+}
+.main-content {
+    transition: margin-left .3s;
+    padding: 20px;
+    margin-top: 60px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.closebtn:hover{
+    color: #004a98;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+</style>
+
+
+<!-- for below first nav -->
+<style>
+
+    #below-first-nav{
+        /* background: linear-gradient(135deg, #e0e8ff , #efe1ff , #ffdff2);  */
+        background-color: #050914;
+        padding-bottom: 1%;     
+    }
+
+</style>
+
 </head>
 <body>
    
-    <div class="container-fluid p-0">
+<div class="container-fluid p-0">
         <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark navbar-custom">
-            <a class="navbar-brand" href="#" style="font-size: larger;">Marketing Analytics Platform</a>
+            <button class="menu-button" onclick="toggleNav()" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+            <a class="navbar-brand" href="/main" style= "letter-spacing: 0.001vh; font-size: 3.4vh; background: linear-gradient(45deg, #106af3 , #0193c7,#019a90); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none;">Marketing Analytics Platform</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="font-size: small;">Create New Project</a>
+                        <a class="nav-link" href="/main" style="margin-left: 86vh; font-size: small; letter-spacing: 0.06vh; color: #b7b9bc;">New Project</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="font-size: small;">Select Existing Project</a>
+                        <a class="nav-link" href="/main" style="margin-left:4vh; font-size: small;  letter-spacing: 0.06vh; color: #b7b9bc;">Open Project</a>
                     </li>
                 </ul>
+
+                <div class="separator" style="margin-right: 2vh; height: 4vh; width: 0.1vh; background-color: #57657d;"></div>
+
                 <div class="user-info">
-                    <span id="current-date"></span>
+                    <span id="current-date" style="color: #57657d;"></span>
                     <div class="user-initials ml-3">
                         SK
                     </div>
@@ -375,65 +483,73 @@
             </div>
         </nav>
 
+    <!-- for the side navbar         -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Close navigation menu" style="background-color: transparent;">&times;</a>
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            Home
+        </a>
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+            Past Projects
+        </a>
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            Documentation
+        </a>
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Help
+        </a>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+    
+</div>
+
+<!-- div for the entire thing  -->
+<div id="below-first-nav" style="margin-top: -4.5%; height: 85vh;" >
+
         <!-- Breadcrumb Style Tabs Navbar -->
         <div id="breadcrumb-navbar-container">
             <nav class="breadcrumb">
-                <a href="/main">Data Input and Exploration</a>
+                <a href="/files_upload">Data Input and Exploration</a>
                 <span class="separator">&gt;</span>
-                <a href="/preqc_report">Model Data Preparation</a>
+                <a href="/select_features">Model Data Preparation</a>
+                <span class="separator">&gt;</span>
+                <a href="/pre-qc">Model Pre-Execution</a>
                 <span class="separator">&gt;</span>
                 <a href="/modelling" class="active">Model Execution</a>
-                <span class="separator">&gt;</span>
-                <a href="/modelling">Model Results</a>
             </nav>
         </div>
-    </div>
     
+
+
+    <div class="container" style="margin-top: -3.4vh; height: 70vh; background-color: transparent;">
+        <div class="tab-row" style="margin-top: 0%;">
+            <div class="tab" data-bs-toggle="modal" data-bs-target="#modal1">LightWeight MMM</div>
+            <div class="tab" data-bs-toggle="modal" data-bs-target="#modal2">Bayesian MMM</div>
+        </div>
+        <div class="tab-row">
+            <div class="tab" data-bs-toggle="modal" data-bs-target="#modal3">Future Models</div>
+            <div class="tab" data-bs-toggle="modal" data-bs-target="#modal4">Future Models</div>
+        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the current URL path
-            const currentPath = window.location.pathname;
-    
-            // Get all nav-link elements
-            const navLinks = document.querySelectorAll('#tabs-navbar .nav-link');
-    
-            // Loop through each nav-link
-            navLinks.forEach(function(link) {
-                // Normalize paths (remove trailing slashes)
-                const linkPath = link.getAttribute('href').replace(/\/$/, '');
-                const normalizedCurrentPath = currentPath.replace(/\/$/, '');
-    
-                // Check if the href of the link matches the current path
-                if (linkPath === normalizedCurrentPath) {
-                    // Add 'active' class to the matching link
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded",function(){
-            const currentDate = new Date();
-            const formattedDate = currentDate.toLocaleDateString('en-GB');
-            document.getElementById('current-date').innerText = `Date: ${formattedDate}`;
-        });
-    </script>
-
-<div class="container" style="margin-top: 10vh; border: 2px solid #11517b; border-radius: 15px; padding: 20px; background-color: #f4f4f9">
-    <div class="tab-row" style="margin-top: 0%;">
-        <div class="tab" data-bs-toggle="modal" data-bs-target="#modal1">LightWeight MMM</div>
-        <div class="tab" data-bs-toggle="modal" data-bs-target="#modal2">Bayesian MMM</div>
-    </div>
-    <div class="tab-row">
-        <div class="tab" data-bs-toggle="modal" data-bs-target="#modal3">Future Models</div>
-        <div class="tab" data-bs-toggle="modal" data-bs-target="#modal4">Future Models</div>
-    </div>
 </div>
 
 <!-- Modal 1 LightWeight MMM -->
@@ -790,6 +906,20 @@
 
 <!-- for modal-2 i.e channels charts -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- for current date -->
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString('en-GB');
+        document.getElementById('current-date').innerText = `Date: ${formattedDate}`;
+    });
+</script>
 
 
 <!-- Running LightWeight MMM Base Model -->
@@ -1588,6 +1718,38 @@ function displayModelResultsTab4(data) {
     const tabContent = document.querySelector('#tab4');
     tabContent.appendChild(resultSection);
 }
+</script>
+
+<!-- for the side navbar -->
+<script>
+    const sidenav = document.getElementById("mySidenav");
+    const overlay = document.getElementById("overlay");
+
+    function toggleNav() {
+        if (sidenav.style.left === "0px") {
+            closeNav();
+        } else {
+            openNav();
+        }
+    }
+
+    function openNav() {
+        sidenav.style.left = "0px";
+        overlay.style.display = "block";
+    }
+
+    function closeNav() {
+        sidenav.style.left = "-250px";
+        overlay.style.display = "none";
+    }
+
+    overlay.addEventListener("click", closeNav);
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeNav();
+        }
+    });
 </script>
 
 </body>
