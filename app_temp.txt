@@ -151,28 +151,17 @@ def select_features():
 
 @app.route('/pre-qc', methods=['POST'])
 def save_data():
-    file_1 = request.files['file_1']
-    file_2 = request.files['file_2']
+
     data = request.form['data']
 
-    print(file_1.filename)
-    print(file_2.filename)
-
-    # Save the file
-    file_path_1 = os.path.join('static','uploads', file_1.filename)
-    file_path_2 = os.path.join('static','uploads', file_2.filename)
-
-    try:
-        file_1.save(file_path_1)
-        file_2.save(file_path_2)
-
-        print("Media and Sales files are save successfully")
-    except Exception as ex:
-        print(f"Error saving Media and Sales files: {ex}")
+    # retrieving sales and media files name
+    media_file_name = session['media_file_name'] 
+    sales_file_name = session['sales_file_name'] 
+    
 
     # Open file
-    sales_df = pd.read_excel(os.path.join('static','uploads', file_1.filename))
-    media_df = pd.read_excel(os.path.join('static','uploads', file_2.filename))
+    sales_df = pd.read_excel(os.path.join('static','uploads', media_file_name))
+    media_df = pd.read_excel(os.path.join('static','uploads', sales_file_name))
 
     combined_data = pd.merge(sales_df,media_df,on='TIME',how='inner')
 
