@@ -601,7 +601,7 @@
         
         columns.forEach(function(column, index) {
             $('#variable-list').append(`
-                <li class="list-group-item draggable" draggable="true" style="width:70vh">
+                <li class="list-group-item draggable" draggable="true" style="width:70vh; height:6.5vh;">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input variable-checkbox" id="var${index}" value="${column}">
                         <label class="custom-control-label" for="var${index}">${column}</label>
@@ -813,14 +813,7 @@
 
             // Get the uploaded files
             const formData = new FormData();
-            
-            if (files_1 && files_1[0]) {
-                formData.append('file_1', files_1[0]);
-            }
-            if (files_2 && files_2[0]) {
-                formData.append('file_2', files_2[0]);
-            }
-            
+                      
             // Append the collected data
             formData.append('data', JSON.stringify(data));
 
