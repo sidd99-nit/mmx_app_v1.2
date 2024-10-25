@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Mix Modeling Comparison</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #0a192f, #0f2b4a, #1a3b5c);
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #bae6fd;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .card {
+            background-color: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid #1e40af;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+        }
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .icon {
+            width: 6rem;
+            height: 6rem;
+            fill: none;
+            stroke: #93c5fd;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s ease;
+        }
+        .card:hover .icon {
+            stroke: #bae6fd;
+        }
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        li {
+            display: flex;
+            align-items: flex-start;
+            color: #93c5fd;
+            margin-bottom: 1rem;
+        }
+        li svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            background-color: #1e40af;
+            color: #e2e8f0;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        button svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        button:hover svg {
+            transform: translateX(5px);
+        }
+        .cta {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        .cta p {
+            font-size: 1.25rem;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+        }
+        .cta button {
+            background: linear-gradient(to right, #1e40af, #1e3a8a);
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+        .cta button:hover {
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Marketing Mix Modeling</h1>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="icon-container">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 21H4C3.44772 21 3 20.5523 3 20V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 14L12 9L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2>Lightweight MMM</h2>
+                <ul>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Quick implementation for rapid insights</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Ideal for smaller datasets and limited computational resources</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Provides a solid foundation for understanding marketing impact</span>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button>
+                        Explore Lightweight MMM
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="icon-container">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 4"/>
+                    </svg>
+                </div>
+                <h2>Bayesian MMM</h2>
+                <ul>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Advanced probabilistic modeling for deeper insights</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Handles uncertainty and incorporates prior knowledge</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Ideal for complex marketing scenarios and larger datasets</span>
+                    </li>
+                </ul>
+                <div class="button-container">
+                    <button>
+                        Discover Bayesian MMM
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta">
+            <p>Ready to optimize your marketing mix?</p>
+            <button>Start Your MMM Journey</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.querySelector('svg').style.transform = 'translateX(5px)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.querySelector('svg').style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>
