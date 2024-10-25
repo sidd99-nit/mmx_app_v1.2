@@ -61,3 +61,110 @@
 </div>
 
 
+<!-- trigger modals -->
+<style>
+    .container {            
+        max-width: fit-content;
+        max-height: 70vh;
+        margin-top: 5vh;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: -1vh;
+    }
+    @media (min-width: 768px) {
+        .grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    .card {
+        background-color: rgba(15, 23, 42, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        border: 1px solid #1e40af;
+        transition: all 0.3s ease;
+    }
+    .card:hover {
+        border-color: #3b82f6;
+        transform: translateY(-5px);
+    }
+    .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .icon {
+        width: 4rem;
+        height: 4rem;
+        fill: none;
+        stroke: #93c5fd;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: stroke 0.3s ease;
+    }
+    .card:hover .icon {
+        stroke: #bae6fd;
+    }
+    h2 {
+        font-size: 1.875rem;
+        font-weight: 600;
+        color: #e2e8f0;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 1.5rem;
+    }
+    li {
+        display: flex;
+        align-items: flex-start;
+        color: #93c5fd;
+        margin-bottom: 1rem;
+    }
+    li svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: 0.5rem;
+        flex-shrink: 0;
+    }
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+    .trigger {
+        background-color: #1e40af;
+        color: #e2e8f0;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    .trigger:hover {
+        background-color: #2563eb;
+    }
+    .trigger svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+    .trigger:hover svg {
+        transform: translateX(5px);
+    }
+</style>
+
