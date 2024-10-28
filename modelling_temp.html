@@ -46,7 +46,7 @@
         }
     
         .navbar-brand, .navbar-nav .nav-link {
-          color: white;
+          color: rgb(245, 242, 242);
           font-weight: 600;
           letter-spacing: 0.05vh; /* Sleek spacing */
           transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
@@ -500,7 +500,15 @@
         padding-bottom: 1%;     
     }
 
+    .nav-tabs .nav-link.active {
+        border-color: rgb(154, 154, 154) rgb(154, 154, 154) #fff;
+        font-weight: bold;
+    }
+
 </style>
+
+<!-- for base and custom names styling -->
+
 
 </head>
 <body>
@@ -676,10 +684,10 @@
                 <!-- Tab Navigation -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Base Model</a>
+                        <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true" style="color: #747474;">Base Model</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Custom Priors</a>
+                        <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false" style="color: #747474;">Custom Priors</a>
                     </li>
                 </ul>
 
@@ -859,10 +867,10 @@
                 <!-- Tab Navigation -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="tab3-tab" data-bs-toggle="tab" href="#tab3" role="tab" aria-controls="tab1" aria-selected="true">Base Model</a>
+                        <a class="nav-link active" id="tab3-tab" data-bs-toggle="tab" href="#tab3" role="tab" aria-controls="tab1" aria-selected="true" style="color: #747474;">Base Model</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="tab4-tab" data-bs-toggle="tab" href="#tab4" role="tab" aria-controls="tab2" aria-selected="false">Custom Priors</a>
+                        <a class="nav-link" id="tab4-tab" data-bs-toggle="tab" href="#tab4" role="tab" aria-controls="tab2" aria-selected="false" style="color: #747474;">Custom Priors</a>
                     </li>
                 </ul>
 
