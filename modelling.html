@@ -46,7 +46,7 @@
         }
     
         .navbar-brand, .navbar-nav .nav-link {
-          color: white;
+          color: rgb(245, 242, 242);
           font-weight: 600;
           letter-spacing: 0.05vh; /* Sleek spacing */
           transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
@@ -228,7 +228,7 @@
         backdrop-filter: blur(10px);
         border-radius: 1.5rem;
         padding: 2rem;
-        border: 1px solid #1e40af;
+        border: 0.5px solid #000480;
         transition: all 0.3s ease;
     }
     .card:hover {
@@ -245,7 +245,7 @@
         width: 3rem;
         height: 3rem;
         fill: none;
-        stroke: #93c5fd;
+        stroke: #c1b1b1;
         stroke-width: 2;
         stroke-linecap: round;
         stroke-linejoin: round;
@@ -256,7 +256,7 @@
     }
     h3 {
         font-size: 1.875rem;
-        font-weight: 400;
+        font-weight: 360;
         color: #e2e8f0;
         text-align: center;
         margin-bottom: 1rem;
@@ -288,11 +288,12 @@
         border: none;
         padding: 0.75rem 1.5rem;
         border-radius: 9999px;
-        font-weight: 600;
+        font-weight: 350;
         cursor: pointer;
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
+        margin: -2vh;
     }
     .trigger:hover {
         background-color: #001b56;
@@ -499,7 +500,15 @@
         padding-bottom: 1%;     
     }
 
+    .nav-tabs .nav-link.active {
+        border-color: rgb(154, 154, 154) rgb(154, 154, 154) #fff;
+        font-weight: bold;
+    }
+
 </style>
+
+<!-- for base and custom names styling -->
+
 
 </head>
 <body>
@@ -591,8 +600,8 @@
             <div class="card">
                 <div class="icon-container">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21 21H4C3.44772 21 3 20.5523 3 20V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7 14L12 9L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 21H4C3.44772 21 3 20.5523 3 20V3" stroke="#EEEEEE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 14L12 9L17 14" stroke="#EEEEEE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <h3>Lightweight MMM</h3>
@@ -602,7 +611,14 @@
                             <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span>Provides a solid foundation for understanding marketing impact</span>
+                        <span>Employs Bayesian modelling with JAX and NumPyro for efficient computation</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Allows adjustment for various custom priors</span>
                     </li>
                 </ul>
                 <div class="button-container">
@@ -619,9 +635,9 @@
             <div class="card">
                 <div class="icon-container">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
-                        <path d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 4"/>
+                        <circle cx="12" cy="12" r="3" stroke="#EEEEEE" stroke-width="1.5"/>
+                        <path d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21" stroke="#EEEEEE" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3" stroke="#EEEEEE" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 4"/>
                     </svg>
                 </div>
                 <h3>Bayesian MMM</h3>
@@ -631,12 +647,19 @@
                             <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span>Handles uncertainty and incorporates prior knowledge</span>
+                        <span>Traditional Bayesian model incorporating prior knowledge</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Easy to use</span>
                     </li>
                 </ul>
                 <div class="button-container">
                     <div class="trigger tab" data-bs-toggle="modal" data-bs-target="#modal2">
-                        Discover Bayesian MMM
+                        Explore Bayesian MMM
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 12L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -661,10 +684,10 @@
                 <!-- Tab Navigation -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Base Model</a>
+                        <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true" style="color: #747474;">Base Model</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Custom Priors</a>
+                        <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false" style="color: #747474;">Custom Priors</a>
                     </li>
                 </ul>
 
@@ -844,10 +867,10 @@
                 <!-- Tab Navigation -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="tab3-tab" data-bs-toggle="tab" href="#tab3" role="tab" aria-controls="tab1" aria-selected="true">Base Model</a>
+                        <a class="nav-link active" id="tab3-tab" data-bs-toggle="tab" href="#tab3" role="tab" aria-controls="tab1" aria-selected="true" style="color: #747474;">Base Model</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="tab4-tab" data-bs-toggle="tab" href="#tab4" role="tab" aria-controls="tab2" aria-selected="false">Custom Priors</a>
+                        <a class="nav-link" id="tab4-tab" data-bs-toggle="tab" href="#tab4" role="tab" aria-controls="tab2" aria-selected="false" style="color: #747474;">Custom Priors</a>
                     </li>
                 </ul>
 
