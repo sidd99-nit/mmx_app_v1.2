@@ -1,0 +1,123 @@
+// Function to display images and table below the button
+function displayModelResults(data) {
+    // Create a container for the results
+    const resultSection = document.createElement('div');
+    resultSection.id = 'model-results-1';
+    resultSection.style.cssText = `
+        margin-top: 5vh;
+        padding: 3vh 2vw;
+        border-radius: 10px;
+        background-color: #f5f8fa; 
+        font-family: 'Helvetica Neue', sans-serif;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    `;
+
+    // Function to create and style headers
+    function createStyledHeader(text) {
+        const header = document.createElement('h4');
+        header.innerText = text;
+        header.style.cssText = `
+            color: #333;
+            font-size: 4vh;
+            margin: 5vh auto 4.5vh auto;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: underline;
+            text-align: center;
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        `;
+        return header;
+    }
+
+    // Model Fit Chart
+    resultSection.appendChild(createStyledHeader('Model Fit'));
+    const modelFitImage = document.createElement('img');
+    modelFitImage.src = data.images.model_fit;
+    modelFitImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
+    resultSection.appendChild(modelFitImage);
+
+    // ROI Hat Chart
+    resultSection.appendChild(createStyledHeader('ROI Hat'));
+    const roiHatImage = document.createElement('img');
+    roiHatImage.src = data.images.roi_hat;
+    roiHatImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
+    resultSection.appendChild(roiHatImage);
+
+    // Media Attribution Chart
+    resultSection.appendChild(createStyledHeader('Media Attribution'));
+    const mediaAttributionImage = document.createElement('img');
+    mediaAttributionImage.src = data.images.media_attribution;
+    mediaAttributionImage.style.cssText = `
+        width: 100%;
+        margin-bottom: 5vh;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
+    resultSection.appendChild(mediaAttributionImage);
+
+    // ROI Chart Table
+    resultSection.appendChild(createStyledHeader('ROI Table'));
+    const scrollableDiv = document.createElement('div');
+    scrollableDiv.style.cssText = `
+        max-height: 50vh;
+        overflow-y: auto;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
+
+    const table = document.createElement('table');
+    table.style.cssText = `
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 2.5vh;
+        color: #333;
+    `;
+    table.innerHTML = `
+        <thead style="background-color: #e0e0e0; color: #333;">
+            <tr>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">Media Channel</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">ROI</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${data.table.map(row => `
+                <tr style="background-color: #fff;">
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.feature}</td>
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.value}</td>
+                </tr>
+            `).join('')}
+        </tbody>
+    `;
+
+    scrollableDiv.appendChild(table);
+    resultSection.appendChild(scrollableDiv);
+
+    // ROI Plot
+    resultSection.appendChild(createStyledHeader('ROI Plot'));
+    const roiPlotImage = document.createElement('img');
+    roiPlotImage.src = data.images.roi_plot;
+    roiPlotImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
+    resultSection.appendChild(roiPlotImage);
+
+    // Append results to the DOM (below the button)
+    const tabContent = document.querySelector('#tab1');
+    tabContent.appendChild(resultSection);
+}
+
