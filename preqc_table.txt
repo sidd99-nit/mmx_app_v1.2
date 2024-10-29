@@ -1,0 +1,28 @@
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Variables Selected</th>
+            <th>Variables Dropped</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set max_length = [variables_table['selected']|length, variables_table['dropped']|length]|max %}
+
+        {% for i in range(0, max_length) %}
+        <tr>
+            <!-- Render selected variable if index exists -->
+            <td>{% if i < variables_table['selected']|length %}{{ variables_table['selected'][i] }}{% else %}&nbsp;{% endif %}</td>
+
+            <!-- Render dropped variable checkbox with label in a flex container -->
+            <td>
+                {% if i < variables_table['dropped']|length %}
+                <label style="display: flex; align-items: center;">
+                    <input type="checkbox" class="form-check-input dropped-variable" value="{{ variables_table['dropped'][i] }}" style="margin-right: 5px;">
+                    {{ variables_table['dropped'][i] }}
+                </label>
+                {% else %}&nbsp;{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
