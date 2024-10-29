@@ -325,8 +325,8 @@
 .button {
     position: absolute;
     width: 40vh;
-    height: 16vh;
-    border-radius: 10vh;
+    height: 18vh;
+    border-radius: 4vh;
     background-color: rgba(59, 130, 246, 0.1);
     color: #e2e8f0;
     font-size: 16px;
@@ -495,7 +495,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3v18h18M9 15l6-6" />
                 </svg>
-                Spend Distribution
+                Sales Distribution
             </div>
         </div>
     </div>
@@ -525,34 +525,34 @@
                 </div>
 
                 <!-- Table for feature selection -->
-                <div style="max-height: 45vh; overflow-y: auto;">
-                    <table class="table mt-3">
-                        <thead>
-                            <tr>
-                                <th>Variables Selected</th>
-                                <th>Variables Dropped</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          {% set max_length = [variables_table['selected']|length, variables_table['dropped']|length]|max %}
-                          
-                          {% for i in range(0, max_length) %}
-                          <tr>
-                              <!-- Render selected variable if index exists -->
-                              <td>{% if i < variables_table['selected']|length %}{{ variables_table['selected'][i] }}{% else %}&nbsp;{% endif %}</td>
-                    
-                              <!-- Render dropped variable checkbox if index exists -->
-                              <td>{% if i < variables_table['dropped']|length %}
-                                  <!-- Align checkbox with label -->
-                                  <input type="checkbox" class="form-check-input dropped-variable" value="{{ variables_table['dropped'][i] }}"> {{ variables_table['dropped'][i] }}
-                                  {% else %}&nbsp;{% endif %}
-                              </td>
-                    
-                          </tr>  
-                           {% endfor %}
-                       </tbody>   
-                    </table>              
-                </div>
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th>Variables Selected</th>
+                            <th>Variables Dropped</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set max_length = [variables_table['selected']|length, variables_table['dropped']|length]|max %}
+                
+                        {% for i in range(0, max_length) %}
+                        <tr>
+                            <!-- Render selected variable if index exists -->
+                            <td>{% if i < variables_table['selected']|length %}{{ variables_table['selected'][i] }}{% else %}&nbsp;{% endif %}</td>
+                
+                            <!-- Render dropped variable checkbox with label in a flex container -->
+                            <td>
+                                {% if i < variables_table['dropped']|length %}
+                                <label style="display: flex; align-items: center;">
+                                    <input type="checkbox" class="form-check-input dropped-variable" value="{{ variables_table['dropped'][i] }}" style="margin-right: 5px;">
+                                    {{ variables_table['dropped'][i] }}
+                                </label>
+                                {% else %}&nbsp;{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
                 <!-- Button to save selection -->
                 <button type="button" class="btn btn-primary" onclick="submitSelectedVariables()" style="background-color: #133d6a; border-color: #133d6a;">Save Selection</button>
