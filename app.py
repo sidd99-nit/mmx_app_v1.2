@@ -92,13 +92,13 @@ def upload_file():
         return jsonify({"message":"Click on save and continue button to proceed"})
 
     # Generate profiling report for sales
-    profile_sales = ProfileReport(df_sales.sample(frac=0.30), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True , correlations=None)
+    profile_sales = ProfileReport(df_sales.sample(frac=0.20), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True , correlations=None)
     sales_report_file = 'sales_report.html'
     profile_path_sales = os.path.join('static','reports', sales_report_file)
     profile_sales.to_file(profile_path_sales)
 
     # Generate profiling report for media
-    profile_media = ProfileReport(df_media.sample(frac=0.30), title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None  , minimal=True)
+    profile_media = ProfileReport(df_media.sample(frac=0.20), title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None  , minimal=True)
     media_report_file = 'media_report.html'
     profile_path_media = os.path.join('static','reports', media_report_file)
     profile_media.to_file(profile_path_media)
@@ -151,28 +151,17 @@ def select_features():
 
 @app.route('/pre-qc', methods=['POST'])
 def save_data():
-    file_1 = request.files['file_1']
-    file_2 = request.files['file_2']
+
     data = request.form['data']
 
-    print(file_1.filename)
-    print(file_2.filename)
-
-    # Save the file
-    file_path_1 = os.path.join('static','uploads', file_1.filename)
-    file_path_2 = os.path.join('static','uploads', file_2.filename)
-
-    try:
-        file_1.save(file_path_1)
-        file_2.save(file_path_2)
-
-        print("Media and Sales files are save successfully")
-    except Exception as ex:
-        print(f"Error saving Media and Sales files: {ex}")
+    # retrieving sales and media files name
+    media_file_name = session['media_file_name'] 
+    sales_file_name = session['sales_file_name'] 
+    
 
     # Open file
-    sales_df = pd.read_excel(os.path.join('static','uploads', file_1.filename))
-    media_df = pd.read_excel(os.path.join('static','uploads', file_2.filename))
+    sales_df = pd.read_excel(os.path.join('static','uploads', media_file_name))
+    media_df = pd.read_excel(os.path.join('static','uploads', sales_file_name))
 
     combined_data = pd.merge(sales_df,media_df,on='TIME',how='inner')
 
