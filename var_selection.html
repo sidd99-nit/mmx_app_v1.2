@@ -100,3 +100,112 @@ variables_table = {"selected": control_features_B, "dropped": dropped_features_B
     }
 
 </script>
+
+
+///////////
+
+
+# Python backend code
+variables_table = {
+    "selected": control_features_B, 
+    "dropped": [(feature, reason) for feature, reason in dropped_features_B]
+}
+
+
+<div class="modal-body">
+    <!-- Dropdown without search above the table -->
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuNewOption" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Option
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuNewOption" id="newOptionDropdown" style="width: 300px;">
+            <!-- Dropdown options -->
+            {% for new_option in options_var_selection %}
+                <li><a class="dropdown-item-new-option dropdown-item" href="#" onclick="selectNewOption('{{ new_option }}')">{{ new_option }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Table for feature selection -->
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Variables Selected</th>
+                <th>Variables Dropped</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set max_length = [variables_table['selected']|length, variables_table['dropped']|length]|max %}
+    
+            {% for i in range(0, max_length) %}
+            <tr>
+                <!-- Render selected variable if index exists -->
+                <td>{% if i < variables_table['selected']|length %}{{ variables_table['selected'][i] }}{% else %}&nbsp;{% endif %}</td>
+    
+                <!-- Render dropped variable checkbox with label in a flex container -->
+                <td>
+                    {% if i < variables_table['dropped']|length %}
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" class="form-check-input dropped-variable" value="{{ variables_table['dropped'][i][0] }}" style="margin-right: 5px;">
+                        {{ variables_table['dropped'][i][0] }} ({{ variables_table['dropped'][i][1] }})
+                    </label>
+                    {% else %}&nbsp;{% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Button to save selection -->
+    <button type="button" class="btn btn-primary" onclick="submitSelectedVariables()" style="background-color: #133d6a; border-color: #133d6a;">Save Selection</button>
+</div>
+
+
+<script>
+    function submitSelectedVariables() {
+        // Get the selected dropdown option
+        const selectedOption = document.getElementById('dropdownMenuNewOption').innerText;
+
+        // Get all the variables from the 'selected' column
+        const selectedVariables = [];
+        document.querySelectorAll('.table tbody tr td:first-child').forEach(function(td) {
+            if (td.innerText.trim()) {
+                selectedVariables.push(td.innerText.trim());
+            }
+        });
+
+        // Get the checked variables from the 'dropped' column
+        const droppedVariables = [];
+        document.querySelectorAll('.dropped-variable:checked').forEach(function(checkbox) {
+            droppedVariables.push(checkbox.value);
+        });
+
+        // Prepare the data to send to the Flask route
+        const dataToSend = {
+            selected_option: selectedOption,
+            selected_variables: selectedVariables,
+            dropped_variables: droppedVariables
+        };
+
+        // Sending selected option, selected variables, and checked dropped variables to Flask
+        fetch('/save_selected_variables', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(dataToSend)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Redirect to the /modelling URL 
+                window.location.href = data.redirect_url;
+            } else {
+                alert('Failed to save selection.');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+</script>
