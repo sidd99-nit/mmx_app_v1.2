@@ -507,8 +507,12 @@
 
 </style>
 
-<!-- for base and custom names styling -->
-
+<!-- for the table showing the media, base, and target Variables -->
+<style>
+    .table-bordered td, .table-bordered th {
+    border: 0.1vh solid #dcdcdc;
+}
+</style>
 
 </head>
 <body>
@@ -697,35 +701,34 @@
                     <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                         <div style="margin-top: 20px;">
                             <!-- Scrollable and Stylish Table with Features and Values -->
-                            <div style="max-height: 300px; overflow-y: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
-                                    <thead style="background-color: #2a77ad; color: white;">
-                                        <tr>
-                                            <th>Features</th>
-                                            <th>Values</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="background-color: #f9f9f9;">
-                                        <!-- Media Channels -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Media Channels</td>
-                                            <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                                        
-                                        <!-- Base Variables -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Base Variables</td>
-                                            <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                    
-                                        <!-- Target Variable -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Target Variable</td>
-                                            <td>{{ target_variable}}</td> <!-- Comma-separated values -->
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
+                                <thead style="background-color: #2a77ad; color: white;">
+                                    <tr>
+                                        <th>Features</th>
+                                        <th>Values</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="background-color: #f9f9f9;">
+                                    <!-- Media Channels -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Media Channels</td>
+                                        <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                                    
+                                    <!-- Base Variables -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Base Variables</td>
+                                        <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                
+                                    <!-- Target Variable -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Target Variable</td>
+                                        <td>{{ target_variable}}</td> <!-- Comma-separated values -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
                     
                             <!-- Run Button -->
                             <button type="button" class="btn btn-primary" style="background-color: #0d3c5d; border-color: #0d3c5d; margin-top: 20px;">Run LightWeight Model</button>
@@ -744,35 +747,34 @@
                     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                         <div style="margin-top: 20px;">
                             <!-- Scrollable and Stylish Table with Features and Values -->
-                            <div style="max-height: 300px; overflow-y: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
-                                    <thead style="background-color: #2a77ad; color: white;">
-                                        <tr>
-                                            <th>Features</th>
-                                            <th>Values</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="background-color: #f9f9f9;">
-                                        <!-- Media Channels -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Media Channels</td>
-                                            <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                    
-                                        <!-- Base Variables -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Base Variables</td>
-                                            <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                    
-                                        <!-- Target Variable -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Target Variable</td>
-                                            <td>{{ target_variable }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
+                                <thead style="background-color: #2a77ad; color: white;">
+                                    <tr>
+                                        <th>Features</th>
+                                        <th>Values</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="background-color: #f9f9f9;">
+                                    <!-- Media Channels -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Media Channels</td>
+                                        <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                
+                                    <!-- Base Variables -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Base Variables</td>
+                                        <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                
+                                    <!-- Target Variable -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Target Variable</td>
+                                        <td>{{ target_variable }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
                             
                             <div style="margin-top: 3%; margin-bottom: 2%; margin-left:15%; border: 1px solid #0d3c5d; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 70%; background-color: #f5f5f5;">
                             
@@ -880,35 +882,34 @@
                     <div class="tab-pane fade show active" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
                         <div style="margin-top: 20px;">
                             <!-- Scrollable and Stylish Table with Features and Values -->
-                            <div style="max-height: 300px; overflow-y: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
-                                    <thead style="background-color: #2a77ad; color: white;">
-                                        <tr>
-                                            <th>Features</th>
-                                            <th>Values</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="background-color: #f9f9f9;">
-                                        <!-- Media Channels -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Media Channels</td>
-                                            <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                                        
-                                        <!-- Base Variables -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Base Variables</td>
-                                            <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                    
-                                        <!-- Target Variable -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Target Variable</td>
-                                            <td>{{ target_variable}}</td> <!-- Comma-separated values -->
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
+                                <thead style="background-color: #2a77ad; color: white;">
+                                    <tr>
+                                        <th>Features</th>
+                                        <th>Values</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="background-color: #f9f9f9;">
+                                    <!-- Media Channels -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Media Channels</td>
+                                        <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                                    
+                                    <!-- Base Variables -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Base Variables</td>
+                                        <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                
+                                    <!-- Target Variable -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Target Variable</td>
+                                        <td>{{ target_variable}}</td> <!-- Comma-separated values -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                          
                     
                             <!-- Run Button -->
                             <button type="button" class="btn btn-primary" style="background-color: #0d3c5d; border-color: #0d3c5d; margin-top: 20px;">Run Bayesian Model</button>
@@ -927,35 +928,34 @@
                     <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
                         <div style="margin-top: 20px;">
                             <!-- Scrollable and Stylish Table with Features and Values -->
-                            <div style="max-height: 300px; overflow-y: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
-                                    <thead style="background-color: #2a77ad; color: white;">
-                                        <tr>
-                                            <th>Features</th>
-                                            <th>Values</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="background-color: #f9f9f9;">
-                                        <!-- Media Channels -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Media Channels</td>
-                                            <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                    
-                                        <!-- Base Variables -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Base Variables</td>
-                                            <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                    
-                                        <!-- Target Variable -->
-                                        <tr>
-                                            <td style="font-weight: 500;">Target Variable</td>
-                                            <td>{{ target_variable }}</td> <!-- Comma-separated values -->
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-bordered table-hover" style="border-collapse: separate; border-spacing: 0;">
+                                <thead style="background-color: #2a77ad; color: white;">
+                                    <tr>
+                                        <th>Features</th>
+                                        <th>Values</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="background-color: #f9f9f9;">
+                                    <!-- Media Channels -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Media Channels</td>
+                                        <td>{{ media_channels | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                
+                                    <!-- Base Variables -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Base Variables</td>
+                                        <td>{{ base_variables | join(', ') }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                
+                                    <!-- Target Variable -->
+                                    <tr>
+                                        <td style="font-weight: 650;">Target Variable</td>
+                                        <td>{{ target_variable }}</td> <!-- Comma-separated values -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
                             
                             <div style="margin-top: 3%; margin-bottom: 2%; margin-left:15%; border: 1px solid #0d3c5d; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 70%; background-color: #f5f5f5;">
                             
@@ -991,35 +991,6 @@
     </div>
 </div>
 
-<!-- Modal 3: Future Models -->
-<div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modal3Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: 180vh; margin-left: -48vh; margin-top: 12vh;">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal3Label">Future Models</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal 4 Future Models -->
-<div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modal4Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: 180vh; margin-left: -48vh; margin-top: 12vh;" >
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal4Label">Future Models</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -1108,169 +1079,129 @@ function clearPreviousResults() {
 }
 
 // Function to display images and table below the button
+// Function to display images and table below the button
 function displayModelResults(data) {
     // Create a container for the results
     const resultSection = document.createElement('div');
-    resultSection.id = 'model-results-1'; // Add an ID to easily find and clear it later
-    resultSection.style.marginTop = '5vh';
-    resultSection.style.padding = '3vh 2vw';
-    resultSection.style.borderRadius = '10px';
-    resultSection.style.backgroundColor = '#f9f9f9'; 
-    resultSection.style.fontFamily = "'Helvetica Neue', sans-serif";
+    resultSection.id = 'model-results-1';
+    resultSection.style.cssText = `
+        margin-top: 5vh;
+        padding: 3vh 2vw;
+        border-radius: 10px;
+        background-color: #f5f8fa; 
+        font-family: 'Helvetica Neue', sans-serif;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    `;
+
+    // Function to create and style headers
+    function createStyledHeader(text) {
+        const header = document.createElement('h4');
+        header.innerText = text;
+        header.style.cssText = `
+            color: #333;
+            font-size: 4vh;
+            margin: 5vh auto 4.5vh auto;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: underline;
+            text-align: center;
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        `;
+        return header;
+    }
 
     // Model Fit Chart
-    const modelFitTitle = document.createElement('h4');
-    modelFitTitle.style.marginTop = '5vh';
-    modelFitTitle.innerText = 'Model Fit';
-    modelFitTitle.style.textDecoration = 'underline';
-    modelFitTitle.style.color = '#333';
-    modelFitTitle.style.fontSize = '4vh';  // Professional font size
-    modelFitTitle.style.marginBottom = '4.5vh';
-    modelFitTitle.style.marginLeft = '40%';
-    modelFitTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    modelFitTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    modelFitTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    modelFitTitle.style.textTransform = 'uppercase';  // Heading style
-    modelFitTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(modelFitTitle);
-
+    resultSection.appendChild(createStyledHeader('Model Fit'));
     const modelFitImage = document.createElement('img');
     modelFitImage.src = data.images.model_fit;
-    modelFitImage.style.width = '80%'; // Stretch to max width
-    modelFitImage.style.marginBottom = '5vh';
-    modelFitImage.style.marginLeft = '10%';
-    modelFitImage.style.borderRadius = '5px';
+    modelFitImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(modelFitImage);
 
     // ROI Hat Chart
-    const roiHatTitle = document.createElement('h4');
-    roiHatTitle.style.marginTop = '5vh';
-    roiHatTitle.innerText = 'ROI Hat';
-    roiHatTitle.style.textDecoration = 'underline';
-    roiHatTitle.style.color = '#333';
-    roiHatTitle.style.fontSize = '4vh';  // Professional font size
-    roiHatTitle.style.marginBottom = '4.5vh';
-    roiHatTitle.style.marginLeft = '40%';
-    roiHatTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiHatTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiHatTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiHatTitle.style.textTransform = 'uppercase';  // Heading style
-    roiHatTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiHatTitle);
-
+    resultSection.appendChild(createStyledHeader('ROI Hat'));
     const roiHatImage = document.createElement('img');
     roiHatImage.src = data.images.roi_hat;
-    roiHatImage.style.width = '80%';
-    roiHatImage.style.marginBottom = '5vh';
-    roiHatImage.style.marginLeft = '10%';
-    roiHatImage.style.borderRadius = '5px';
+    roiHatImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(roiHatImage);
 
     // Media Attribution Chart
-    const mediaAttributionTitle = document.createElement('h4');
-    mediaAttributionTitle.style.marginTop = '5vh';
-    mediaAttributionTitle.innerText = 'Media Attribution';
-    mediaAttributionTitle.style.textDecoration = 'underline';
-    mediaAttributionTitle.style.color = '#333'; 
-    mediaAttributionTitle.style.fontSize = '4vh';  // Slightly smaller for a subtle, refined look
-    mediaAttributionTitle.style.marginBottom = '4.5vh';
-    mediaAttributionTitle.style.marginLeft = '32%';
-    mediaAttributionTitle.style.fontFamily = "'Roboto', sans-serif"; // Use a modern, clean font
-    mediaAttributionTitle.style.fontWeight = '600';  // Bold but not too heavy
-    mediaAttributionTitle.style.letterSpacing = '0.05em';  // Slight letter spacing for clarity
-    mediaAttributionTitle.style.textTransform = 'uppercase';  // Heading style
-    mediaAttributionTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle text shadow for depth
-    resultSection.appendChild(mediaAttributionTitle);
-
+    resultSection.appendChild(createStyledHeader('Media Attribution'));
     const mediaAttributionImage = document.createElement('img');
     mediaAttributionImage.src = data.images.media_attribution;
-    mediaAttributionImage.style.width = '100%';
-    mediaAttributionImage.style.marginBottom = '5vh';
-    mediaAttributionImage.style.borderRadius = '5px';
+    mediaAttributionImage.style.cssText = `
+        width: 100%;
+        margin-bottom: 5vh;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(mediaAttributionImage);
 
     // ROI Chart Table
-    const roiChartTitle = document.createElement('h4');
-    roiChartTitle.style.marginTop = '5vh';
-    roiChartTitle.innerText = 'ROI Table';
-    roiChartTitle.style.textDecoration = 'underline';
-    roiChartTitle.style.color = '#333';
-    roiChartTitle.style.fontSize = '4vh';  // Professional font size
-    roiChartTitle.style.marginBottom = '4.5vh';  // Slightly adjusted for table
-    roiChartTitle.style.marginLeft = '40%';
-    roiChartTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiChartTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiChartTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiChartTitle.style.textTransform = 'uppercase';  // Heading style
-    roiChartTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiChartTitle);
-
-    // Create a div to wrap around the table
+    resultSection.appendChild(createStyledHeader('ROI Table'));
     const scrollableDiv = document.createElement('div');
-    scrollableDiv.style.maxHeight = '50vh'; // Set max height for scrolling
-    scrollableDiv.style.overflowY = 'auto'; // Enable vertical scrolling
+    scrollableDiv.style.cssText = `
+        max-height: 50vh;
+        overflow-y: auto;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
 
-    // Create the table element
     const table = document.createElement('table');
-    table.classList.add('table', 'table-hover');
-    table.style.width = '100%';
-    table.style.marginBottom = '5vh';
-    table.style.fontSize = '2.5vh'; // Adjust table font
-    table.style.borderSpacing = '0';
+    table.style.cssText = `
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 2.5vh;
+        color: #333;
+    `;
     table.innerHTML = `
         <thead style="background-color: #e0e0e0; color: #333;">
             <tr>
-                <th style="padding: 1vh;">Media Channel</th>
-                <th style="padding: 1vh;">ROI</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">Media Channel</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">ROI</th>
             </tr>
         </thead>
-        <tbody style="background-color: #fff;">
+        <tbody>
             ${data.table.map(row => `
-                <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 1vh;">${row.feature}</td>
-                    <td style="padding: 1vh;">${row.value}</td>
+                <tr style="background-color: #fff;">
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.feature}</td>
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.value}</td>
                 </tr>
             `).join('')}
         </tbody>
     `;
 
-    // Append the table to the scrollable div
     scrollableDiv.appendChild(table);
-
-    // Append the scrollable div to the result section
     resultSection.appendChild(scrollableDiv);
 
-
     // ROI Plot
-    const roiPlotTitle = document.createElement('h4');
-    roiPlotTitle.style.marginTop = '5vh';
-    roiPlotTitle.innerText = 'ROI Plot';
-    roiPlotTitle.style.textDecoration = 'underline';
-    roiPlotTitle.style.color = '#333';
-    roiPlotTitle.style.fontSize = '4vh';  // Professional font size
-    roiPlotTitle.style.marginBottom = '4.5vh';
-    roiPlotTitle.style.marginLeft = '40%';
-    roiPlotTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiPlotTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiPlotTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiPlotTitle.style.textTransform = 'uppercase';  // Heading style
-    roiPlotTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiPlotTitle);
-    
-    resultSection.appendChild(roiPlotTitle);
-
+    resultSection.appendChild(createStyledHeader('ROI Plot'));
     const roiPlotImage = document.createElement('img');
     roiPlotImage.src = data.images.roi_plot;
-    roiPlotImage.style.width = '80%';
-    roiPlotImage.style.marginBottom = '5vh';
-    roiPlotImage.style.borderRadius = '5px';
-    roiPlotImage.style.marginLeft = '8%';
+    roiPlotImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(roiPlotImage);
 
     // Append results to the DOM (below the button)
     const tabContent = document.querySelector('#tab1');
     tabContent.appendChild(resultSection);
 }
+
 </script>
 
 
@@ -1367,160 +1298,118 @@ function clearPreviousResultsTab2() {
 function displayModelResultsTab2(data) {
     // Create a container for the results
     const resultSection = document.createElement('div');
-    resultSection.id = 'model-results-2'; // Add an ID to easily find and clear it later
-    resultSection.style.marginTop = '5vh';
-    resultSection.style.padding = '3vh 2vw';
-    resultSection.style.borderRadius = '10px';
-    resultSection.style.backgroundColor = '#f9f9f9'; 
-    resultSection.style.fontFamily = "'Helvetica Neue', sans-serif";
+    resultSection.id = 'model-results-2';
+    resultSection.style.cssText = `
+        margin-top: 5vh;
+        padding: 3vh 2vw;
+        border-radius: 10px;
+        background-color: #f5f8fa; 
+        font-family: 'Helvetica Neue', sans-serif;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    `;
+
+    // Function to create and style headers
+    function createStyledHeader(text) {
+        const header = document.createElement('h4');
+        header.innerText = text;
+        header.style.cssText = `
+            color: #333;
+            font-size: 4vh;
+            margin: 5vh auto 4.5vh auto;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: underline;
+            text-align: center;
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        `;
+        return header;
+    }
 
     // Model Fit Chart
-    const modelFitTitle = document.createElement('h4');
-    modelFitTitle.style.marginTop = '5vh';
-    modelFitTitle.innerText = 'Model Fit';
-    modelFitTitle.style.textDecoration = 'underline';
-    modelFitTitle.style.color = '#333';
-    modelFitTitle.style.fontSize = '4vh';  // Professional font size
-    modelFitTitle.style.marginBottom = '4.5vh';
-    modelFitTitle.style.marginLeft = '40%';
-    modelFitTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    modelFitTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    modelFitTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    modelFitTitle.style.textTransform = 'uppercase';  // Heading style
-    modelFitTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(modelFitTitle);
-
+    resultSection.appendChild(createStyledHeader('Model Fit'));
     const modelFitImage = document.createElement('img');
     modelFitImage.src = data.images.model_fit;
-    modelFitImage.style.width = '80%'; // Stretch to max width
-    modelFitImage.style.marginBottom = '5vh';
-    modelFitImage.style.marginLeft = '10%';
-    modelFitImage.style.borderRadius = '5px';
+    modelFitImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(modelFitImage);
 
     // ROI Hat Chart
-    const roiHatTitle = document.createElement('h4');
-    roiHatTitle.style.marginTop = '5vh';
-    roiHatTitle.innerText = 'ROI Hat';
-    roiHatTitle.style.textDecoration = 'underline';
-    roiHatTitle.style.color = '#333';
-    roiHatTitle.style.fontSize = '4vh';  // Professional font size
-    roiHatTitle.style.marginBottom = '4.5vh';
-    roiHatTitle.style.marginLeft = '40%';
-    roiHatTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiHatTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiHatTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiHatTitle.style.textTransform = 'uppercase';  // Heading style
-    roiHatTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiHatTitle);
-
+    resultSection.appendChild(createStyledHeader('ROI Hat'));
     const roiHatImage = document.createElement('img');
     roiHatImage.src = data.images.roi_hat;
-    roiHatImage.style.width = '80%';
-    roiHatImage.style.marginBottom = '5vh';
-    roiHatImage.style.marginLeft = '10%';
-    roiHatImage.style.borderRadius = '5px';
+    roiHatImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(roiHatImage);
 
     // Media Attribution Chart
-    const mediaAttributionTitle = document.createElement('h4');
-    mediaAttributionTitle.style.marginTop = '5vh';
-    mediaAttributionTitle.innerText = 'Media Attribution';
-    mediaAttributionTitle.style.textDecoration = 'underline';
-    mediaAttributionTitle.style.color = '#333'; 
-    mediaAttributionTitle.style.fontSize = '4vh';  // Slightly smaller for a subtle, refined look
-    mediaAttributionTitle.style.marginBottom = '4.5vh';
-    mediaAttributionTitle.style.marginLeft = '32%';
-    mediaAttributionTitle.style.fontFamily = "'Roboto', sans-serif"; // Use a modern, clean font
-    mediaAttributionTitle.style.fontWeight = '600';  // Bold but not too heavy
-    mediaAttributionTitle.style.letterSpacing = '0.05em';  // Slight letter spacing for clarity
-    mediaAttributionTitle.style.textTransform = 'uppercase';  // Heading style
-    mediaAttributionTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle text shadow for depth
-    resultSection.appendChild(mediaAttributionTitle);
-
+    resultSection.appendChild(createStyledHeader('Media Attribution'));
     const mediaAttributionImage = document.createElement('img');
     mediaAttributionImage.src = data.images.media_attribution;
-    mediaAttributionImage.style.width = '100%';
-    mediaAttributionImage.style.marginBottom = '5vh';
-    mediaAttributionImage.style.borderRadius = '5px';
+    mediaAttributionImage.style.cssText = `
+        width: 100%;
+        margin-bottom: 5vh;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(mediaAttributionImage);
 
     // ROI Chart Table
-    const roiChartTitle = document.createElement('h4');
-    roiChartTitle.style.marginTop = '5vh';
-    roiChartTitle.innerText = 'ROI Table';
-    roiChartTitle.style.textDecoration = 'underline';
-    roiChartTitle.style.color = '#333';
-    roiChartTitle.style.fontSize = '4vh';  // Professional font size
-    roiChartTitle.style.marginBottom = '4.5vh';  // Slightly adjusted for table
-    roiChartTitle.style.marginLeft = '40%';
-    roiChartTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiChartTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiChartTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiChartTitle.style.textTransform = 'uppercase';  // Heading style
-    roiChartTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiChartTitle);
-
-    // Create a div to wrap around the table
+    resultSection.appendChild(createStyledHeader('ROI Table'));
     const scrollableDiv = document.createElement('div');
-    scrollableDiv.style.maxHeight = '50vh'; // Set max height for scrolling
-    scrollableDiv.style.overflowY = 'auto'; // Enable vertical scrolling
+    scrollableDiv.style.cssText = `
+        max-height: 50vh;
+        overflow-y: auto;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
 
-    // Create the table element
     const table = document.createElement('table');
-    table.classList.add('table', 'table-hover');
-    table.style.width = '100%';
-    table.style.marginBottom = '5vh';
-    table.style.fontSize = '2.5vh'; // Adjust table font
-    table.style.borderSpacing = '0';
+    table.style.cssText = `
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 2.5vh;
+        color: #333;
+    `;
     table.innerHTML = `
         <thead style="background-color: #e0e0e0; color: #333;">
             <tr>
-                <th style="padding: 1vh;">Media Channel</th>
-                <th style="padding: 1vh;">ROI</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">Media Channel</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">ROI</th>
             </tr>
         </thead>
-        <tbody style="background-color: #fff;">
+        <tbody>
             ${data.table.map(row => `
-                <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 1vh;">${row.feature}</td>
-                    <td style="padding: 1vh;">${row.value}</td>
+                <tr style="background-color: #fff;">
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.feature}</td>
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.value}</td>
                 </tr>
             `).join('')}
         </tbody>
     `;
 
-    // Append the table to the scrollable div
     scrollableDiv.appendChild(table);
-
-    // Append the scrollable div to the result section
     resultSection.appendChild(scrollableDiv);
 
-
     // ROI Plot
-    const roiPlotTitle = document.createElement('h4');
-    roiPlotTitle.style.marginTop = '5vh';
-    roiPlotTitle.innerText = 'ROI Plot';
-    roiPlotTitle.style.textDecoration = 'underline';
-    roiPlotTitle.style.color = '#333';
-    roiPlotTitle.style.fontSize = '4vh';  // Professional font size
-    roiPlotTitle.style.marginBottom = '4.5vh';
-    roiPlotTitle.style.marginLeft = '40%';
-    roiPlotTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiPlotTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiPlotTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiPlotTitle.style.textTransform = 'uppercase';  // Heading style
-    roiPlotTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiPlotTitle);
-    
-    resultSection.appendChild(roiPlotTitle);
-
+    resultSection.appendChild(createStyledHeader('ROI Plot'));
     const roiPlotImage = document.createElement('img');
     roiPlotImage.src = data.images.roi_plot;
-    roiPlotImage.style.width = '80%';
-    roiPlotImage.style.marginBottom = '5vh';
-    roiPlotImage.style.borderRadius = '5px';
-    roiPlotImage.style.marginLeft = '8%';
+    roiPlotImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(roiPlotImage);
 
     // Append results to the DOM (below the button)
@@ -1611,89 +1500,82 @@ function clearPreviousResultsTab3() {
 function displayModelResultsTab3(data) {
     // Create a container for the results
     const resultSection = document.createElement('div');
-    resultSection.id = 'model-results-3'; // Add an ID to easily find and clear it later
-    resultSection.style.marginTop = '5vh';
-    resultSection.style.padding = '3vh 2vw';
-    resultSection.style.borderRadius = '10px';
-    resultSection.style.backgroundColor = '#f9f9f9'; 
-    resultSection.style.fontFamily = "'Helvetica Neue', sans-serif";
+    resultSection.id = 'model-results-3';
+    resultSection.style.cssText = `
+        margin-top: 5vh;
+        padding: 3vh 2vw;
+        border-radius: 10px;
+        background-color: #f5f8fa; 
+        font-family: 'Helvetica Neue', sans-serif;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    `;
+
+    // Function to create and style headers
+    function createStyledHeader(text) {
+        const header = document.createElement('h4');
+        header.innerText = text;
+        header.style.cssText = `
+            color: #333;
+            font-size: 4vh;
+            margin: 5vh auto 4.5vh auto;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: underline;
+            text-align: center;
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        `;
+        return header;
+    }
 
     // ROI Chart Table
-    const roiChartTitle = document.createElement('h4');
-    roiChartTitle.style.marginTop = '5vh';
-    roiChartTitle.innerText = 'ROI Table';
-    roiChartTitle.style.textDecoration = 'underline';
-    roiChartTitle.style.color = '#333';
-    roiChartTitle.style.fontSize = '4vh';  // Professional font size
-    roiChartTitle.style.marginBottom = '4.5vh';  // Slightly adjusted for table
-    roiChartTitle.style.marginLeft = '40%';
-    roiChartTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiChartTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiChartTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiChartTitle.style.textTransform = 'uppercase';  // Heading style
-    roiChartTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiChartTitle);
-
-    // Create a div to wrap around the table
+    resultSection.appendChild(createStyledHeader('ROI Table'));
     const scrollableDiv = document.createElement('div');
-    scrollableDiv.style.maxHeight = '50vh'; // Set max height for scrolling
-    scrollableDiv.style.overflowY = 'auto'; // Enable vertical scrolling
+    scrollableDiv.style.cssText = `
+        max-height: 50vh;
+        overflow-y: auto;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
 
-    // Create the table element
     const table = document.createElement('table');
-    table.classList.add('table', 'table-hover');
-    table.style.width = '100%';
-    table.style.marginBottom = '5vh';
-    table.style.fontSize = '2.5vh'; // Adjust table font
-    table.style.borderSpacing = '0';
+    table.style.cssText = `
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 2.5vh;
+        color: #333;
+    `;
     table.innerHTML = `
         <thead style="background-color: #e0e0e0; color: #333;">
             <tr>
-                <th style="padding: 1vh;">Media Channel</th>
-                <th style="padding: 1vh;">ROI</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">Media Channel</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">ROI</th>
             </tr>
         </thead>
-        <tbody style="background-color: #fff;">
+        <tbody>
             ${data.table.map(row => `
-                <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 1vh;">${row.feature}</td>
-                    <td style="padding: 1vh;">${row.value}</td>
+                <tr style="background-color: #fff;">
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.feature}</td>
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.value}</td>
                 </tr>
             `).join('')}
         </tbody>
     `;
 
-    // Append the table to the scrollable div
     scrollableDiv.appendChild(table);
-
-    // Append the scrollable div to the result section
     resultSection.appendChild(scrollableDiv);
 
-
     // ROI Plot
-    const roiPlotTitle = document.createElement('h4');
-    roiPlotTitle.style.marginTop = '5vh';
-    roiPlotTitle.innerText = 'ROI Plot';
-    roiPlotTitle.style.textDecoration = 'underline';
-    roiPlotTitle.style.color = '#333';
-    roiPlotTitle.style.fontSize = '4vh';  // Professional font size
-    roiPlotTitle.style.marginBottom = '4.5vh';
-    roiPlotTitle.style.marginLeft = '40%';
-    roiPlotTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiPlotTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiPlotTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiPlotTitle.style.textTransform = 'uppercase';  // Heading style
-    roiPlotTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiPlotTitle);
-    
-    resultSection.appendChild(roiPlotTitle);
-
+    resultSection.appendChild(createStyledHeader('ROI Plot'));
     const roiPlotImage = document.createElement('img');
     roiPlotImage.src = data.images.roi_plot;
-    roiPlotImage.style.width = '80%';
-    roiPlotImage.style.marginBottom = '5vh';
-    roiPlotImage.style.borderRadius = '5px';
-    roiPlotImage.style.marginLeft = '8%';
+    roiPlotImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(roiPlotImage);
 
     // Append results to the DOM (below the button)
@@ -1761,89 +1643,82 @@ function clearPreviousResultsTab4() {
 function displayModelResultsTab4(data) {
     // Create a container for the results
     const resultSection = document.createElement('div');
-    resultSection.id = 'model-results-4'; // Add an ID to easily find and clear it later
-    resultSection.style.marginTop = '5vh';
-    resultSection.style.padding = '3vh 2vw';
-    resultSection.style.borderRadius = '10px';
-    resultSection.style.backgroundColor = '#f9f9f9'; 
-    resultSection.style.fontFamily = "'Helvetica Neue', sans-serif";
+    resultSection.id = 'model-results-4';
+    resultSection.style.cssText = `
+        margin-top: 5vh;
+        padding: 3vh 2vw;
+        border-radius: 10px;
+        background-color: #f5f8fa; 
+        font-family: 'Helvetica Neue', sans-serif;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    `;
+
+    // Function to create and style headers
+    function createStyledHeader(text) {
+        const header = document.createElement('h4');
+        header.innerText = text;
+        header.style.cssText = `
+            color: #333;
+            font-size: 4vh;
+            margin: 5vh auto 4.5vh auto;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: underline;
+            text-align: center;
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        `;
+        return header;
+    }
 
     // ROI Chart Table
-    const roiChartTitle = document.createElement('h4');
-    roiChartTitle.style.marginTop = '5vh';
-    roiChartTitle.innerText = 'ROI Table';
-    roiChartTitle.style.textDecoration = 'underline';
-    roiChartTitle.style.color = '#333';
-    roiChartTitle.style.fontSize = '4vh';  // Professional font size
-    roiChartTitle.style.marginBottom = '4.5vh';  // Slightly adjusted for table
-    roiChartTitle.style.marginLeft = '40%';
-    roiChartTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiChartTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiChartTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiChartTitle.style.textTransform = 'uppercase';  // Heading style
-    roiChartTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiChartTitle);
-
-    // Create a div to wrap around the table
+    resultSection.appendChild(createStyledHeader('ROI Table'));
     const scrollableDiv = document.createElement('div');
-    scrollableDiv.style.maxHeight = '50vh'; // Set max height for scrolling
-    scrollableDiv.style.overflowY = 'auto'; // Enable vertical scrolling
+    scrollableDiv.style.cssText = `
+        max-height: 50vh;
+        overflow-y: auto;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
 
-    // Create the table element
     const table = document.createElement('table');
-    table.classList.add('table', 'table-hover');
-    table.style.width = '100%';
-    table.style.marginBottom = '5vh';
-    table.style.fontSize = '2.5vh'; // Adjust table font
-    table.style.borderSpacing = '0';
+    table.style.cssText = `
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 2.5vh;
+        color: #333;
+    `;
     table.innerHTML = `
         <thead style="background-color: #e0e0e0; color: #333;">
             <tr>
-                <th style="padding: 1vh;">Media Channel</th>
-                <th style="padding: 1vh;">ROI</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">Media Channel</th>
+                <th style="padding: 1vh; border-bottom: 2px solid #ddd;">ROI</th>
             </tr>
         </thead>
-        <tbody style="background-color: #fff;">
+        <tbody>
             ${data.table.map(row => `
-                <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 1vh;">${row.feature}</td>
-                    <td style="padding: 1vh;">${row.value}</td>
+                <tr style="background-color: #fff;">
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.feature}</td>
+                    <td style="padding: 1vh; border-bottom: 1px solid #ddd;">${row.value}</td>
                 </tr>
             `).join('')}
         </tbody>
     `;
 
-    // Append the table to the scrollable div
     scrollableDiv.appendChild(table);
-
-    // Append the scrollable div to the result section
     resultSection.appendChild(scrollableDiv);
 
-
     // ROI Plot
-    const roiPlotTitle = document.createElement('h4');
-    roiPlotTitle.style.marginTop = '5vh';
-    roiPlotTitle.innerText = 'ROI Plot';
-    roiPlotTitle.style.textDecoration = 'underline';
-    roiPlotTitle.style.color = '#333';
-    roiPlotTitle.style.fontSize = '4vh';  // Professional font size
-    roiPlotTitle.style.marginBottom = '4.5vh';
-    roiPlotTitle.style.marginLeft = '40%';
-    roiPlotTitle.style.fontFamily = "'Roboto', sans-serif";  // Clean, professional font
-    roiPlotTitle.style.fontWeight = '600';  // Bold, but not too heavy
-    roiPlotTitle.style.letterSpacing = '0.05em';  // Slight letter spacing
-    roiPlotTitle.style.textTransform = 'uppercase';  // Heading style
-    roiPlotTitle.style.textShadow = '0px 1px 2px rgba(0, 0, 0, 0.1)';  // Subtle shadow
-    resultSection.appendChild(roiPlotTitle);
-    
-    resultSection.appendChild(roiPlotTitle);
-
+    resultSection.appendChild(createStyledHeader('ROI Plot'));
     const roiPlotImage = document.createElement('img');
     roiPlotImage.src = data.images.roi_plot;
-    roiPlotImage.style.width = '80%';
-    roiPlotImage.style.marginBottom = '5vh';
-    roiPlotImage.style.borderRadius = '5px';
-    roiPlotImage.style.marginLeft = '8%';
+    roiPlotImage.style.cssText = `
+        width: 80%;
+        margin: 0 10% 5vh 10%;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    `;
     resultSection.appendChild(roiPlotImage);
 
     // Append results to the DOM (below the button)
@@ -1883,6 +1758,6 @@ function displayModelResultsTab4(data) {
         }
     });
 </script>
-
+        
 </body>
 </html>
