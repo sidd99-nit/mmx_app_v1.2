@@ -1,9 +1,9 @@
 import plotly.graph_objects as go
 
-def create_plot(df, selected_column):
+def create_plot(df, selected_column, target_column):
     fig = go.Figure()
 
-    # Add line trace with smooth lines and customized appearance
+    # Add line trace for selected_column with smooth lines and customized appearance
     fig.add_trace(go.Scatter(
         x=df['TIME'],
         y=df[selected_column],
@@ -13,13 +13,23 @@ def create_plot(df, selected_column):
         name=selected_column
     ))
 
+    # Add line trace for target_column with distinct color
+    fig.add_trace(go.Scatter(
+        x=df['TIME'],
+        y=df[target_column],
+        mode='lines+markers',
+        line=dict(shape='linear', color='#d62728', width=3),  # A different color (red) for target column
+        marker=dict(color='#9467bd', size=6, line=dict(color='#FFFFFF', width=1.5)),  # Purple markers with white borders
+        name=target_column
+    ))
+
     # Customize the layout for aesthetics
     fig.update_layout(
-        width = 1000,
-        title=f'{selected_column} Over Time',
+        width=1000,
+        title=f'{selected_column} and {target_column} Over Time',
         title_font=dict(size=26, family='Helvetica, Arial', color='#333333'),  # Stylish font and darker title color
         xaxis_title='Date',
-        yaxis_title=selected_column,
+        yaxis_title='Value',
         xaxis=dict(showgrid=True, gridcolor='rgba(200, 200, 200, 0.4)', zeroline=False, tickangle=-45),  # Light grid and angled ticks
         yaxis=dict(showgrid=True, gridcolor='rgba(200, 200, 200, 0.4)', zeroline=False),
         plot_bgcolor='#f4f4f4',  # Slightly darker background for contrast
@@ -51,7 +61,7 @@ def create_plot(df, selected_column):
         ]
     )
 
-    # Add some interactive elements like a range slider and buttons
+    # Add interactive elements like a range slider and buttons
     fig.update_xaxes(
         rangeselector=dict(
             buttons=list([
