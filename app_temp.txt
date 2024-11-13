@@ -253,7 +253,7 @@ def preqc_report():
     print(target_variable)
 
     # For modal-2 , making media and organic plots
-    fig2 = create_plot(combined_data,all_channels[0])
+    fig2 = create_plot(combined_data,all_channels[0],target_variable)
 
     # For modal-4 , making target variable i.e sales plot
     fig4 = create_plot_sales(combined_data,target_variable)
@@ -279,11 +279,17 @@ def update_plot():
     # Read the combined data including sales and media info
     combined_data = pd.read_excel(os.path.join('static', 'uploads', 'combined_data.xlsx'))
 
+    # fetching the options chosen by user in dictionary form
+    user_options_dict = session['user_options']
+
+    # fetching the target variable
+    target_variable = user_options_dict['targetVariable'][0]
+
     # Get the selected column (channel) from the dropdown
     selected_channel = request.args.get('channel')
 
     # Create the Plotly figure based on the selected channel
-    fig = create_plot(combined_data, selected_channel)
+    fig = create_plot(combined_data, selected_channel, target_variable)
 
     # Convert the Plotly figure to JSON and return
     return fig.to_json()
