@@ -780,9 +780,9 @@
                             
                             <!-- Option 1: Intercept with Scale Slider -->
                             <div class="slider-container" style="margin-top: -1%;">
-                                <div class="section-title">Intercept</div>
+                                <div class="section-title">Intercept <a href="https://lightweight-mmm.readthedocs.io/en/latest/custom_priors.html#intercept" target="_blank" style="font-size: small; margin-left: 1vh;">Docs <span style="margin-left: -0.5vh; font-size: smaller;">&#x21F2;</span> </a> </div>
                                 <div class="slider-row">
-                                    <input type="range" id="scale-slider-tab2" class="slider-range" min="0" max="500" step="1" value="250" oninput="document.getElementById('scale-output-tab2').innerHTML = this.value">
+                                    <input style="width: 98vh;" type="range" id="scale-slider-tab2" class="slider-range" min="0" max="500" step="1" value="250" oninput="document.getElementById('scale-output-tab2').innerHTML = this.value">
                                     <span id="scale-output-tab2" class="slider-output">250</span>
                                 </div>
                                 <div class="slider-minmax" style="margin-top: -1.5%;">
@@ -792,7 +792,7 @@
 
                             <!-- Option 2: Lag Weight with Two Sliders (Concentration1 and Concentration0) -->
                             <div class="slider-container">
-                                <div class="section-title">Lag Weight</div>
+                                <div class="section-title">Lag Weight <a href="https://lightweight-mmm.readthedocs.io/en/latest/custom_priors.html#adstock" target="_blank" style="font-size: small; margin-left: 1vh;">Docs <span style="margin-left: -0.5vh; font-size: smaller;">&#x21F2;</span></a> </div>
 
                                 <div class="slider-row">
                                     <label for="concentration1-slider-tab2">Concentration1</label>
@@ -815,7 +815,7 @@
 
                             <!-- Option 3: Half Max Effective Concentration with Two Sliders (Concentration and Rate) -->
                             <div class="slider-container">
-                                <div class="section-title">Half Max Effective Concentration</div>
+                                <div class="section-title">Half Max Effective Concentration <a href="https://lightweight-mmm.readthedocs.io/en/latest/custom_priors.html#hill" target="_blank" style="font-size: small; margin-left: 1vh;">Docs <span style="margin-left: -0.5vh; font-size: smaller;">&#x21F2;</span></a> </div>
 
                                 <div class="slider-row">
                                     <label for="concentration-slider-tab2">Concentration</label>
@@ -828,7 +828,7 @@
 
                                 <div class="slider-row">
                                     <label for="rate-slider-tab2">Rate</label>
-                                    <input type="range" id="rate-slider-tab2" class="slider-range" min="0" max="5" step="0.1" value="2.5" oninput="document.getElementById('rate-output-tab2').innerHTML = this.value">
+                                    <input style="margin-left: 11.5vh;" type="range" id="rate-slider-tab2" class="slider-range" min="0" max="5" step="0.1" value="2.5" oninput="document.getElementById('rate-output-tab2').innerHTML = this.value">
                                     <span id="rate-output-tab2" class="slider-output">2.5</span>
                                 </div>
                                 <div class="slider-minmax" style="margin-top: -1.5%;">
