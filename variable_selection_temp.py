@@ -94,24 +94,3 @@ def main_variable_selection(data, target_variable, media_channels, organic_chann
         return selected_features_2, dropped_features_2
     else:
         return selected_features_3, dropped_features_3
-
-# Example usage of the function
-# Assuming `data`, `target_variable`, `media_channels`, `organic_channels`, and `all_base_variables` are defined
-
-selected_features_B, dropped_features_B = main_variable_selection(
-    data, target_variable, media_channels, organic_channels, all_base_variables, 'Bayesian'
-)
-selected_features_M, dropped_features_M = main_variable_selection(
-    data, target_variable, media_channels, organic_channels, all_base_variables, 'ProphetM'
-)
-selected_features_A, dropped_features_A = main_variable_selection(
-    data, target_variable, media_channels, organic_channels, all_base_variables, 'ProphetA'
-)
-
-# Print results
-print("Selected Features for Bayesian:", selected_features_B)
-print("Dropped Features for Bayesian:", [(feature, reason) for feature, reason in dropped_features_B])
-print("Selected Features for ProphetM:", selected_features_M)
-print("Dropped Features for ProphetM:", [(feature, reason) for feature, reason in dropped_features_M])
-print("Selected Features for ProphetA:", selected_features_A)
-print("Dropped Features for ProphetA:", [(feature, reason) for feature, reason in dropped_features_A])
