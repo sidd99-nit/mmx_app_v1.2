@@ -354,10 +354,15 @@ function submitSelectedVariables() {
                 // Check if dropped feature has a reason (tuple format)
                 let droppedFeature = variablesTable['dropped'][i];
                 if (Array.isArray(droppedFeature)) {
-                    // If it's a tuple, set checkbox value to feature name and display feature with reason
+                    // If it's a tuple, set checkbox value to feature name and display feature with reason in italics
                     checkbox.value = droppedFeature[0];
                     droppedCell.appendChild(checkbox);
-                    droppedCell.append(" " + droppedFeature[0] + " (" + droppedFeature[1] + ")");
+
+                    // Append feature name and italicized reason with brackets
+                    droppedCell.append(" " + droppedFeature[0] + " ");
+                    let italicizedReason = document.createElement("em");
+                    italicizedReason.innerText = `(${droppedFeature[1]})`;
+                    droppedCell.appendChild(italicizedReason);
                 } else {
                     // If not a tuple, assume it's a simple string
                     checkbox.value = droppedFeature;
