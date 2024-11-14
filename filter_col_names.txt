@@ -1,0 +1,12 @@
+# Function to filter out columns based on the conditions
+def filter_columns(df):
+    filtered_cols = []
+    for col in df.columns:
+        col_data = df[col]
+        if ((col_data.nunique() == 1 and col_data.isin([0, 1]).all()) or
+            (col_data.sum() == 0)):
+            # If all values are 0 or 1, or the sum is 0, ignore this column
+            continue
+        else:
+            filtered_cols.append(col)
+    return filtered_cols
