@@ -101,6 +101,82 @@ variables_table = {"selected": control_features_B, "dropped": dropped_features_B
 
 </script>
 
+<script>
+    function selectNewOption(selectedOption) {
+    // Update the dropdown button with the selected option
+    document.getElementById("dropdownMenuNewOption").innerText = selectedOption;
+
+    // Prepare data to send in POST request
+    let data = {
+        selected_option: selectedOption
+    };
+
+    // Send POST request to the server
+    fetch('/change_feature_table', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())  // Parse JSON response
+    .then(data => {
+        // Update the table with new data
+        updateVariablesTable(data.variables_table);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+// Function to dynamically update the variables table
+function updateVariablesTable(variablesTable) {
+    // Get table body element
+    let tableBody = document.querySelector(".table tbody");
+    
+    // Clear the current content of the table
+    tableBody.innerHTML = "";
+
+    // Determine the maximum length between selected and dropped
+    let selectedLength = variablesTable['selected'].length;
+    let droppedLength = variablesTable['dropped'].length;
+    let maxLength = Math.max(selectedLength, droppedLength);
+
+    // Loop through the data and populate the table
+    for (let i = 0; i < maxLength; i++) {
+        let row = document.createElement("tr");
+
+        // Variables Selected column
+        let selectedCell = document.createElement("td");
+        if (i < selectedLength) {
+            selectedCell.innerText = variablesTable['selected'][i];
+        } else {
+            selectedCell.innerHTML = "&nbsp;";  // Blank space if no value
+        }
+        row.appendChild(selectedCell);
+
+        // Variables Dropped column
+        let droppedCell = document.createElement("td");
+        if (i < droppedLength) {
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "form-check-input dropped-variable";
+            checkbox.value = variablesTable['dropped'][i];
+
+            // Add the checkbox and the label for dropped variable
+            droppedCell.appendChild(checkbox);
+            droppedCell.append(" " + variablesTable['dropped'][i]);
+        } else {
+            droppedCell.innerHTML = "&nbsp;";  // Blank space if no value
+        }
+        row.appendChild(droppedCell);
+
+        // Append the new row to the table
+        tableBody.appendChild(row);
+    }
+}
+</script>
+
 
 ///////////
 
