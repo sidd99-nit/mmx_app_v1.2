@@ -76,23 +76,26 @@ import numpy as np
 import plotly.express as px
 import plotly.io as pio
 
-# Create contribution dataframe for the plot.
+# Ensure baseline contribution is at the bottom.
+baseline_column = "baseline_contribution"  # Adjust this to match the column name.
 contribution_columns = [
-    col for col in contribution_df.columns if "contribution" in col
+    col for col in contribution_df.columns if "contribution" in col and col != baseline_column
 ]
-contribution_df_for_plot = contribution_df.loc[:, contribution_columns]
-contribution_df_for_plot = contribution_df_for_plot[
-    contribution_df_for_plot.columns[::-1]
-]
+contribution_columns = [baseline_column] + contribution_columns  # Move baseline to the front.
+
+# Prepare the data for the plot.
+contribution_df_for_plot = contribution_df[contribution_columns]
 period = np.arange(1, contribution_df_for_plot.shape[0] + 1)
 contribution_df_for_plot.loc[:, "period"] = period
 
 # Create a stacked area chart using Plotly.
 fig = go.Figure()
 
+# Define an aesthetic color palette for better visibility.
+colors = px.colors.qualitative.Pastel + px.colors.qualitative.Bold
+
 # Add traces for each contribution column.
-colors = px.colors.sequential.Viridis_r  # Use a visually appealing color scheme.
-for idx, column in enumerate(contribution_df_for_plot.columns[:-1]):
+for idx, column in enumerate(contribution_df_for_plot.columns[:-1]):  # Exclude "period".
     fig.add_trace(
         go.Scatter(
             x=contribution_df_for_plot["period"],
@@ -105,7 +108,7 @@ for idx, column in enumerate(contribution_df_for_plot.columns[:-1]):
         )
     )
 
-# Update layout for improved aesthetics.
+# Update layout for aesthetics.
 fig.update_layout(
     title=dict(
         text="Attribution Over Time",
@@ -141,9 +144,10 @@ fig.update_layout(
 fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
 fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
 
-# Save the figure as an image (e.g., PNG or JPEG).
+# Save the figure as an image.
 image_path = "attribution_over_time.png"  # Define the output path.
 pio.write_image(fig, file=image_path, format="png", width=1200, height=800)
 
 # Return the figure for display if needed.
 return fig
+
