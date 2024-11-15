@@ -71,9 +71,10 @@ return fig
 
 ///////
 
-
 import plotly.graph_objects as go
 import numpy as np
+import plotly.express as px
+import plotly.io as pio
 
 # Create contribution dataframe for the plot.
 contribution_columns = [
@@ -140,4 +141,9 @@ fig.update_layout(
 fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
 fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
 
+# Save the figure as an image (e.g., PNG or JPEG).
+image_path = "attribution_over_time.png"  # Define the output path.
+pio.write_image(fig, file=image_path, format="png", width=1200, height=800)
+
+# Return the figure for display if needed.
 return fig
