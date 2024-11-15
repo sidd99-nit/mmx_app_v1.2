@@ -68,3 +68,76 @@ ax.set_facecolor("#f9f9f9")
 plt.tight_layout()
 plt.close()
 return fig
+
+///////
+
+
+import plotly.graph_objects as go
+import numpy as np
+
+# Create contribution dataframe for the plot.
+contribution_columns = [
+    col for col in contribution_df.columns if "contribution" in col
+]
+contribution_df_for_plot = contribution_df.loc[:, contribution_columns]
+contribution_df_for_plot = contribution_df_for_plot[
+    contribution_df_for_plot.columns[::-1]
+]
+period = np.arange(1, contribution_df_for_plot.shape[0] + 1)
+contribution_df_for_plot.loc[:, "period"] = period
+
+# Create a stacked area chart using Plotly.
+fig = go.Figure()
+
+# Add traces for each contribution column.
+colors = px.colors.sequential.Viridis_r  # Use a visually appealing color scheme.
+for idx, column in enumerate(contribution_df_for_plot.columns[:-1]):
+    fig.add_trace(
+        go.Scatter(
+            x=contribution_df_for_plot["period"],
+            y=contribution_df_for_plot[column],
+            mode="lines",
+            fill="tonexty",
+            name=column,
+            line=dict(width=0.5, color=colors[idx % len(colors)]),
+            hoverinfo="x+y+name",
+        )
+    )
+
+# Update layout for improved aesthetics.
+fig.update_layout(
+    title=dict(
+        text="Attribution Over Time",
+        font=dict(size=24, color="navy", family="Arial"),
+        x=0.5,
+        xanchor="center",
+    ),
+    xaxis=dict(
+        title="Period",
+        titlefont=dict(size=16, family="Arial"),
+        tickmode="array",
+        tickvals=contribution_df_for_plot["period"],
+        ticktext=contribution_df_for_plot["period"],
+    ),
+    yaxis=dict(
+        title="Baseline & Media Channels Attribution",
+        titlefont=dict(size=16, family="Arial"),
+        gridcolor="lightgrey",
+    ),
+    legend=dict(
+        title=dict(text="Channels", font=dict(size=14)),
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="center",
+        x=0.5,
+    ),
+    plot_bgcolor="#f9f9f9",  # Subtle background color.
+    margin=dict(l=50, r=50, t=50, b=50),  # Adjust margins.
+)
+
+# Add gridlines for better readability.
+fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
+fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
+
+return fig
