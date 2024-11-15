@@ -1,95 +1,95 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 import jax.numpy as jnp
-from sklearn import metrics
+from sklearn.metrics import mean_absolute_percentage_error
 import arviz
 
-# Updated _create_shaded_line_plot function with explicit Matplotlib handling
+# Function to plot shaded line plot
 def _create_shaded_line_plot(predictions: jnp.ndarray,
                              target: jnp.ndarray,
                              axis: plt.Axes,
                              title_prefix: str = "",
                              interval_mid_range: float = 0.9,
                              digits: int = 3) -> None:
-    """Creates a plot of ground truth, predicted value, and credibility interval."""
-    sns.set_theme(style="whitegrid")  # Apply Seaborn's clean theme
+    """
+    Creates a plot of ground truth, predicted values, and credibility intervals.
 
+    Args:
+        predictions: 2D array of predicted values (samples x timesteps).
+        target: 1D array of true values. Must match predictions in length.
+        axis: Matplotlib axis to plot the data.
+        title_prefix: Prefix for the plot title.
+        interval_mid_range: Mid-range interval for plotting (e.g., 0.9 for 90% CI).
+        digits: Number of decimals to display in metrics.
+    """
     if predictions.shape[1] != len(target):
-        raise ValueError(
-            "Predicted data and ground-truth data must have the same length."
-        )
-
+        raise ValueError("Predictions and target lengths do not match.")
+    
+    # Calculate credibility intervals
     upper_quantile = 1 - (1 - interval_mid_range) / 2
     lower_quantile = (1 - interval_mid_range) / 2
-    upper_bound = jnp.quantile(a=predictions, q=upper_quantile, axis=0)
-    lower_bound = jnp.quantile(a=predictions, q=lower_quantile, axis=0)
+    upper_bound = jnp.quantile(predictions, q=upper_quantile, axis=0)
+    lower_bound = jnp.quantile(predictions, q=lower_quantile, axis=0)
 
-    r2, _ = arviz.r2_score(y_true=target, y_pred=predictions)
-    mape = 100 * metrics.mean_absolute_percentage_error(
-        y_true=target, y_pred=predictions.mean(axis=0))
+    # Compute metrics
+    r2 = arviz.r2_score(y_true=target, y_pred=predictions.mean(axis=0))[0]
+    mape = 100 * mean_absolute_percentage_error(target, predictions.mean(axis=0))
 
-    # Plot true values and predictions using explicit Matplotlib calls
-    axis.plot(jnp.arange(target.shape[0]), target, label="True KPI", color="blue", linewidth=2)
-    axis.plot(jnp.arange(target.shape[0]), predictions.mean(axis=0), label="Predicted KPI", color="green", linewidth=2)
-    axis.fill_between(
-        jnp.arange(target.shape[0]),
-        lower_bound,
-        upper_bound,
-        color="green",
-        alpha=0.2,  # Set transparency explicitly here
-        label="Credibility Interval"
-    )
+    # Plot true and predicted values
+    time_steps = jnp.arange(len(target))
+    axis.plot(time_steps, target, label="True KPI", color="blue", linewidth=2)
+    axis.plot(time_steps, predictions.mean(axis=0), label="Predicted KPI", color="green", linewidth=2)
+    axis.fill_between(time_steps, lower_bound, upper_bound, color="green", alpha=0.2, label="Credibility Interval")
 
-    # Grid styling
-    axis.yaxis.grid(color="gray", linestyle="dashed", alpha=0.3)
-    axis.xaxis.grid(color="gray", linestyle="dashed", alpha=0.3)
+    # Add legend, title, and grid
+    axis.legend(loc="upper left", fontsize=8)
+    axis.grid(color="gray", linestyle="--", linewidth=0.5, alpha=0.7)
+    axis.set_title(f"{title_prefix} R2: {r2:.{digits}f}, MAPE: {mape:.{digits}f}%", fontsize=12)
+    axis.set_xlabel("Time")
+    axis.set_ylabel("KPI Value")
+    axis.tick_params(axis="both", labelsize=10)
 
-    # Legend settings
-    axis.legend(loc="upper left", fontsize=8, frameon=True, shadow=False)
+# Function to handle multiple plots
+def _call_fit_plotter(predictions: jnp.ndarray,
+                      target: jnp.ndarray,
+                      interval_mid_range: float = 0.9,
+                      digits: int = 3) -> plt.Figure:
+    """
+    Generates shaded line plots for single or multiple models.
 
-    # Title and axis labels
-    title = f"{title_prefix} True and Predicted KPI. R2 = {r2:.{digits}f}, MAPE = {mape:.{digits}f}%"
-    axis.set_title(title, fontsize=12, fontweight="bold")
-    axis.set_xlabel("Time", fontsize=10)
-    axis.set_ylabel("KPI Value", fontsize=10)
-    axis.tick_params(axis="both", which="major", labelsize=8)
+    Args:
+        predictions: 2D or 3D array of predicted values (samples x timesteps x geos).
+        target: 1D or 2D array of true values (timesteps x geos).
+        interval_mid_range: Mid-range interval for plotting (e.g., 0.9 for 90% CI).
+        digits: Number of decimals to display in metrics.
 
-# Updated _call_fit_plotter function
-def _call_fit_plotter(
-    predictions: jnp.ndarray,
-    target: jnp.ndarray,
-    interval_mid_range: float,
-    digits: int,
-) -> plt.Figure:
-    """Calls the shaded line plot once for national and N times for geo models."""
-    sns.set_context("notebook", font_scale=1)  # Adjust context for better visuals
+    Returns:
+        A Matplotlib figure containing the plots.
+    """
+    sns.set_theme(style="whitegrid")  # Apply Seaborn theme
+    is_geo_model = predictions.ndim == 3
 
-    if predictions.ndim == 3:  # Multiple plots for geo models
-        figure, axes = plt.subplots(
-            predictions.shape[-1],
-            figsize=(8, 3 * predictions.shape[-1]),  # Adjust height for compactness
-            constrained_layout=True  # Better spacing between subplots
-        )
+    # Determine figure layout
+    if is_geo_model:
+        num_geos = predictions.shape[-1]
+        fig, axes = plt.subplots(num_geos, figsize=(8, 3 * num_geos), constrained_layout=True)
+        axes = axes if num_geos > 1 else [axes]  # Ensure axes is iterable
         for i, ax in enumerate(axes):
-            _create_shaded_line_plot(
-                predictions=predictions[..., i],
-                target=target[..., i],
-                axis=ax,
-                title_prefix=f"Geo {i}:",
-                interval_mid_range=interval_mid_range,
-                digits=digits
-            )
-    else:  # Single plot for national model
-        figure, ax = plt.subplots(1, 1, figsize=(8, 4))  # Compact single plot
-        _create_shaded_line_plot(
-            predictions=predictions,
-            target=target,
-            axis=ax,
-            interval_mid_range=interval_mid_range,
-            digits=digits
-        )
+            _create_shaded_line_plot(predictions=predictions[..., i],
+                                     target=target[..., i],
+                                     axis=ax,
+                                     title_prefix=f"Geo {i}:",
+                                     interval_mid_range=interval_mid_range,
+                                     digits=digits)
+    else:
+        fig, ax = plt.subplots(figsize=(8, 4))
+        _create_shaded_line_plot(predictions=predictions,
+                                 target=target,
+                                 axis=ax,
+                                 interval_mid_range=interval_mid_range,
+                                 digits=digits)
 
-    # Save figure as PNG for reporting
+    # Save and return the figure
     plt.savefig("predicted_vs_actual_plot.png", dpi=300, bbox_inches="tight")
     plt.close()
-    return figure
+    return fig
