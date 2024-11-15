@@ -52,13 +52,18 @@ if legend_outside:
     )
 else:
     ax.legend(
-        handles[::-1],
+        handles[::-1], 
         labels[::-1],
-        title="Channels",
-        title_fontsize=12,
-        fontsize=10,
-        frameon=True,
-        edgecolor="black",
+        loc="upper right",       # Place the legend inside the plot (e.g., 'upper right')
+        fontsize=8,              # Reduce font size
+        markerscale=0.7,         # Shrink marker size
+        labelspacing=0.4,        # Reduce vertical spacing between labels
+        borderpad=0.3,           # Reduce padding around the legend
+        handlelength=1,          # Adjust marker line length
+        handleheight=0.5,        # Adjust marker height
+        frameon=True,            # Enable frame (optional: set to False for no frame)
+        framealpha=0.7,          # Make frame slightly transparent
+        edgecolor="grey"         # Frame border color
     )
 
 # Add a subtle background color for the plot area.
