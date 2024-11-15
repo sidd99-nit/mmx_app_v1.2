@@ -1,9 +1,9 @@
 import plotly.graph_objects as go
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 def plot_media_baseline_contribution_area_plotly(
-    media_mix_model,  # Assuming a function to get contributions dataframe
+    media_mix_model,  # Placeholder for the actual LightweightMMM model
     target_scaler=None,
     channel_names=None,
     fig_size=(900, 500),
@@ -13,7 +13,9 @@ def plot_media_baseline_contribution_area_plotly(
     Plots an interactive stacked area chart using Plotly to visualize weekly
     media & baseline contribution.
     """
-    # Create the contribution DataFrame
+    # Assume create_media_baseline_contribution_df() returns a DataFrame
+    # Here, we're using a placeholder for demonstration purposes
+    # Replace this with the actual data extraction from media_mix_model
     contribution_df = create_media_baseline_contribution_df(
         media_mix_model=media_mix_model,
         target_scaler=target_scaler,
@@ -28,7 +30,7 @@ def plot_media_baseline_contribution_area_plotly(
     contribution_df_for_plot["Period"] = period
 
     # Create a color palette for the channels
-    colors = plotly.colors.sequential.Viridis[len(contribution_columns)]
+    colors = plotly.colors.sequential.Viridis
 
     # Initialize the Plotly figure
     fig = go.Figure()
@@ -38,15 +40,16 @@ def plot_media_baseline_contribution_area_plotly(
         fig.add_trace(go.Scatter(
             x=contribution_df_for_plot["Period"],
             y=contribution_df_for_plot[col],
-            mode='lines',
+            mode='none',  # No lines, only fill areas
             name=col,
             stackgroup='one',  # Enables stacking
-            line=dict(width=0.5, color=colors[i]),  # Thin line for aesthetics
+            fill='tonexty',  # Fills to the previous trace for stacking
+            line=dict(width=0.5, color=colors[i % len(colors)]),
             hoverinfo='x+y',  # Show x and y values in hover
-            fillcolor=colors[i]
+            fillcolor=colors[i % len(colors)]
         ))
 
-    # Update layout to make it aesthetically pleasing
+    # Update layout for aesthetics
     fig.update_layout(
         title="Weekly Media & Baseline Contribution Over Time",
         title_x=0.5,
@@ -83,9 +86,10 @@ def plot_media_baseline_contribution_area_plotly(
 
     # Add hover template for a better user experience
     for trace in fig.data:
-        trace.hovertemplate = '<b>%{x}</b><br>Contribution: %{y}<extra></extra>'
+        trace.hovertemplate = '<b>Period %{x}</b><br>Contribution: %{y}<extra></extra>'
 
     fig.show()
 
+# Replace this with actual data fetching
 # Example call (assuming necessary data and functions are available)
 # plot_media_baseline_contribution_area_plotly(media_mix_model)
