@@ -4,7 +4,7 @@ import jax.numpy as jnp
 from sklearn import metrics
 import arviz
 
-# Updated _create_shaded_line_plot function with Seaborn styling
+# Updated _create_shaded_line_plot function with explicit Matplotlib handling
 def _create_shaded_line_plot(predictions: jnp.ndarray,
                              target: jnp.ndarray,
                              axis: plt.Axes,
@@ -28,15 +28,15 @@ def _create_shaded_line_plot(predictions: jnp.ndarray,
     mape = 100 * metrics.mean_absolute_percentage_error(
         y_true=target, y_pred=predictions.mean(axis=0))
 
-    # Plot true values and predictions
-    axis.plot(jnp.arange(target.shape[0]), target, label="True KPI", color="blue", alpha=0.8, linewidth=2)
-    axis.plot(jnp.arange(target.shape[0]), predictions.mean(axis=0), label="Predicted KPI", color="green", alpha=0.8, linewidth=2)
+    # Plot true values and predictions using explicit Matplotlib calls
+    axis.plot(jnp.arange(target.shape[0]), target, label="True KPI", color="blue", linewidth=2)
+    axis.plot(jnp.arange(target.shape[0]), predictions.mean(axis=0), label="Predicted KPI", color="green", linewidth=2)
     axis.fill_between(
         jnp.arange(target.shape[0]),
         lower_bound,
         upper_bound,
         color="green",
-        alpha=0.2,
+        alpha=0.2,  # Set transparency explicitly here
         label="Credibility Interval"
     )
 
