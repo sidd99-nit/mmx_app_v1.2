@@ -71,17 +71,13 @@ return fig
 
 ///////
 
-import plotly.graph_objects as go
-import numpy as np
-import plotly.express as px
-import plotly.io as pio
 
 # Ensure baseline contribution is at the bottom.
-baseline_column = "baseline_contribution"  # Adjust this to match the column name.
-contribution_columns = [
+baseline_column = "baseline_contribution"  # Adjust this to match your baseline column name.
+other_columns = [
     col for col in contribution_df.columns if "contribution" in col and col != baseline_column
 ]
-contribution_columns = [baseline_column] + contribution_columns  # Move baseline to the front.
+contribution_columns = [baseline_column] + other_columns  # Baseline first, others stacked on top.
 
 # Prepare the data for the plot.
 contribution_df_for_plot = contribution_df[contribution_columns]
@@ -94,8 +90,8 @@ fig = go.Figure()
 # Define an aesthetic color palette for better visibility.
 colors = px.colors.qualitative.Pastel + px.colors.qualitative.Bold
 
-# Add traces for each contribution column.
-for idx, column in enumerate(contribution_df_for_plot.columns[:-1]):  # Exclude "period".
+# Add traces, starting with the baseline.
+for idx, column in enumerate(contribution_columns):  # Loop through ordered columns.
     fig.add_trace(
         go.Scatter(
             x=contribution_df_for_plot["period"],
@@ -143,11 +139,3 @@ fig.update_layout(
 # Add gridlines for better readability.
 fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
 fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor="lightgrey")
-
-# Save the figure as an image.
-image_path = "attribution_over_time.png"  # Define the output path.
-pio.write_image(fig, file=image_path, format="png", width=1200, height=800)
-
-# Return the figure for display if needed.
-return fig
-
