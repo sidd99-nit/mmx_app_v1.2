@@ -1,171 +1,719 @@
-from flask import Flask, request, jsonify, session, send_from_directory, abort
-import os
-import shutil
-import json
-from flask_cors import CORS
+from flask import Flask, request, jsonify, render_template,url_for,session, send_from_directory
+from werkzeug.utils import secure_filename
 from flask_session import Session
+import pandas as pd
+import os
+import json
 from datetime import timedelta
+import plotly.graph_objects as go
+import mpld3
+import time
+from ydata_profiling import ProfileReport
+from bs4 import BeautifulSoup
 
 
-# Import helper modules or route modules
-from routes.Gemini import get_gemini_response
+from routes.preqc.modal2 import create_plot
+from routes.preqc.modal4 import create_plot_sales
+from routes.preqc.modal3_bayesian import seasonality_bayesian
+from routes.preqc.modal3_prophetA import seasonality_prophetA
+from routes.preqc.modal3_prophetM import seasonality_prophetM
+from routes.helper_modules.add_holidays import add_holidays
+from routes.preqc.variable_selection import main_variable_selection 
+
+from routes.models.LWMMM_Base import run_lwmmm_base
+from routes.models.LWMMM_Custom import run_lwmmm_custom
+from routes.models.Bayesian_Base import bayesian_base
+from routes.models.Bayesian_Custom import bayesian_custom
+
+import matplotlib
+matplotlib.use('Agg')
 
 app = Flask(__name__)
+
 app.secret_key = 'supersecretkey'
-CORS(app)
 
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
+
 Session(app)
 
-# Directory configurations
-UPLOAD_FOLDER = './uploads'
-OUTPUT_JSONS = './output_jsons'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs(OUTPUT_JSONS, exist_ok=True)
+@app.route('/')
+def welcome():
+    return render_template('welcome.html')
 
-app.config.update({
-    'UPLOAD_FOLDER': UPLOAD_FOLDER,
-    'OUTPUT_JSONS': OUTPUT_JSONS,
-    'SESSION_TYPE': 'filesystem',
-})
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp'}
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
 
-# Global variables
-approved_prods = set()
-pending_prods = []
+@app.route('/files_upload')
+def files_upload():
 
-
-def allowed_file(filename):
-    """Check if a file is an allowed image format."""
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def segregate_images(filenames):
-    """
-    Segregate image filenames into a dictionary based on the text
-    before the last underscore and number.
-    """
-    segregated_dict = {}
-    for file in filenames:
-        key_part = '_'.join(file.rsplit('_', 1)[0:-1]) if "_" in file else file.rsplit('.', 1)[0]
-        segregated_dict.setdefault(key_part, []).append(file)
-    return segregated_dict
-
-
-def get_first_values(data_dict):
-    """Retrieve the first value of each list in the dictionary."""
-    try:
-        return [values[0] for values in data_dict.values() if values]
-    except Exception as ex:
-        print("Error in retrieving first image of each product:", ex)
-        return []
-
-
-@app.route('/upload', methods=['POST', 'GET'])
-def upload_files():
+    # having loading effect
+    # time.sleep(1.5)
+    # Clear all session variables
     session.clear()
 
-    if 'files' not in request.files:
-        return jsonify({'error': 'No files part in the request'}), 400
+    return render_template('files_upload.html')
 
-    files = request.files.getlist('files')
-    saved_files = []
+@app.route('/upload', methods=['POST'])
+def upload_file():
 
-    for file in files:
-        if file.filename:
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            file.save(file_path)
-            saved_files.append(file.filename)
+    # retrieve the analysis status
+    analysis_status = request.form.get('analysisStatus')
 
-    all_segregated_files = segregate_images(saved_files)
-    all_products_first_image = get_first_values(all_segregated_files)
+    # Check if the request contains both files
+    if 'file_1' not in request.files or 'file_2' not in request.files:
+        return jsonify({"error": "Both files are required"}), 400
+    
+    # Save the first file
+    file_1 = request.files['file_1']
+    file_1_name = secure_filename(file_1.filename)
+    file_1_path = os.path.join('static','uploads', file_1_name)
+    session['sales_file_name'] = file_1_name
+    file_1.save(file_1_path)
 
-    # Store data in session
-    session['saved_files']= saved_files
-    session['segregated_files']= all_segregated_files
-    session['all_products_first_image']= all_products_first_image
+    # read file sales
+    if file_1.filename.endswith('.xlsx'):
+        df_sales = pd.read_excel(file_1)
+    elif file_1.filename.endswith('.csv'):
+        df_sales = pd.read_csv(file_1)
 
-    return jsonify({
-        'message': 'Files successfully uploaded',
-        'files': saved_files,
-        'product_thumbnail_images': all_products_first_image,
-        'all_segregated_files': all_segregated_files
-    }), 200
+    # Save the second file
+    file_2 = request.files['file_2']
+    file_2_name = secure_filename(file_2.filename)
+    file_2_path = os.path.join('static','uploads', file_2_name)
+    session['media_file_name'] = file_2_name
+    file_2.save(file_2_path)
 
+    # read file media
+    if file_2.filename.endswith('.xlsx'):
+        df_media = pd.read_excel(file_2)
+    elif file_2.filename.endswith('.csv'):
+        df_media = pd.read_csv(file_2)
 
-@app.route('/thumbnails/<filename>', methods=['POST', 'GET'])
-def uploaded_file(filename):
+    # do not run y-data if run analysis is off
+    if analysis_status == 'off':
+        return jsonify({"message":"Click on save and continue button to proceed"})
+
+    # Generate profiling report for sales
+    profile_sales = ProfileReport(df_sales.sample(frac=0.20), title="Sales Profiling Report", explorative=False , dark_mode=True , minimal=True , correlations=None)
+    sales_report_file = 'sales_report.html'
+    profile_path_sales = os.path.join('static','reports', sales_report_file)
+    profile_sales.to_file(profile_path_sales)
+
+    # Generate profiling report for media
+    profile_media = ProfileReport(df_media.sample(frac=0.20), title="Media Profiling Report", explorative=False , dark_mode=True , correlations=None  , minimal=True)
+    media_report_file = 'media_report.html'
+    profile_path_media = os.path.join('static','reports', media_report_file)
+    profile_media.to_file(profile_path_media)
+
+    # Return the file path to be used in the iframe
+    return jsonify({"file_path_sales": f"/get_html/{sales_report_file}" , "file_path_media": f"/get_html/{media_report_file}" }), 200
+
+# route to serve the generated report HTML file
+@app.route('/get_html/<filename>', methods=['GET','POST'])
+def get_html(filename):
     try:
-        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+        return send_from_directory(os.path.join('static','reports'),filename)    
     except FileNotFoundError:
-        abort(404)
+        return jsonify({"error":"File not found"}), 404
 
+#dummy route to redirect
+@app.route('/select_features_redirect', methods=['GET','POST'])
+def select_features_redirect():
 
-@app.route('/first_info', methods=['GET', 'POST'])
-def first_info():
-    try:
-        incoming_data = request.get_json()
-        if not incoming_data:
-            return jsonify({'error': 'No JSON data received'}), 400
+    # go to the next page (select feature)
+    redirect_url = url_for('select_features')
+
+    # Return JSON with a message and a URL
+    return jsonify({"message": "Data saved successfully!", "redirect_url": redirect_url}), 200
+
+# Function to filter out columns based on the conditions (0 or 1 or sum == 0)
+def filter_columns(df):
+    filtered_cols = []
+    for col in df.columns:
+        col_data = df[col]
+        # Skip datetime columns or text columns
+        if pd.api.types.is_datetime64_any_dtype(col_data) or pd.api.types.is_object_dtype(col_data):
+            filtered_cols.append(col)
         else:
-            print(incoming_data.get('data'))
+            # Apply filtering logic for numeric columns
+            if ((col_data.nunique() == 1 and col_data.isin([0, 1]).all()) or
+                (col_data.sum() == 0)):
+                # If all values are 0 or 1, or the sum is 0, ignore this column
+                continue
+            else:
+                filtered_cols.append(col)
+    return filtered_cols  
 
-        all_products_first_image = session.get('all_products_first_image')
-        segregated_files = session.get('segregated_files')
+# route for selecting features
+@app.route('/select_features')
+def select_features():
 
-        return jsonify({
-            'product_thumbnail_file_names': all_products_first_image,
-            'all_segregated_files': segregated_files
-        }), 200
+    # retrieving sales and media files name
+    media_file_name = session['media_file_name'] 
+    sales_file_name = session['sales_file_name'] 
 
-    except Exception as ex:
-        print('Error in product thumbnail images:', ex)
-        return jsonify({'error': str(ex)}), 500
+    # reading them using pandas
+    if media_file_name.endswith('.xlsx'):
+        media_df = pd.read_excel(os.path.join('static','uploads',media_file_name))
+    elif media_file_name.endswith('.csv'):
+        media_df = pd.read_csv(os.path.join('static','uploads',media_file_name))
+
+    if sales_file_name.endswith('.xlsx'):
+        sales_df = pd.read_excel(os.path.join('static','uploads',sales_file_name))
+    elif sales_file_name.endswith('.csv'):
+        sales_df = pd.read_csv(os.path.join('static','uploads',sales_file_name))
+
+    # Get column names of both sales and media files
+    cols_media_df = filter_columns(media_df)
+    cols_sales_df = filter_columns(sales_df)
+
+    # retrieving column names to populate the list and give user for selection
+    # all_columns = list(set(list(sales_df.columns) + list(media_df.columns)))
+    all_columns = cols_media_df + [col for col in cols_sales_df if col not in cols_media_df]
+
+    return render_template('select_features.html' , all_columns = all_columns)
+
+@app.route('/pre-qc', methods=['POST'])
+def save_data():
+
+    data = request.form['data']
+
+    # retrieving sales and media files name
+    media_file_name = session['media_file_name'] 
+    sales_file_name = session['sales_file_name'] 
+    
+
+    # Open file
+    sales_df = pd.read_excel(os.path.join('static','uploads', media_file_name))
+    media_df = pd.read_excel(os.path.join('static','uploads', sales_file_name))
+
+    combined_data = pd.merge(sales_df,media_df,on='TIME',how='inner')
+
+    # Add holidays to the data
+    combined_data = add_holidays(data=combined_data)
+
+    combined_data.to_excel(os.path.join('static','uploads','combined_data.xlsx'))
+
+    # Process the JSON data
+    data_dict = json.loads(data)
+    # Do something with the data
+
+    # store the chosen variables in session
+    session['user_options'] = data_dict
+
+    print(data_dict)
+
+     # Define the URL to redirect to
+    redirect_url = url_for('preqc_report')  # Replace 'new_route' with the name of the route you want to redirect to
+
+    # Return JSON with a message and a URL
+    return jsonify({"message": "Data saved successfully!", "redirect_url": redirect_url}), 200
 
 
-@app.route('/pending_approved', methods=['POST'])
-def product_thumbnail():
-    try:
-        incoming_data = request.get_json()
-        
-        approved_prods.add('HARIBO_CANDY_1.jpg')  # Example placeholder
+@app.route('/preqc_report')
+def preqc_report():
 
-        print('INCOMING DATA',incoming_data.get('data'))
+    # reading the combined data including sales and media info
+    combined_data = pd.read_excel(os.path.join('static','uploads','combined_data.xlsx'))
 
-        return jsonify({
-            'message': 'Hello boy'
-        }), 200
+    # fetching the options chosen by user in dictionary form
+    user_options_dict = session['user_options']
 
-    except Exception as ex:
-        print('Error in product thumbnail images:', ex)
-        return jsonify({'error': str(ex)}), 500
+    # checking if user options are being fetched properly
+    if(user_options_dict):
+        print("session working fine and extracted user_options_dict")
+
+    # extracting the media channels from dictionary in list form
+    media_channels = user_options_dict['marketingVariables']
+    
+    # extracting the organic channels from dictionary in list form
+    organic_channels = user_options_dict['organicVariables']
+
+    # extracting the base variables from the dictionary in list form (used for variable selection process)
+    all_base_variables = user_options_dict['mandatoryBaseVariables']
+
+    # combing the media and organic channel lists to send to front end
+    all_channels = media_channels + organic_channels 
+
+    # fetching the target variable
+    target_variable = user_options_dict['targetVariable'][0]
+
+    # save seasonalities plots which also has seasonality data appended to the original data
+    img_path_B,data_B = seasonality_bayesian(combined_data)
+    img_path_A,data_A = seasonality_prophetA(combined_data, target=target_variable)
+    img_path_M,data_M = seasonality_prophetM(combined_data, target=target_variable)
+
+    # testing
+    print("inside of data_B",data_M)
+    # testing
+
+    folder_name_seasonality = 'seasonality_data'
+    if not os.path.exists(folder_name_seasonality):
+        os.makedirs(folder_name_seasonality)
+    
+    # saved data with seasonality data appended
+    data_B.to_excel(os.path.join(folder_name_seasonality,'data_B.xlsx'),index = False)
+    data_A.to_excel(os.path.join(folder_name_seasonality,'data_A.xlsx'),index = False)
+    data_M.to_excel(os.path.join(folder_name_seasonality,'data_M.xlsx'),index = False)
+
+    # Running variable selection process
+    control_features_B , dropped_features_B = main_variable_selection(data_B, target_variable, media_channels , organic_channels, all_base_variables, seasonality_type = 'Bayesian')
+    control_features_A , dropped_features_A = main_variable_selection(data_A, target_variable, media_channels , organic_channels, all_base_variables, seasonality_type = 'ProphetA')
+    control_features_M , dropped_features_M = main_variable_selection(data_M, target_variable, media_channels , organic_channels, all_base_variables, seasonality_type = 'ProphetM')
+
+    # remove duplicate tuple if required
+    dropped_features_B = list(dict.fromkeys(dropped_features_B))
+    dropped_features_A = list(dict.fromkeys(dropped_features_A))
+    dropped_features_M = list(dict.fromkeys(dropped_features_M))
+
+    # testing
+    print("printing control ones",control_features_A,dropped_features_A)
+    # testing
+    
+    # putting them in session variables
+    session['control_features_A'] = control_features_A
+    session['dropped_features_A'] = dropped_features_A
+    session['control_features_B'] = control_features_B
+    session['dropped_features_B'] = dropped_features_B
+    session['control_features_M'] = control_features_M
+    session['dropped_features_M'] = dropped_features_M
+
+    # printing taget variable for cross checking
+    print(target_variable)
+
+    # For modal-2 , making media and organic plots
+    fig2 = create_plot(combined_data,all_channels[0],target_variable)
+
+    # For modal-4 , making target variable i.e sales plot
+    fig4 = create_plot_sales(combined_data,target_variable)
 
 
-@app.route('/complete_info', methods=['POST', 'GET'])
-def complete_info():
-    # Example data for testing
-    all_products_images = {
-        'HARIBO_CANDY': ['HARIBO_CANDY_1.jpg', 'HARIBO_CANDY_2.jpg'],
-        'rocher': ['rocher_1.png', 'rocher_2.png']
+    # For modal-3 , seasonality plots of all type
+    seasonalities = ['Bayesian','Prophet Additive','Prophet Multiplicative']
+    fig3 = os.path.join('static', 'images', 'seasonality_Bayesian.png')
+
+
+    # For modal-1 , to show the selected and dropped features 
+    options_var_selection = ['Bayesian Seasonality','Prophet Multiplicative Seasonality','Prophet Additive Seasonality']
+    # Create a single dictionary to hold 'selected' and 'dropped'
+    # Python backend code
+    variables_table = {
+        "selected": control_features_B, 
+        "dropped": [(feature, reason) for feature, reason in dropped_features_B]
     }
 
-    for key, images in all_products_images.items():
-        try:
-            df = get_gemini_response(images, os.path.join(os.getcwd(), "uploads"))
-            json_data = df.to_dict(orient='records')[0]
+    print(variables_table)
 
-            json_file_path = os.path.join(app.config['OUTPUT_JSONS'], f"{key}.json")
-            with open(json_file_path, 'w') as json_file:
-                json.dump(json_data, json_file, indent=4)
+    return render_template('preqc_report.html', channel_names = all_channels, chart2 = fig2.to_html(full_html=False), chart4 = fig4.to_html(full_html=False), variables_table=variables_table,seasonalities = seasonalities ,chart3 = fig3, options_var_selection=options_var_selection)
 
-            print(f"Saved JSON for key: {key} at {json_file_path}")
-        except Exception as ex:
-            print(f"Error processing images for key {key}:", ex)
+# Route to update the Media Spend Distribution plot (Modal 2)
+@app.route('/update_plot')
+def update_plot():
+    # Read the combined data including sales and media info
+    combined_data = pd.read_excel(os.path.join('static', 'uploads', 'combined_data.xlsx'))
 
-    return jsonify({'message': 'Processing complete'}), 200
+    # fetching the options chosen by user in dictionary form
+    user_options_dict = session['user_options']
 
+    # fetching the target variable
+    target_variable = user_options_dict['targetVariable'][0]
+
+    # Get the selected column (channel) from the dropdown
+    selected_channel = request.args.get('channel')
+
+    # Create the Plotly figure based on the selected channel
+    fig = create_plot(combined_data, selected_channel, target_variable)
+
+    # Convert the Plotly figure to JSON and return
+    return fig.to_json()
+
+
+#for saving the varibales that got dropped from variable selection but user selected them back
+@app.route('/save_selected_variables', methods=['POST'])
+def save_selected_variables():
+    data = request.get_json()
+    selected_option = data.get('selected_option')
+    selected_variables = data.get('selected_variables')
+    dropped_variables = data.get('dropped_variables')
+
+    # Process and save the selected option and variables (customize this logic as needed)
+    print("Selected Option:", selected_option)
+    print("Selected Variables:", selected_variables)
+    print("Dropped Variables:", dropped_variables)
+
+    # save them in session variables as they'll be used in modelling
+    session['selected_option_seasonality'] = selected_option
+    session['selected_variables'] = selected_variables
+    session['dropped_variables_to_include'] = dropped_variables
+
+    # Simulate saving the data
+    try:
+        # Add logic here to save the data to a database or process it as needed
+        return jsonify({"success": True , "redirect_url" : url_for('modelling')})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"success": False})
+
+#for changing the feature selection table according to seasonality
+@app.route('/change_feature_table', methods = ['POST'])
+def change_feature_table():
+    data = request.get_json()
+    selected_seasonality = data.get('selected_option')
+
+    # extracting the dropped and selected features
+    control_features_A = session['control_features_A']
+    dropped_features_A = session['dropped_features_A']  
+    control_features_B = session['control_features_B'] 
+    dropped_features_B = session['dropped_features_B'] 
+    control_features_M = session['control_features_M'] 
+    dropped_features_M = session['dropped_features_M']  
+
+    if selected_seasonality == 'Bayesian Seasonality':
+        # Python backend code
+        variables_table = {
+            "selected": control_features_B, 
+            "dropped": [(feature, reason) for feature, reason in dropped_features_B]
+        }
+        print(selected_seasonality,variables_table)
+    elif selected_seasonality ==  'Prophet Additive Seasonality':
+        # variables_table = {"selected": control_features_A, "dropped": dropped_features_A}
+         # Python backend code
+        variables_table = {
+            "selected": control_features_A, 
+            "dropped": [(feature, reason) for feature, reason in dropped_features_A]
+        }
+        print(selected_seasonality,variables_table)
+    elif selected_seasonality == 'Prophet Multiplicative Seasonality':
+        # variables_table = {"selected": control_features_M, "dropped": dropped_features_M}
+        # Python backend code
+        variables_table = {
+            "selected": control_features_M, 
+            "dropped": [(feature, reason) for feature, reason in dropped_features_M]
+        }
+        print(selected_seasonality,variables_table)
+    else:
+        variables_table = {"selected": [], "dropped": [()]}
+        print(selected_seasonality,variables_table)
+
+    return jsonify({"variables_table":variables_table})
+
+
+# Route to update the Seasonality plot (Modal 3)
+@app.route('/update_seasonality')
+def update_seasonality():
+    # Fetch the user options stored in session
+    user_options_dict = session.get('user_options', {})
+
+    # Read the combined data including sales and media info
+    combined_data = pd.read_excel(os.path.join('static', 'uploads', 'combined_data.xlsx'))
+
+    # Extract the target column from the user options
+    target = user_options_dict.get('targetVariable', [None])[0]
+
+    # Get the selected seasonality type from the dropdown
+    selected_seasonality = request.args.get('seasonality')
+
+    if selected_seasonality == 'Bayesian':
+        img_path = os.path.join('static', 'images', 'seasonality_Bayesian.png')
+    elif selected_seasonality == 'Prophet Multiplicative':
+        img_path = os.path.join('static', 'images', 'seasonality_prophetM.png')
+    else:
+        img_path = os.path.join('static', 'images', 'seasonality_prophetA.png')
+
+    # Return the image path in JSON response
+    return jsonify({'image_path': img_path})
+
+# Modelling options
+@app.route('/modelling')
+def modelling():
+
+    #Extract the variables selected
+    seasonality_type = session['selected_option_seasonality'] 
+    control_variables = session['selected_variables'] 
+    mandatory_control_varibales = session['dropped_variables_to_include']
+
+    #Extract media variables
+    user_options_dict = session['user_options']
+    # extracting the media channels from dictionary in list form
+    media_channels = user_options_dict['marketingVariables']
+    # extracting the organic channels from dictionary in list form
+    organic_channels = user_options_dict['organicVariables']
+    # fetching the target variable
+    target_variable = user_options_dict['targetVariable'][0]
+
+    # Creating final variables
+    media_channels = media_channels + organic_channels
+    session['media_channels_final'] = media_channels
+
+    base_variables = control_variables + mandatory_control_varibales
+    session['base_variables_final'] = base_variables
+
+    target_variable = target_variable
+    session['target_variable_final'] = target_variable
+
+    return render_template("modelling.html",media_channels=media_channels, base_variables=base_variables, target_variable=target_variable)
+
+# Actually running Light Weight MMM Base Model
+@app.route('/run_model', methods=['POST'])
+def run_model():
+    data = request.get_json()
+
+    # Extract the variables
+    media_channels = session['media_channels_final']
+    base_variables = session['base_variables_final']
+    target_variable = session['target_variable_final']
+
+    # Checking seasonality type
+    seasonality_type_final = session['selected_option_seasonality']
+
+    # converting target_variable to list
+    target_variable = [target_variable]
+
+    # accordingly selecting data i.e seasonality
+    if seasonality_type_final == 'Bayesian Seasonality':
+        data_path = os.path.join("seasonality_data","data_B.xlsx")
+    elif seasonality_type_final == 'Prophet Multiplicative Seasonality':
+        data_path = os.path.join("seasonality_data","data_M.xlsx")
+    else:
+        data_path = os.path.join("seasonality_data","data_A.xlsx")
+
+    # Checking all variables once
+    print("media_channels :",media_channels)
+    print("base_variables :",base_variables) 
+    print("target_variable :",target_variable) 
+
+    # Running the Base LWMMM Model
+    roi_df = run_lwmmm_base(media_channels,base_variables,target_variable,data_path)
+
+    ### ROI data ###
+
+    roi_df = roi_df.applymap(lambda x: round(x,2) if isinstance(x,(float,int)) else x )
+
+    # transposing ROI
+    roi_df_transposed = roi_df.T
+
+    # Rename columns to 'feature' and 'value'
+    roi_df_transposed.columns = ['value']
+    roi_df_transposed['feature'] = roi_df_transposed.index
+
+    # Reorder columns to match the desired structure
+    roi_df_transposed = roi_df_transposed[['feature', 'value']]
+
+    # Convert the DataFrame to a list of dictionaries
+    table = roi_df_transposed.to_dict(orient='records')
+    ### ROI data ###
+
+    # Run your machine learning model here
+    # For the example, we assume we get the following:
+    images = {
+        'model_fit': '/static/images/LWMMM_Base/model_fit.png',
+        'roi_hat': '/static/images/LWMMM_Base/roi_bar_chart.png',
+        'media_attribution': '/static/images/LWMMM_Base/media_baseline_contribution.png',
+        'roi_plot': '/static/images/LWMMM_Base/roi_plot.png'
+    }
+
+    # table = [
+    #     {'feature': 'Feature 1', 'value': 'Value 1'},
+    #     {'feature': 'Feature 2', 'value': 'Value 2'}
+    # ]
+
+    # Return the result as JSON
+    return jsonify({'images': images, 'table': table})
+
+# Running LightWeight with custom priors
+@app.route('/lightweight_custom_prior', methods=['POST'])
+def lightweight_custom_prior():
+    data = request.get_json()
+
+    # Extract the variables
+    media_channels = session['media_channels_final']
+    base_variables = session['base_variables_final']
+    target_variable = session['target_variable_final']
+    scale =  (data.get('scale'))
+    concentration1 = data.get('concentration1')
+    concentration0 =  data.get('concentration0')
+    concentration =  data.get('concentration')
+    rate =  data.get('rate')
+
+    print("checkinggggggggggg",scale,concentration1,concentration0,concentration,rate)
+
+    # Checking seasonality type
+    seasonality_type_final = session['selected_option_seasonality']
+
+    # converting target_variable to list
+    target_variable = [target_variable]
+
+    # accordingly selecting data i.e seasonality
+    if seasonality_type_final == 'Bayesian Seasonality':
+        data_path = os.path.join("seasonality_data","data_B.xlsx")
+    elif seasonality_type_final == 'Prophet Multiplicative Seasonality':
+        data_path = os.path.join("seasonality_data","data_M.xlsx")
+    else:
+        data_path = os.path.join("seasonality_data","data_A.xlsx")
+
+    # Checking all variables once
+    print("media_channels :",media_channels)
+    print("base_variables :",base_variables) 
+    print("target_variable :",target_variable) 
+
+    # Running the Custom LWMMM Model
+    roi_df = run_lwmmm_custom(media_channels,base_variables,target_variable,data_path, scale , concentration1 , concentration0, concentration , rate)
+
+    ### ROI data ###
+
+    roi_df = roi_df.applymap(lambda x: round(x,2) if isinstance(x,(float,int)) else x )
+
+    # transposing ROI
+    roi_df_transposed = roi_df.T
+
+    # Rename columns to 'feature' and 'value'
+    roi_df_transposed.columns = ['value']
+    roi_df_transposed['feature'] = roi_df_transposed.index
+
+    # Reorder columns to match the desired structure
+    roi_df_transposed = roi_df_transposed[['feature', 'value']]
+
+    # Convert the DataFrame to a list of dictionaries
+    table = roi_df_transposed.to_dict(orient='records')
+    ### ROI data ###
+
+    # Run your machine learning model here
+    # For the example, we assume we get the following:
+    images = {
+        'model_fit': '/static/images/LWMMM_Custom/model_fit.png',
+        'roi_hat': '/static/images/LWMMM_Custom/roi_bar_chart.png',
+        'media_attribution': '/static/images/LWMMM_Custom/media_baseline_contribution.png',
+        'roi_plot': '/static/images/LWMMM_Custom/roi_plot.png'
+    }
+
+    # table = [
+    #     {'feature': 'Feature 1', 'value': 'Value 1'},
+    #     {'feature': 'Feature 2', 'value': 'Value 2'}
+    # ]
+
+    # Return the result as JSON
+    return jsonify({'images': images, 'table': table})
+
+# Actually running Bayesian Base Model
+@app.route('/run_bayesian_base', methods=['POST'])
+def run_bayesian_base():
+    data = request.get_json()
+
+    # Extract the variables
+    media_channels = session['media_channels_final']
+    base_variables = session['base_variables_final']
+    target_variable = session['target_variable_final']
+
+    # Checking seasonality type
+    seasonality_type_final = session['selected_option_seasonality']
+
+    # converting target_variable to list
+    target_variable = [target_variable]
+
+    # accordingly selecting data i.e seasonality
+    if seasonality_type_final == 'Bayesian Seasonality':
+        data_path = os.path.join("seasonality_data","data_B.xlsx")
+    elif seasonality_type_final == 'Prophet Multiplicative Seasonality':
+        data_path = os.path.join("seasonality_data","data_M.xlsx")
+    else:
+        data_path = os.path.join("seasonality_data","data_A.xlsx")
+
+    # Checking all variables once
+    print("media_channels :",media_channels)
+    print("base_variables :",base_variables) 
+    print("target_variable :",target_variable) 
+
+    # Running the Base LWMMM Model
+    roi_df = bayesian_base(media_channels,base_variables,target_variable,data_path)
+    roi_df['ROI'] = roi_df['ROI'].round(2)
+    roi_df.columns = ['feature','value']
+
+    ### ROI data ###
+
+    # Convert the DataFrame to a list of dictionaries
+    table = roi_df.to_dict(orient='records')
+    ### ROI data ###
+
+    # Run your machine learning model here
+    # For the example, we assume we get the following:
+    images = {
+        'roi_plot': '/static/images/Bayesian_Base/roi_plot.png'
+    }
+
+    # table = [
+    #     {'feature': 'Feature 1', 'value': 'Value 1'},
+    #     {'feature': 'Feature 2', 'value': 'Value 2'}
+    # ]
+
+    # Return the result as JSON
+    return jsonify({'images': images, 'table': table})
+    # return jsonify({'table': table})
+
+# Running LightWeight with custom priors
+@app.route('/bayesian_final_iteration', methods=['POST'])
+def bayesian_final_iteration():
+    data = request.get_json()
+
+    # Extract the variables
+    media_channels = session['media_channels_final']
+    base_variables = session['base_variables_final']
+    target_variable = session['target_variable_final']
+    runs =  data.get('runs')
+
+    print("checkinggggggggggg",runs)
+
+    # Checking seasonality type
+    seasonality_type_final = session['selected_option_seasonality']
+
+    # converting target_variable to list
+    target_variable = [target_variable]
+
+    # accordingly selecting data i.e seasonality
+    if seasonality_type_final == 'Bayesian Seasonality':
+        data_path = os.path.join("seasonality_data","data_B.xlsx")
+    elif seasonality_type_final == 'Prophet Multiplicative Seasonality':
+        data_path = os.path.join("seasonality_data","data_M.xlsx")
+    else:
+        data_path = os.path.join("seasonality_data","data_A.xlsx")
+
+    # Checking all variables once
+    print("media_channels :",media_channels)
+    print("base_variables :",base_variables) 
+    print("target_variable :",target_variable) 
+
+    # Running the Custom LWMMM Model
+    roi_df = bayesian_custom(media_channels,base_variables,target_variable,data_path,runs)
+    roi_df['ROI'] = roi_df['ROI'].round(2)
+    roi_df.columns = ['feature','value']
+
+    ### ROI data ###
+
+    # Convert the DataFrame to a list of dictionaries
+    table = roi_df.to_dict(orient='records')
+    ### ROI data ###
+
+    # Run your machine learning model here
+    # For the example, we assume we get the following:
+    images = {
+        'roi_plot': '/static/images/Bayesian_Custom/roi_plot.png'
+    }
+
+    # table = [
+    #     {'feature': 'Feature 1', 'value': 'Value 1'},
+    #     {'feature': 'Feature 2', 'value': 'Value 2'}
+    # ]
+
+    # Return the result as JSON
+    return jsonify({'images': images, 'table': table})
+    # return jsonify({'table': table})
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+    
